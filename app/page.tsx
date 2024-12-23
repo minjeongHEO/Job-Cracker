@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 
 import logo from '@/public/images/cracker.png';
 
@@ -16,7 +17,9 @@ export default function Home() {
       <div className={styles['main__description']}>취뽀 팔로♾️로미😉</div>
       <div className={styles['main__sub-title']}>AI와 함께하는 맞춤형 면접 준비</div>
 
-      <button className={styles['main__button']}>시작하기</button>
+      <Link className={styles['main__button']} href={'/interview/developer'}>
+        시작하기
+      </Link>
     </div>
   );
 }

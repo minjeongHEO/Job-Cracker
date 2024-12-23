@@ -39,7 +39,10 @@
   }
 
   &__button {
-    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
     width: 7rem;
     height: 2.5rem;
     color: $default-white-color;
