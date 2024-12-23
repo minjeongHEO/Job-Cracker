@@ -68,6 +68,9 @@
   border-radius: 2rem;
   box-shadow: 0 1rem 1.3rem rgba(62, 73, 95, 0.2);
   transition: transform 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   &:hover {
     transform: translateY(-0.25rem); // 위로 4px 이동
