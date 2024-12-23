@@ -71,8 +71,7 @@
   }
 
   &__image {
-    width: 15rem;
-    height: 15rem;
     z-index: 2;
+    object-fit: cover;
   }
 }
