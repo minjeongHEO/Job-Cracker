@@ -1,5 +1,5 @@
+@use './_variables.scss' as *;
 @use './reset.css';
-@use './variable.scss' as *;
 
 @font-face {
   font-family: 'Pretendard';
@@ -41,5 +41,10 @@ li {
 }
 
 .container {
-  margin: 0 auto;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: $default-bg-color;
 }
