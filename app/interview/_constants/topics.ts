@@ -1,4 +1,6 @@
-export const TOPICS = {
+import { TopicsType } from '@/app/_types/interview';
+
+export const TOPICS: TopicsType = {
   frontEnd: {
     'HTML/CSS': [
       '시맨틱 태그와 웹 접근성',
