@@ -1,0 +1,46 @@
+.wrapper {
+  background-color: $default-white-color;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 0.2rem 0.5rem $default-shadow-color;
+  cursor: pointer;
+
+  transition: transform 0.2s ease;
+
+  &:hover {
+    transform: translateY(-0.25rem);
+  }
+
+  &--selected {
+    box-shadow: 0 0.2rem 0.5rem $default-select-color;
+    border: 0.1rem solid $default-select-color;
+  }
+
+  &__title {
+    font-size: 1.7rem;
+    font-weight: bold;
+    color: $sub-color;
+    display: flex;
+    gap: 1rem;
+  }
+
+  &__description {
+    color: $sub-text-color;
+    font-size: 1rem;
+    font-weight: 500;
+    margin: 1rem 0 2rem 0;
+  }
+
+  &__sub-title span {
+    background-color: $default-yellow-color;
+    color: $default-white-color;
+    margin: 0 0.5rem 2rem 0;
+    padding: 0.3rem 1rem;
+    border-radius: 2rem;
+    font-size: 1rem;
+    text-align: center;
+  }
+}
