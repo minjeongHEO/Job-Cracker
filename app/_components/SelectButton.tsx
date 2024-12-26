@@ -17,7 +17,7 @@ export default function SelectButton({
   variant = 'simple',
   title,
   description,
-  subTitles,
+  subTitles = [],
   Icon,
   isSelected = false,
   onClick,
@@ -33,7 +33,7 @@ export default function SelectButton({
         <>
           <div className={styles['wrapper__description']}>{description}</div>
           <div className={styles['wrapper__sub-title']}>
-            {subTitles && subTitles.length > 0 && subTitles?.map((e, idx) => <span key={`subTitle-${idx}`}>{e}</span>)}
+            {subTitles.length > 0 && subTitles?.map((e, idx) => <span key={`subTitle-${idx}`}>{e}</span>)}
           </div>
         </>
       )}
