@@ -10,13 +10,13 @@
 
   transition: transform 0.2s ease;
 
-  &:hover {
+  &:hover:not(&--selected) {
     transform: translateY(-0.25rem);
   }
 
   &--selected {
     box-shadow: 0 0.2rem 0.5rem $default-select-color;
-    border: 0.1rem solid $default-select-color;
+    border: 0.15rem solid $default-select-color;
   }
 
   &__title {

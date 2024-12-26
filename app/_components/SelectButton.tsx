@@ -20,10 +20,10 @@ export default function SelectButton({
   subTitles,
   Icon,
   isSelected = false,
-  onclick,
+  onClick,
 }: SelectButtonProps) {
   return (
-    <div className={clsx(styles.wrapper, { [styles['wrapper--selected']]: isSelected })}>
+    <div className={clsx(styles.wrapper, { [styles['wrapper--selected']]: isSelected })} onClick={onClick}>
       <div className={styles['wrapper__title']}>
         {/* {variant === 'detailed' && Icon && <Icon />} //TODO: SVGR설정하여 아이콘 처리*/}
         <div>{title}</div>
