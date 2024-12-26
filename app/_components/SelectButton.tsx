@@ -6,7 +6,7 @@ import styles from './SelectButton.module.scss';
 interface OptionType {
   title: string;
   description?: string;
-  subTitles?: string[];
+  topics?: { [key: string]: string[] };
   Icon?: FC<SVGProps<SVGSVGElement>>; // SVG 컴포넌트 타입
 }
 
@@ -19,7 +19,7 @@ interface SelectButtonProps {
 
 export default function SelectButton({
   variant = 'simple',
-  option: { title, description, subTitles = [] },
+  option: { title, description, topics = {} },
   isSelected = false,
   onClick,
 }: SelectButtonProps) {
@@ -33,8 +33,10 @@ export default function SelectButton({
       {variant === 'detailed' && (
         <>
           <div className={styles['wrapper__description']}>{description}</div>
-          <div className={styles['wrapper__sub-title']}>
-            {subTitles.length > 0 && subTitles?.map((e, idx) => <span key={`subTitle-${idx}`}>{e}</span>)}
+          <div className={styles['wrapper__topics']}>
+            {Object.keys(topics).map((topic) => (
+              <span key={topic}>{topic}</span>
+            ))}
           </div>
         </>
       )}
