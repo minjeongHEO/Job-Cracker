@@ -3,22 +3,23 @@ import { FC, SVGProps } from 'react';
 
 import styles from './SelectButton.module.scss';
 
-interface SelectButtonProps {
-  variant: 'simple' | 'detailed'; // 버튼 스타일 구분
+interface OptionType {
   title: string;
   description?: string;
   subTitles?: string[];
   Icon?: FC<SVGProps<SVGSVGElement>>; // SVG 컴포넌트 타입
+}
+
+interface SelectButtonProps {
+  variant: 'simple' | 'detailed';
+  option: OptionType;
   isSelected?: boolean;
   onClick?: () => void;
 }
 
 export default function SelectButton({
   variant = 'simple',
-  title,
-  description,
-  subTitles = [],
-  Icon,
+  option: { title, description, subTitles = [] },
   isSelected = false,
   onClick,
 }: SelectButtonProps) {

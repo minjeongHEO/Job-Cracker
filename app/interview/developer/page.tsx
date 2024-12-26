@@ -22,10 +22,7 @@ export default function DeveloperPage() {
           <SelectButton
             key={key}
             variant="detailed"
-            title={option.title}
-            description={option.description}
-            subTitles={option.subTitles}
-            Icon={option.Icon}
+            option={option}
             isSelected={selectedDev === key}
             onClick={() => setSelectedDev(key as DeveloperType)}
           />
