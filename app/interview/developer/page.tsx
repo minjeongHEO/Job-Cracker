@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import SelectButton from '@/app/_components/SelectButton';
 import { DeveloperType } from '@/app/_types/interview';
+import { typedEntries } from '@/app/_utils/typeUtils';
 import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 
 import styles from './DeveloperPage.module.scss';
@@ -18,13 +19,13 @@ export default function DeveloperPage() {
       </div>
 
       <div className={styles['main__selectBox']}>
-        {Object.entries(DEVELOPER_OPTIONS).map(([key, option]) => (
+        {typedEntries(DEVELOPER_OPTIONS).map(([key, option]) => (
           <SelectButton
             key={key}
             variant="detailed"
             option={option}
             isSelected={selectedDev === key}
-            onClick={() => setSelectedDev(key as DeveloperType)}
+            onClick={() => setSelectedDev(key)}
           />
         ))}
       </div>
