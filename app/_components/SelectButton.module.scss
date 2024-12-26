@@ -34,7 +34,7 @@
     margin: 1rem 0 2rem 0;
   }
 
-  &__sub-title span {
+  &__topics span {
     background-color: $default-yellow-color;
     color: $default-white-color;
     margin: 0 0.5rem 2rem 0;
@@ -42,5 +42,6 @@
     border-radius: 2rem;
     font-size: 1rem;
     text-align: center;
+    font-weight: 500;
   }
 }
