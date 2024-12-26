@@ -12,7 +12,7 @@ export const DEVELOPER_OPTIONS: DeveloperOptionType = {
   },
   BackEnd: {
     Icon: BackEndIcon,
-    title: 'backEnd Developer',
+    title: 'BackEnd Developer',
     description: '서버 로직과 데이터 처리에 더 흥미를 느끼시나요?',
     subTitles: ['Java', 'Spring Boot', 'MySQL', 'AWS'],
   },
