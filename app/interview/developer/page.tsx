@@ -1,8 +1,15 @@
+'use client';
+import { useState } from 'react';
+
 import SelectButton from '@/app/_components/SelectButton';
+import { DeveloperType } from '@/app/_types/interview';
+import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 
 import styles from './DeveloperPage.module.scss';
 
 export default function DeveloperPage() {
+  const [selectedDev, setSelectedDev] = useState<DeveloperType | null>();
+
   return (
     <div className={styles.main}>
       <div className={styles['main__description']}>
@@ -11,9 +18,18 @@ export default function DeveloperPage() {
       </div>
 
       <div className={styles['main__selectBox']}>
-        <SelectButton />
-        <SelectButton />
-        <SelectButton />
+        {Object.entries(DEVELOPER_OPTIONS).map(([key, option]) => (
+          <SelectButton
+            key={key}
+            variant="detailed"
+            title={option.title}
+            description={option.description}
+            subTitles={option.subTitles}
+            Icon={option.Icon}
+            isSelected={selectedDev === key}
+            onClick={() => setSelectedDev(key as DeveloperType)}
+          />
+        ))}
       </div>
     </div>
   );
