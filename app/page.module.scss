@@ -39,7 +39,10 @@
   }
 
   &__button {
-    border: none;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
     width: 7rem;
     height: 2.5rem;
     color: $default-white-color;
@@ -48,11 +51,11 @@
     cursor: pointer;
     background-color: $default-select-color;
     border-radius: 2rem;
-    box-shadow: 0 1rem 1.3rem rgba(62, 73, 95, 0.2);
+    box-shadow: 0 1rem 1.3rem $button-shadow-color;
     transition: transform 0.2s ease;
 
     &:hover {
-      transform: translateY(-0.25rem); // 위로 4px 이동
+      transform: translateY(-0.25rem);
     }
   }
 }
@@ -66,7 +69,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    box-shadow: 0 2rem 1rem rgba(95, 84, 62, 0.2);
+    box-shadow: 0 2rem 1rem $default-shadow-color;
     z-index: 1;
   }
 
