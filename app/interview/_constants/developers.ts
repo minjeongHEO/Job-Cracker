@@ -1,24 +1,25 @@
-import backEndIcon from '@/public/icons/backend.svg';
-import frontEndIcon from '@/public/icons/frontend.svg';
-import IOSIcon from '@/public/icons/ios.svg';
+import BackEndIcon from '@/app/_assets/svg/backend.svg';
+import FrontEndIcon from '@/app/_assets/svg/frontend.svg';
+import iOSIcon from '@/app/_assets/svg/ios.svg';
+import { DeveloperOptionType } from '@/app/_types/interview';
 
-export const DEVELOPER_OPTIONS = {
-  frontEnd: {
-    icon: frontEndIcon,
+export const DEVELOPER_OPTIONS: DeveloperOptionType = {
+  FrontEnd: {
+    Icon: FrontEndIcon,
     title: 'FrontEnd Developer',
     description: 'UI/UX에 관심이 많고, 사용자 경험을 개선하는 것을 즐기시나요?',
-    techSkills: ['JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'Next.js'],
+    subTitles: ['JavaScript', 'TypeScript', 'HTML/CSS', 'React', 'Next.js'],
   },
-  backEnd: {
-    icon: backEndIcon,
+  BackEnd: {
+    Icon: BackEndIcon,
     title: 'backEnd Developer',
     description: '서버 로직과 데이터 처리에 더 흥미를 느끼시나요?',
-    techSkills: ['Java', 'Spring Boot', 'MySQL', 'AWS'],
+    subTitles: ['Java', 'Spring Boot', 'MySQL', 'AWS'],
   },
-  IOS: {
-    icon: IOSIcon,
-    title: 'IOS Developer',
+  iOS: {
+    Icon: iOSIcon,
+    title: 'iOS Developer',
     description: '모바일 앱 개발과 애플 생태계에 관심이 있으신가요?',
-    techSkills: ['Swift', 'SwiftUI', 'UIKit', 'Xcode'],
+    subTitles: ['Swift', 'SwiftUI', 'UIKit', 'Xcode'],
   },
 };

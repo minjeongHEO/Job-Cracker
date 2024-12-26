@@ -1,7 +1,7 @@
 import { TopicsType } from '@/app/_types/interview';
 
 export const TOPICS: TopicsType = {
-  frontEnd: {
+  FrontEnd: {
     'HTML/CSS': [
       '시맨틱 태그와 웹 접근성',
       'CSS Box Model과 Layout',
@@ -37,7 +37,7 @@ export const TOPICS: TopicsType = {
     ],
   },
 
-  backEnd: {
+  BackEnd: {
     Java: [
       'OOP 원칙과 디자인 패턴',
       'Collection Framework',
