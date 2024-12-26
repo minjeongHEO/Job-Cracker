@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useState } from 'react';
 
 import SelectButton from '@/app/_components/SelectButton';
@@ -20,13 +21,14 @@ export default function DeveloperPage() {
 
       <div className={styles['main__selectBox']}>
         {typedEntries(DEVELOPER_OPTIONS).map(([key, option]) => (
-          <SelectButton
-            key={key}
-            variant="detailed"
-            option={option}
-            isSelected={selectedDev === key}
-            onClick={() => setSelectedDev(key)}
-          />
+          <Link key={key} href={`/interview/developer/${key}`}>
+            <SelectButton
+              variant="detailed"
+              option={option}
+              isSelected={selectedDev === key}
+              onClick={() => setSelectedDev(key)}
+            />
+          </Link>
         ))}
       </div>
     </div>
