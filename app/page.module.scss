@@ -39,24 +39,7 @@
   }
 
   &__button {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    text-align: center;
-    width: 7rem;
-    height: 2.5rem;
-    color: $default-white-color;
-    font-size: large;
-    font-weight: bold;
-    cursor: pointer;
-    background-color: $default-select-color;
-    border-radius: 2rem;
-    box-shadow: 0 1rem 1.3rem $button-shadow-color;
-    transition: transform 0.2s ease;
-
-    &:hover {
-      transform: translateY(-0.25rem);
-    }
+    @extend %primary-button;
   }
 }
 
