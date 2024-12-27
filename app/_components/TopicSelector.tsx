@@ -9,18 +9,27 @@ import SelectButton from './SelectButton';
 import styles from './TopicSelector.module.scss';
 
 interface TopicSelectorProps {
+  variant?: 'topic' | 'subTopic';
   devType: DeveloperType;
   topics: string[];
 }
 
-export default function TopicSelector({ devType, topics }: TopicSelectorProps) {
+export default function TopicSelector({ variant = 'topic', devType, topics }: TopicSelectorProps) {
   const router = useRouter();
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
 
   const handleNext = () => {
     if (!selectedTopics.length) return;
-    const topicParam = selectedTopics.length === topics.length ? `all` : selectedTopics.join(',');
-    router.push(`/interview/developer/${devType}/prepare?topics=${topicParam}`);
+
+    switch (variant) {
+      case 'topic':
+        const topicParam = selectedTopics.length === topics.length ? `all` : selectedTopics.join(',');
+        router.push(`/interview/developer/${devType}/prepare?topics=${topicParam}`);
+        break;
+      case 'subTopic':
+        router.push(`/interview/chat`);
+        break;
+    }
   };
 
   const handleClickTopic = (clickedTopic: string) => {

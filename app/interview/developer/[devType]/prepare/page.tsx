@@ -39,7 +39,7 @@ export default function PreparePage() {
       </div>
 
       <div className={styles['main__selectBox']}>
-        <TopicSelector devType={devType} topics={subTopics}></TopicSelector>
+        <TopicSelector variant={'subTopic'} devType={devType} topics={subTopics}></TopicSelector>
       </div>
     </div>
   );
