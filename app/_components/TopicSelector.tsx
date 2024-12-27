@@ -25,7 +25,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
     switch (variant) {
       case 'topic':
         const topicParam = selectedTopics.length === topics.length ? `all` : selectedTopics.join(',');
-        router.push(`/interview/developer/${devType}/prepare?topics=${topicParam}`);
+        router.push(`/interview/select/${devType}/prepare?topics=${topicParam}`);
         break;
       case 'subTopic':
         router.push(`/interview/chat`);
