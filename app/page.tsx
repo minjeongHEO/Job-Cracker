@@ -17,7 +17,7 @@ export default function Home() {
       <div className={styles['main__description']}>취뽀 팔로♾️로미😉</div>
       <div className={styles['main__sub-title']}>AI와 함께하는 맞춤형 면접 준비</div>
 
-      <Link className={styles['main__button']} href={'/interview/developer'}>
+      <Link className={styles['main__button']} href={'/interview/select'}>
         시작하기
       </Link>
     </div>
