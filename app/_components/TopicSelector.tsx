@@ -18,7 +18,8 @@ export default function TopicSelector({ devType, topics }: TopicSelectorProps) {
 
   const handleNext = () => {
     if (!selectedTopics.length) return;
-    router.push(`/interview/developer/${devType}/prepare?topics=${selectedTopics.join(',')}`);
+    const topicParam = selectedTopics.length === topics.length ? `all` : selectedTopics.join(',');
+    router.push(`/interview/developer/${devType}/prepare?topics=${topicParam}`);
   };
 
   const handleClickTopic = (clickedTopic: string) => {
@@ -27,8 +28,19 @@ export default function TopicSelector({ devType, topics }: TopicSelectorProps) {
     );
   };
 
+  const selectAll = () => {
+    setSelectedTopics((prev) => (prev.length === topics.length ? [] : topics));
+  };
+
   return (
     <>
+      <SelectButton
+        key={`topic-all`}
+        variant="simple"
+        option={{ title: '전체 선택' }}
+        isSelected={selectedTopics.length === topics.length}
+        onClick={selectAll}
+      />
       {topics.map((topic) => (
         <SelectButton
           key={topic}
