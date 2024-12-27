@@ -1,5 +1,6 @@
 'use client';
 
+import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
@@ -68,7 +69,10 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
         />
       ))}
 
-      <button onClick={handleNext} disabled={selectedTopics.length === 0}>
+      <button
+        className={clsx(styles['next-button'], { [styles['next-button--visible']]: selectedTopics.length > 0 })}
+        onClick={handleNext}
+      >
         다음
       </button>
     </>
