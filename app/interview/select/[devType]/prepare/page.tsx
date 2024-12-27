@@ -5,7 +5,7 @@ import TopicSelector from '@/app/_components/TopicSelector';
 import { DeveloperType } from '@/app/_types/interview';
 import { isDeveloperType } from '@/app/_utils/typeGuards';
 import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
-import styles from '@/app/interview/developer/DeveloperPage.module.scss';
+import SelectLayout from '@/app/interview/select/layout';
 
 export default function PreparePage() {
   const pathname = usePathname(); //  `/interview/developer/FrontEnd/prepare`
@@ -33,14 +33,8 @@ export default function PreparePage() {
   const subTopics = selectedTopics.flatMap((topic) => DEVELOPER_OPTIONS[devType].topics[topic] || []);
 
   return (
-    <div className={styles.main}>
-      <div className={styles['main__description']}>
-        <div className={styles['main__title']}>세부 주제에 맞는 면접 질문을 준비해드릴게요!</div>
-      </div>
-
-      <div className={styles['main__selectBox']}>
-        <TopicSelector variant={'subTopic'} devType={devType} topics={subTopics}></TopicSelector>
-      </div>
-    </div>
+    <SelectLayout title={`세부 내용을 선택하시면 관련 면접 질문을 준비해드릴게요!`}>
+      <TopicSelector variant={'subTopic'} devType={devType} topics={subTopics}></TopicSelector>
+    </SelectLayout>
   );
 }
