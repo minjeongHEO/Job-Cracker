@@ -6,6 +6,7 @@ import { useState } from 'react';
 import { DeveloperType } from '@/app/_types/interview';
 
 import SelectButton from './SelectButton';
+import styles from './TopicSelector.module.scss';
 
 interface TopicSelectorProps {
   devType: DeveloperType;
@@ -34,6 +35,13 @@ export default function TopicSelector({ devType, topics }: TopicSelectorProps) {
 
   return (
     <>
+      <div className={styles['sub_title']}>
+        원하는 주제를 선택해주세요.
+        <span>
+          {selectedTopics.length}/{topics.length}
+        </span>
+      </div>
+
       <SelectButton
         key={`topic-all`}
         variant="simple"
