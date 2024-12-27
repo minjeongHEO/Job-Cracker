@@ -2,6 +2,7 @@
 import { usePathname, useSearchParams } from 'next/navigation';
 
 import TopicSelector from '@/app/_components/TopicSelector';
+import { isDeveloperType } from '@/app/_utils/typeGuards';
 import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 import styles from '@/app/interview/developer/DeveloperPage.module.scss';
 
@@ -9,10 +10,10 @@ export default function PreparePage() {
   const pathname = usePathname(); //  `/interview/developer/FrontEnd/prepare`
   const searchParams = useSearchParams(); // ReadonlyURLSearchParams
 
-  const devType = pathname.split('/')[3]; // TODO: 타입이 안맞을 경우?
-  // if (!devType || !isDeveloperType(devType)) {
-  //   return <div>Invalid developer type</div>;
-  // }
+  const devType = pathname.split('/')[3];
+  if (!devType || !isDeveloperType(devType)) {
+    return <div>Invalid developer type</div>;
+  }
 
   const topicsParam = searchParams.get('topics'); // TODO: 타입 체크
   // if (!topicParam || !isTopicType(devType, topicsParam)) {
