@@ -33,10 +33,16 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
     }
   };
 
+  const toggleTopic = (prevTopics: string[], clickedTopic: string) => {
+    if (prevTopics.includes(clickedTopic)) {
+      const newSelectedTopics = prevTopics.filter((topic) => topic !== clickedTopic);
+      return newSelectedTopics;
+    }
+    return [...prevTopics, clickedTopic];
+  };
+
   const handleClickTopic = (clickedTopic: string) => {
-    setSelectedTopics((prev) =>
-      prev.includes(clickedTopic) ? prev.filter((topic) => topic !== clickedTopic) : [...prev, clickedTopic]
-    );
+    setSelectedTopics((prevTopics) => toggleTopic(prevTopics, clickedTopic));
   };
 
   const selectAll = () => {
