@@ -46,7 +46,10 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
   };
 
   const selectAll = () => {
-    setSelectedTopics((prev) => (prev.length === topics.length ? [] : topics));
+    setSelectedTopics((prevSelectedTopics) => {
+      if (prevSelectedTopics.length === topics.length) return [];
+      return topics;
+    });
   };
 
   return (
