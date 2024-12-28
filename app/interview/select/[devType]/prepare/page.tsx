@@ -19,12 +19,20 @@ export default function PreparePage() {
 
   const devType = pathname.split('/')[3];
   if (!devType || !isDeveloperType(devType)) {
-    return <div>Invalid developer type</div>;
+    return (
+      <SelectLayout title={'개발자 타입 오류'}>
+        <div>잘못된 개발자 타입입니다.</div>
+      </SelectLayout>
+    );
   }
 
   const topicsParam = searchParams.get('topics');
   if (!topicsParam || !isTopicByDevType(devType, topicsParam)) {
-    return <div>Invalid topic type</div>;
+    return (
+      <SelectLayout title={'주제 오류'}>
+        <div>잘못된 주제 입니다.</div>
+      </SelectLayout>
+    );
   }
 
   const selectedTopics =
