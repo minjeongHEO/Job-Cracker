@@ -19,7 +19,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
   const router = useRouter();
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
 
-  const handleNext = () => {
+  const navigateToNext = () => {
     if (!selectedTopics.length) return;
 
     switch (variant) {
@@ -73,7 +73,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
 
       <button
         className={clsx(styles['next-button'], { [styles['next-button--visible']]: selectedTopics.length > 0 })}
-        onClick={handleNext}
+        onClick={navigateToNext}
       >
         다음
       </button>
