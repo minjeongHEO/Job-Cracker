@@ -41,7 +41,7 @@ export default function PreparePage() {
   const subTopics = selectedTopics.flatMap((topic) => DEVELOPER_OPTIONS[devType].topics[topic] || []);
 
   return (
-    <SelectLayout title={`세부 내용을 선택하시면 관련 면접 질문을 준비해드릴게요!`}>
+    <SelectLayout title={'세부 내용을 선택하시면 관련 면접 질문을 준비해드릴게요!'}>
       <TopicSelector variant={'subTopic'} devType={devType} topics={subTopics}></TopicSelector>
     </SelectLayout>
   );
