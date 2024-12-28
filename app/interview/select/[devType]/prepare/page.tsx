@@ -9,14 +9,7 @@ interface PreparePageType {
   searchParams: { topics?: string };
 }
 
-export default function PreparePage({ params, searchParams }: PreparePageType) {
-  const isTopicByDevType = (devType: DeveloperType, topicsParam: string) => {
-    if (topicsParam === 'all') return true;
-    const validTopics = Object.keys(DEVELOPER_OPTIONS[devType].topics);
-    return topicsParam.split(',').every((topic) => validTopics.includes(topic));
-  };
-
-  const devType = params.devType;
+export default function PreparePage({ params: { devType }, searchParams: { topics } }: PreparePageType) {
   if (!devType || !isDeveloperType(devType)) {
     return (
       <SelectLayout title={'개발자 타입 오류'}>
@@ -25,8 +18,7 @@ export default function PreparePage({ params, searchParams }: PreparePageType) {
     );
   }
 
-  const topicsParam = searchParams.topics;
-  if (!topicsParam || !isTopicByDevType(devType, topicsParam)) {
+  if (!topics || !isValidTopicParam(devType, topics)) {
     return (
       <SelectLayout title={'주제 오류'}>
         <div>잘못된 주제 입니다.</div>
@@ -34,8 +26,7 @@ export default function PreparePage({ params, searchParams }: PreparePageType) {
     );
   }
 
-  const selectedTopics =
-    topicsParam === 'all' ? Object.keys(DEVELOPER_OPTIONS[devType].topics) : topicsParam.split(',');
+  const selectedTopics = getSelectedTopics(devType, topics);
 
   const subTopics = selectedTopics.flatMap((topic) => DEVELOPER_OPTIONS[devType].topics[topic] || []);
 
@@ -44,4 +35,24 @@ export default function PreparePage({ params, searchParams }: PreparePageType) {
       <TopicSelector variant={'subTopic'} devType={devType} topics={subTopics}></TopicSelector>
     </SelectLayout>
   );
+}
+
+function isValidTopicParam(devType: DeveloperType, param: string) {
+  const validTopics = Object.keys(DEVELOPER_OPTIONS[devType].topics);
+
+  if (param === 'all') {
+    return true;
+  }
+
+  return param.split(',').every((topic) => validTopics.includes(topic));
+}
+
+function getSelectedTopics(devType: DeveloperType, param: string) {
+  const validTopics = Object.keys(DEVELOPER_OPTIONS[devType].topics);
+
+  if (param === 'all') {
+    return validTopics;
+  }
+
+  return param.split(',');
 }
