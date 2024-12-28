@@ -1,0 +1,30 @@
+.sub_title {
+  color: $sub-text-color;
+  font-size: 1rem;
+  margin-bottom: 1rem;
+
+  & span {
+    margin-left: 1rem;
+  }
+}
+
+.select_container {
+  padding: 0 0.5rem;
+  height: 60vh;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
+.next-button {
+  @extend %primary-button;
+
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+
+  &--visible {
+    pointer-events: auto;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+  }
+}

@@ -3,11 +3,11 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: 2rem 3rem;
+  padding: 1.5rem 3rem;
   border-radius: 1rem;
   box-shadow: 0 3px 8px $default-shadow-color;
   cursor: pointer;
-
+  margin-bottom: 1rem;
   transition: transform 0.2s ease;
 
   &:hover:not(&--selected) {

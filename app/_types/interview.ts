@@ -1,6 +1,7 @@
 import { FC, SVGProps } from 'react';
 
-export type DeveloperType = 'FrontEnd' | 'BackEnd' | 'iOS';
+export const DEVELOPER_TYPES = ['FrontEnd', 'BackEnd', 'iOS'] as const;
+export type DeveloperType = (typeof DEVELOPER_TYPES)[number];
 
 export type OptionDetails = {
   Icon: FC<SVGProps<SVGSVGElement>>; // SVG 컴포넌트 타입
