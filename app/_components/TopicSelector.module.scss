@@ -8,6 +8,13 @@
   }
 }
 
+.select_container {
+  padding: 0 0.5rem;
+  height: 60vh;
+  overflow-y: auto;
+  margin-bottom: 1rem;
+}
+
 .next-button {
   @extend %primary-button;
 

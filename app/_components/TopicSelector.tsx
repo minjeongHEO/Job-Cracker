@@ -52,22 +52,24 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
         </span>
       </div>
 
-      <SelectButton
-        key={`topic-all`}
-        variant="simple"
-        option={{ title: '전체 선택' }}
-        isSelected={selectedTopics.length === topics.length}
-        onClick={selectAll}
-      />
-      {topics.map((topic) => (
+      <div className={styles['select_container']}>
         <SelectButton
-          key={topic}
+          key={`topic-all`}
           variant="simple"
-          option={{ title: topic }}
-          isSelected={selectedTopics.includes(topic)}
-          onClick={() => handleClickTopic(topic)}
+          option={{ title: '전체 선택' }}
+          isSelected={selectedTopics.length === topics.length}
+          onClick={selectAll}
         />
-      ))}
+        {topics.map((topic) => (
+          <SelectButton
+            key={topic}
+            variant="simple"
+            option={{ title: topic }}
+            isSelected={selectedTopics.includes(topic)}
+            onClick={() => handleClickTopic(topic)}
+          />
+        ))}
+      </div>
 
       <button
         className={clsx(styles['next-button'], { [styles['next-button--visible']]: selectedTopics.length > 0 })}
