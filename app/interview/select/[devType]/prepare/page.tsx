@@ -1,23 +1,22 @@
-'use client';
-import { usePathname, useSearchParams } from 'next/navigation';
-
 import TopicSelector from '@/app/_components/TopicSelector';
 import { DeveloperType } from '@/app/_types/interview';
 import { isDeveloperType } from '@/app/_utils/typeGuards';
 import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 import SelectLayout from '@/app/interview/select/layout';
 
-export default function PreparePage() {
-  const pathname = usePathname(); //  `/interview/developer/FrontEnd/prepare`
-  const searchParams = useSearchParams(); // ReadonlyURLSearchParams
+interface PreparePageType {
+  params: { devType: string };
+  searchParams: { topics?: string };
+}
 
+export default function PreparePage({ params, searchParams }: PreparePageType) {
   const isTopicByDevType = (devType: DeveloperType, topicsParam: string) => {
     if (topicsParam === 'all') return true;
     const validTopics = Object.keys(DEVELOPER_OPTIONS[devType].topics);
     return topicsParam.split(',').every((topic) => validTopics.includes(topic));
   };
 
-  const devType = pathname.split('/')[3];
+  const devType = params.devType;
   if (!devType || !isDeveloperType(devType)) {
     return (
       <SelectLayout title={'개발자 타입 오류'}>
@@ -26,7 +25,7 @@ export default function PreparePage() {
     );
   }
 
-  const topicsParam = searchParams.get('topics');
+  const topicsParam = searchParams.topics;
   if (!topicsParam || !isTopicByDevType(devType, topicsParam)) {
     return (
       <SelectLayout title={'주제 오류'}>
