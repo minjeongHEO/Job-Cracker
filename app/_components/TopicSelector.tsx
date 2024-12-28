@@ -18,13 +18,14 @@ interface TopicSelectorProps {
 export default function TopicSelector({ variant = 'topic', devType, topics }: TopicSelectorProps) {
   const router = useRouter();
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
+  const isAllSelected = selectedTopics.length === topics.length;
 
   const navigateToNext = () => {
     if (!selectedTopics.length) return;
 
     switch (variant) {
       case 'topic':
-        const topicParam = selectedTopics.length === topics.length ? `all` : selectedTopics.join(',');
+        const topicParam = isAllSelected ? `all` : selectedTopics.join(',');
         router.push(`/interview/select/${devType}/prepare?topics=${topicParam}`);
         break;
       case 'subTopic':
@@ -52,6 +53,8 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
     });
   };
 
+  const isSelectedTopic = (topic: string) => selectedTopics.includes(topic);
+
   return (
     <>
       <div className={styles['sub_title']}>
@@ -66,7 +69,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
           key={`topic-all`}
           variant="simple"
           option={{ title: '전체 선택' }}
-          isSelected={selectedTopics.length === topics.length}
+          isSelected={isAllSelected}
           onClick={selectAll}
         />
         {topics.map((topic) => (
@@ -74,7 +77,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
             key={topic}
             variant="simple"
             option={{ title: topic }}
-            isSelected={selectedTopics.includes(topic)}
+            isSelected={isSelectedTopic(topic)}
             onClick={() => handleClickTopic(topic)}
           />
         ))}
