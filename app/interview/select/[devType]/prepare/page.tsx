@@ -2,14 +2,16 @@ import TopicSelector from '@/app/_components/TopicSelector';
 import { DeveloperType } from '@/app/_types/interview';
 import { isDeveloperType } from '@/app/_utils/typeGuards';
 import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
-import SelectLayout from '@/app/interview/select/layout';
+import SelectLayout from '@/app/interview/select/_components/SelectLayout';
 
 interface PreparePageType {
-  params: { devType: string };
-  searchParams: { topics?: string };
+  params: Promise<{ devType: string }>;
+  searchParams: Promise<{ topics?: string }>;
 }
 
-export default function PreparePage({ params: { devType }, searchParams: { topics } }: PreparePageType) {
+export default async function PreparePage({ params, searchParams }: PreparePageType) {
+  const [{ devType }, { topics }] = await Promise.all([params, searchParams]);
+
   if (!devType || !isDeveloperType(devType)) {
     return (
       <SelectLayout title={'개발자 타입 오류'}>
