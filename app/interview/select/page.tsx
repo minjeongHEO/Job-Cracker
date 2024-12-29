@@ -7,7 +7,7 @@ import { DeveloperType } from '@/app/_types/interview';
 import { typedEntries } from '@/app/_utils/typeUtils';
 import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 
-import SelectLayout from './layout';
+import SelectLayout from './_components/SelectLayout';
 
 export default function SelectPage() {
   const [selectedDev, setSelectedDev] = useState<DeveloperType | null>();
