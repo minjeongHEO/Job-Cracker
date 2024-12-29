@@ -5,11 +5,14 @@ import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 import SelectLayout from '@/app/interview/select/layout';
 
 interface PreparePageType {
-  params: { devType: string };
-  searchParams: { topics?: string };
+  params: Promise<{ devType: string }>;
+  searchParams: Promise<{ topics?: string }>;
 }
 
-export default function PreparePage({ params: { devType }, searchParams: { topics } }: PreparePageType) {
+export default async function PreparePage({ params, searchParams }: PreparePageType) {
+  const { devType } = await params;
+  const { topics } = await searchParams;
+
   if (!devType || !isDeveloperType(devType)) {
     return (
       <SelectLayout title={'개발자 타입 오류'}>

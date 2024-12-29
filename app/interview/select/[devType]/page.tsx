@@ -4,7 +4,9 @@ import { isDeveloperType } from '@/app/_utils/typeGuards';
 import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 import SelectLayout from '@/app/interview/select/layout';
 
-export default async function DevTypePage({ params: { devType } }: { params: { devType: DeveloperType } }) {
+export default async function DevTypePage({ params }: { params: { devType: DeveloperType } }) {
+  const { devType } = await params;
+
   if (!devType || !isDeveloperType(devType)) {
     return (
       <SelectLayout title={'개발자 타입 오류'}>
