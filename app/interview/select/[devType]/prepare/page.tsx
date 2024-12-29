@@ -10,8 +10,7 @@ interface PreparePageType {
 }
 
 export default async function PreparePage({ params, searchParams }: PreparePageType) {
-  const { devType } = await params;
-  const { topics } = await searchParams;
+  const [{ devType }, { topics }] = await Promise.all([params, searchParams]);
 
   if (!devType || !isDeveloperType(devType)) {
     return (
