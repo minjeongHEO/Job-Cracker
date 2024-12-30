@@ -7,6 +7,13 @@ import buttonStyles from './SelectButton.module.scss';
 import TopicSelector from './TopicSelector';
 import styles from './TopicSelector.module.scss';
 
+export const ROUTES = {
+  SUBTOPIC: '/interview/chat',
+  TOPIC: {
+    build: (devType: string, topics: string) => `/interview/select/${devType}/prepare?topics=${topics}`,
+  },
+} as const;
+
 // NOTE: useRouter를 사용하는 컴포넌트를 테스트할 때는 Next.js의 App Router context를 mock 해줘야 합니다.
 const mockPush = vi.fn();
 vi.mock('next/navigation', () => ({
@@ -115,6 +122,56 @@ describe('TopicSelector', () => {
 
       // 카운터 업데이트 확인
       expect(screen.getByText(`${defaultProps.topics.length - 1}/${defaultProps.topics.length}`)).toBeInTheDocument();
+    });
+  });
+
+  describe('-라우팅 관련', () => {
+    it('topic 타입에서 전체 선택 후 라우팅', () => {
+      render(<TopicSelector {...defaultProps} variant="topic" />);
+
+      // 전체 선택
+      const allButton = screen.getByRole('button', { name: '전체 선택' });
+      fireEvent.click(allButton);
+
+      // 다음 버튼 클릭
+      const nextButton = screen.getByRole('button', { name: '다음' });
+      fireEvent.click(nextButton);
+
+      // 라우팅 확인
+      expect(mockPush).toHaveBeenCalledWith(`/interview/select/${defaultProps.devType}/prepare?topics=all`);
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.TOPIC.build(defaultProps.devType, 'all'));
+    });
+
+    it('topic 타입에서 개별 선택 후 라우팅', () => {
+      render(<TopicSelector {...defaultProps} variant="topic" />);
+
+      // 개별 선택
+      const topicButton = screen.getByRole('button', { name: firstTopicName });
+      fireEvent.click(topicButton);
+
+      // 다음 버튼 클릭
+      const nextButton = screen.getByRole('button', { name: '다음' });
+      fireEvent.click(nextButton);
+
+      // 라우팅 확인
+      expect(mockPush).toHaveBeenCalledWith(
+        `/interview/select/${defaultProps.devType}/prepare?topics=${firstTopicName}`
+      );
+    });
+
+    it('subTopic 타입 라우팅', () => {
+      render(<TopicSelector {...defaultProps} variant="subTopic" />);
+
+      // 주제 선택
+      const topicButton = screen.getByRole('button', { name: firstTopicName });
+      fireEvent.click(topicButton);
+
+      // 다음 버튼 클릭
+      const nextButton = screen.getByRole('button', { name: '다음' });
+      fireEvent.click(nextButton);
+
+      // 라우팅 확인
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.SUBTOPIC);
     });
   });
 });
