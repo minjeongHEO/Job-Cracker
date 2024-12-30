@@ -1,6 +1,7 @@
 'use client';
 
 import clsx from 'clsx';
+import { useRouter } from 'next/navigation';
 
 import useTopicSelector from '@/app/_hooks/useTopicSelector';
 import { DeveloperType } from '@/app/_types/interview';
@@ -15,13 +16,23 @@ export interface TopicSelectorProps {
 }
 
 export default function TopicSelector({ variant = 'topic', devType, topics }: TopicSelectorProps) {
-  const { selectedTopics, isAllSelected, handleClickTopic, selectAll, isSelectedTopic, navigateToNext } =
-    useTopicSelector({
-      variant,
-      devType,
-      topics,
-    });
+  const router = useRouter();
+  const { selectedTopics, isAllSelected, handleClickTopic, selectAll, isSelectedTopic } = useTopicSelector({
+    topics,
+  });
 
+  const navigateToNext = () => {
+    if (!selectedTopics.length) return;
+    switch (variant) {
+      case 'topic':
+        const topicParam = isAllSelected ? 'all' : selectedTopics.join(',');
+        router.push(`/interview/select/${devType}/prepare?topics=${topicParam}`);
+        break;
+      case 'subTopic':
+        router.push('/interview/chat');
+        break;
+    }
+  };
   return (
     <>
       <div className={styles['sub_title']}>

@@ -1,10 +1,8 @@
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { TopicSelectorProps } from '../_components/TopicSelector';
 
-export default function useTopicSelector({ variant = 'topic', devType, topics }: TopicSelectorProps) {
-  const router = useRouter();
+export default function useTopicSelector({ topics }: Omit<TopicSelectorProps, 'devType'>) {
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
   const isAllSelected = selectedTopics.length === topics.length;
 
@@ -29,25 +27,11 @@ export default function useTopicSelector({ variant = 'topic', devType, topics }:
 
   const isSelectedTopic = (topic: string) => selectedTopics.includes(topic);
 
-  const navigateToNext = () => {
-    if (!selectedTopics.length) return;
-    switch (variant) {
-      case 'topic':
-        const topicParam = isAllSelected ? 'all' : selectedTopics.join(',');
-        router.push(`/interview/select/${devType}/prepare?topics=${topicParam}`);
-        break;
-      case 'subTopic':
-        router.push('/interview/chat');
-        break;
-    }
-  };
-
   return {
     selectedTopics,
     isAllSelected,
     handleClickTopic,
     selectAll,
     isSelectedTopic,
-    navigateToNext,
   };
 }
