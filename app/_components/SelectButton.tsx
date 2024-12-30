@@ -24,7 +24,7 @@ export default function SelectButton({
   onClick,
 }: SelectButtonProps) {
   return (
-    <div className={clsx(styles.wrapper, { [styles['wrapper--selected']]: isSelected })} onClick={onClick}>
+    <button className={clsx(styles.wrapper, { [styles['wrapper--selected']]: isSelected })} onClick={onClick}>
       <div className={styles['wrapper__title']}>
         {/* {variant === 'detailed' && Icon && <Icon />} //TODO: SVGR설정하여 아이콘 처리*/}
         <div>{title}</div>
@@ -40,6 +40,6 @@ export default function SelectButton({
           </div>
         </>
       )}
-    </div>
+    </button>
   );
 }
