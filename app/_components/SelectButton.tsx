@@ -24,10 +24,14 @@ export default function SelectButton({
   onClick,
 }: SelectButtonProps) {
   return (
-    <button className={clsx(styles.wrapper, { [styles['wrapper--selected']]: isSelected })} onClick={onClick}>
+    <button
+      className={clsx(styles.wrapper, { [styles['wrapper--selected']]: isSelected })}
+      onClick={onClick}
+      aria-label={title}
+    >
       <div className={styles['wrapper__title']}>
         {/* {variant === 'detailed' && Icon && <Icon />} //TODO: SVGR설정하여 아이콘 처리*/}
-        <div>{title}</div>
+        <div className={styles['wrapper__title-text']}>{title}</div>
       </div>
 
       {variant === 'detailed' && (
