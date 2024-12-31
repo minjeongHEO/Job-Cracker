@@ -24,10 +24,10 @@ export default function SelectButton({
   onClick,
 }: SelectButtonProps) {
   return (
-    <div className={clsx(styles.wrapper, { [styles['wrapper--selected']]: isSelected })} onClick={onClick}>
+    <button className={wrapperClass(isSelected)} onClick={onClick} aria-label={title}>
       <div className={styles['wrapper__title']}>
         {/* {variant === 'detailed' && Icon && <Icon />} //TODO: SVGR설정하여 아이콘 처리*/}
-        <div>{title}</div>
+        <div className={styles['wrapper__title-text']}>{title}</div>
       </div>
 
       {variant === 'detailed' && (
@@ -40,6 +40,12 @@ export default function SelectButton({
           </div>
         </>
       )}
-    </div>
+    </button>
   );
+}
+
+function wrapperClass(selected: boolean) {
+  return clsx(styles.wrapper, {
+    [styles['wrapper--selected']]: selected,
+  });
 }

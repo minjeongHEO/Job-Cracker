@@ -1,15 +1,14 @@
 'use client';
 
-import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
-import { useState } from 'react';
 
+import useTopicSelector from '@/app/_hooks/useTopicSelector';
 import { DeveloperType } from '@/app/_types/interview';
 
 import SelectButton from './SelectButton';
 import styles from './TopicSelector.module.scss';
 
-interface TopicSelectorProps {
+export interface TopicSelectorProps {
   variant?: 'topic' | 'subTopic';
   devType: DeveloperType;
   topics: string[];
@@ -17,12 +16,12 @@ interface TopicSelectorProps {
 
 export default function TopicSelector({ variant = 'topic', devType, topics }: TopicSelectorProps) {
   const router = useRouter();
-  const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const isAllSelected = selectedTopics.length === topics.length;
+  const { selectedTopics, isAllSelected, isTopicSelected, handleClickTopic, handleSelectAll } = useTopicSelector({
+    topics,
+  });
 
   const navigateToNext = () => {
     if (!selectedTopics.length) return;
-
     switch (variant) {
       case 'topic':
         const topicParam = isAllSelected ? 'all' : selectedTopics.join(',');
@@ -34,26 +33,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
     }
   };
 
-  const toggleTopic = (prevTopics: string[], clickedTopic: string) => {
-    if (prevTopics.includes(clickedTopic)) {
-      const newSelectedTopics = prevTopics.filter((topic) => topic !== clickedTopic);
-      return newSelectedTopics;
-    }
-    return [...prevTopics, clickedTopic];
-  };
-
-  const handleClickTopic = (clickedTopic: string) => {
-    setSelectedTopics((prevTopics) => toggleTopic(prevTopics, clickedTopic));
-  };
-
-  const selectAll = () => {
-    setSelectedTopics((prevSelectedTopics) => {
-      if (prevSelectedTopics.length === topics.length) return [];
-      return topics;
-    });
-  };
-
-  const isSelectedTopic = (topic: string) => selectedTopics.includes(topic);
+  const notSelected = selectedTopics.length === 0;
 
   return (
     <>
@@ -70,23 +50,20 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
           variant="simple"
           option={{ title: '전체 선택' }}
           isSelected={isAllSelected}
-          onClick={selectAll}
+          onClick={handleSelectAll}
         />
         {topics.map((topic) => (
           <SelectButton
             key={topic}
             variant="simple"
             option={{ title: topic }}
-            isSelected={isSelectedTopic(topic)}
+            isSelected={isTopicSelected(topic)}
             onClick={() => handleClickTopic(topic)}
           />
         ))}
       </div>
 
-      <button
-        className={clsx(styles['next-button'], { [styles['next-button--visible']]: selectedTopics.length > 0 })}
-        onClick={navigateToNext}
-      >
+      <button className={styles['next-button']} onClick={navigateToNext} disabled={notSelected}>
         다음
       </button>
     </>
