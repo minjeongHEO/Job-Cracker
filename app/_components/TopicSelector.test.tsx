@@ -28,6 +28,7 @@ const defaultProps = {
 };
 const firstTopicName = defaultProps.topics[0];
 const allTopicsButtonText = '전체 선택';
+const nextButtonText = '다음';
 const topicCount = defaultProps.topics.length;
 
 describe('TopicSelector', () => {
@@ -59,7 +60,7 @@ describe('TopicSelector', () => {
       render(<TopicSelector {...defaultProps} />);
 
       // 다음 버튼 확인
-      const nextButton = screen.getByRole('button', { name: '다음' });
+      const nextButton = screen.getByRole('button', { name: nextButtonText });
 
       expect(nextButton).not.toHaveClass(styles['next-button--visible']);
     });
@@ -72,7 +73,7 @@ describe('TopicSelector', () => {
       fireEvent.click(topicButton);
 
       // 다음 버튼 확인
-      const nextButton = screen.getByRole('button', { name: '다음' });
+      const nextButton = screen.getByRole('button', { name: nextButtonText });
 
       expect(nextButton).toHaveClass(styles['next-button--visible']);
     });
@@ -130,15 +131,14 @@ describe('TopicSelector', () => {
       render(<TopicSelector {...defaultProps} variant="topic" />);
 
       // 전체 선택
-      const allButton = screen.getByRole('button', { name: '전체 선택' });
+      const allButton = screen.getByRole('button', { name: allTopicsButtonText });
       fireEvent.click(allButton);
 
       // 다음 버튼 클릭
-      const nextButton = screen.getByRole('button', { name: '다음' });
+      const nextButton = screen.getByRole('button', { name: nextButtonText });
       fireEvent.click(nextButton);
 
       // 라우팅 확인
-      expect(mockPush).toHaveBeenCalledWith(`/interview/select/${defaultProps.devType}/prepare?topics=all`);
       expect(mockPush).toHaveBeenCalledWith(ROUTES.TOPIC.build(defaultProps.devType, 'all'));
     });
 
@@ -150,13 +150,11 @@ describe('TopicSelector', () => {
       fireEvent.click(topicButton);
 
       // 다음 버튼 클릭
-      const nextButton = screen.getByRole('button', { name: '다음' });
+      const nextButton = screen.getByRole('button', { name: nextButtonText });
       fireEvent.click(nextButton);
 
       // 라우팅 확인
-      expect(mockPush).toHaveBeenCalledWith(
-        `/interview/select/${defaultProps.devType}/prepare?topics=${firstTopicName}`
-      );
+      expect(mockPush).toHaveBeenCalledWith(ROUTES.TOPIC.build(defaultProps.devType, firstTopicName));
     });
 
     it('subTopic 타입 라우팅', () => {
@@ -167,7 +165,7 @@ describe('TopicSelector', () => {
       fireEvent.click(topicButton);
 
       // 다음 버튼 클릭
-      const nextButton = screen.getByRole('button', { name: '다음' });
+      const nextButton = screen.getByRole('button', { name: nextButtonText });
       fireEvent.click(nextButton);
 
       // 라우팅 확인
