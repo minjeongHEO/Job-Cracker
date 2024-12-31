@@ -17,7 +17,7 @@ export interface TopicSelectorProps {
 
 export default function TopicSelector({ variant = 'topic', devType, topics }: TopicSelectorProps) {
   const router = useRouter();
-  const { selectedTopics, isAllSelected, handleClickTopic, handleSelectAll, isTopicSelected } = useTopicSelector({
+  const { selectedTopics, isAllSelected, isTopicSelected, handleClickTopic, handleSelectAll } = useTopicSelector({
     topics,
   });
 
@@ -33,6 +33,9 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
         break;
     }
   };
+
+  const notSelected = selectedTopics.length === 0;
+
   return (
     <>
       <div className={styles['sub_title']}>
@@ -61,12 +64,13 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
         ))}
       </div>
 
-      <button
-        className={clsx(styles['next-button'], { [styles['next-button--visible']]: selectedTopics.length > 0 })}
-        onClick={navigateToNext}
-      >
+      <button className={buttonClass(notSelected)} onClick={navigateToNext} disabled={notSelected}>
         다음
       </button>
     </>
   );
+}
+
+function buttonClass(disabled: boolean) {
+  return clsx(styles['next-button'], { [styles['next-button--disabled']]: disabled });
 }

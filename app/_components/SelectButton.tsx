@@ -23,12 +23,6 @@ export default function SelectButton({
   isSelected = false,
   onClick,
 }: SelectButtonProps) {
-  const wrapperClass = (selected: boolean) => {
-    return clsx(styles.wrapper, {
-      [styles['wrapper--selected']]: selected,
-    });
-  };
-
   return (
     <button className={wrapperClass(isSelected)} onClick={onClick} aria-label={title}>
       <div className={styles['wrapper__title']}>
@@ -48,4 +42,10 @@ export default function SelectButton({
       )}
     </button>
   );
+}
+
+function wrapperClass(selected: boolean) {
+  return clsx(styles.wrapper, {
+    [styles['wrapper--selected']]: selected,
+  });
 }
