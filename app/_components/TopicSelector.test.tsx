@@ -26,7 +26,7 @@ const defaultProps = {
   devType: 'FrontEnd' as DeveloperType,
   topics: ['JavaScript', 'React', 'TypeScript'],
 };
-const firstTopicName = defaultProps.topics[0];
+const [firstTopicName] = defaultProps.topics;
 const allTopicsButtonText = '전체 선택';
 const nextButtonText = '다음';
 const topicCount = defaultProps.topics.length;
