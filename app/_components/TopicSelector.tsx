@@ -1,6 +1,5 @@
 'use client';
 
-import clsx from 'clsx';
 import { useRouter } from 'next/navigation';
 
 import useTopicSelector from '@/app/_hooks/useTopicSelector';
@@ -64,7 +63,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
         ))}
       </div>
 
-      <button className={clsx(styles['next-button'])} onClick={navigateToNext} disabled={notSelected}>
+      <button className={styles['next-button']} onClick={navigateToNext} disabled={notSelected}>
         다음
       </button>
     </>
