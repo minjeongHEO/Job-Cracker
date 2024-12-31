@@ -17,7 +17,7 @@ export interface TopicSelectorProps {
 
 export default function TopicSelector({ variant = 'topic', devType, topics }: TopicSelectorProps) {
   const router = useRouter();
-  const { selectedTopics, isAllSelected, handleClickTopic, selectAll, isSelectedTopic } = useTopicSelector({
+  const { selectedTopics, isAllSelected, handleClickTopic, handleSelectAll, isSelectedTopic } = useTopicSelector({
     topics,
   });
 
@@ -48,7 +48,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
           variant="simple"
           option={{ title: '전체 선택' }}
           isSelected={isAllSelected}
-          onClick={selectAll}
+          onClick={handleSelectAll}
         />
         {topics.map((topic) => (
           <SelectButton

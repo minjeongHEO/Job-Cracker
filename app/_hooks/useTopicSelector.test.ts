@@ -34,12 +34,12 @@ describe('useTopicSelector', () => {
     expect(result.current.selectedTopics).toHaveLength(0);
   });
 
-  // selectAll +  isAllSelected
+  // handleSelectAll +  isAllSelected
   it('전체 선택을 누르면 전체가 선택된다.', () => {
     const { result } = renderHook(() => useTopicSelector(defaultProps));
 
     act(() => {
-      result.current.selectAll();
+      result.current.handleSelectAll();
     });
 
     expect(result.current.selectedTopics).toEqual(defaultProps.topics);
@@ -50,8 +50,8 @@ describe('useTopicSelector', () => {
     const { result } = renderHook(() => useTopicSelector(defaultProps));
 
     act(() => {
-      result.current.selectAll(); // 전체 선택
-      result.current.selectAll(); // 전체 해제
+      result.current.handleSelectAll(); // 전체 선택
+      result.current.handleSelectAll(); // 전체 해제
     });
 
     expect(result.current.selectedTopics).toHaveLength(0);

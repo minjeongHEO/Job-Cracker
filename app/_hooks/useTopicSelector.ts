@@ -18,7 +18,7 @@ export default function useTopicSelector({ topics }: Omit<TopicSelectorProps, 'd
     setSelectedTopics((prevTopics) => toggleTopic(prevTopics, clickedTopic));
   };
 
-  const selectAll = () => {
+  const handleSelectAll = () => {
     setSelectedTopics((prevSelectedTopics) => {
       if (prevSelectedTopics.length === topics.length) return [];
       return topics;
@@ -31,7 +31,7 @@ export default function useTopicSelector({ topics }: Omit<TopicSelectorProps, 'd
     selectedTopics,
     isAllSelected,
     handleClickTopic,
-    selectAll,
+    handleSelectAll,
     isSelectedTopic,
   };
 }
