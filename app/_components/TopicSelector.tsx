@@ -1,8 +1,10 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
+import { getVaildTopics } from '@/app/_helpers/interviewHelpers';
 import useTopicSelector from '@/app/_hooks/useTopicSelector';
+import { useInterviewStore } from '@/app/_stores/useInterviewStore';
 import { DeveloperType } from '@/app/_types/interview';
 
 import SelectButton from './SelectButton';
@@ -16,24 +18,41 @@ export interface TopicSelectorProps {
 
 export default function TopicSelector({ variant = 'topic', devType, topics }: TopicSelectorProps) {
   const router = useRouter();
-  const { selectedTopics, isAllSelected, isTopicSelected, handleClickTopic, handleSelectAll } = useTopicSelector({
-    topics,
-  });
+  const searchParams = useSearchParams();
+  const { selectedTopics, isAllSelected, notSelected, isTopicSelected, handleClickTopic, handleSelectAll } =
+    useTopicSelector({
+      topics,
+    });
+  const { updateSelect, updateDevType } = useInterviewStore();
+
+  const handleTopicNavigation = () => {
+    const topicParam = isAllSelected ? 'all' : selectedTopics.join(',');
+    router.push(`/interview/select/${devType}/prepare?topics=${topicParam}`);
+  };
+
+  const handleSubTopicNavigation = () => {
+    const topicsFromUrl = searchParams.get('topics') || '';
+    const wholeTopic = getVaildTopics(devType);
+    const previousTopics = topicsFromUrl === 'all' ? wholeTopic : topicsFromUrl.split(',');
+
+    updateDevType(devType);
+    updateSelect({ topics: previousTopics, subTopics: selectedTopics });
+    router.push('/interview/chat');
+  };
 
   const navigateToNext = () => {
     if (!selectedTopics.length) return;
+
     switch (variant) {
       case 'topic':
-        const topicParam = isAllSelected ? 'all' : selectedTopics.join(',');
-        router.push(`/interview/select/${devType}/prepare?topics=${topicParam}`);
+        handleTopicNavigation();
         break;
+
       case 'subTopic':
-        router.push('/interview/chat');
+        handleSubTopicNavigation();
         break;
     }
   };
-
-  const notSelected = selectedTopics.length === 0;
 
   return (
     <>
