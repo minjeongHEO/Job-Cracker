@@ -64,13 +64,9 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
         ))}
       </div>
 
-      <button className={buttonClass(notSelected)} onClick={navigateToNext} disabled={notSelected}>
+      <button className={clsx(styles['next-button'])} onClick={navigateToNext} disabled={notSelected}>
         다음
       </button>
     </>
   );
-}
-
-function buttonClass(disabled: boolean) {
-  return clsx(styles['next-button'], { [styles['next-button--disabled']]: disabled });
 }

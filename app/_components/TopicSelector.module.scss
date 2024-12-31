@@ -21,9 +21,9 @@
   pointer-events: auto;
   opacity: 1;
   transition: opacity 0.4s ease;
+}
 
-  &--disabled {
-    pointer-events: none;
-    opacity: 0;
-  }
+.next-button:disabled {
+  pointer-events: none;
+  opacity: 0;
 }
