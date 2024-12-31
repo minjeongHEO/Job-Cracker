@@ -65,7 +65,7 @@ describe('useTopicSelector', () => {
       result.current.handleClickTopic('JavaScript');
     });
 
-    expect(result.current.isSelectedTopic('JavaScript')).toBe(true);
-    expect(result.current.isSelectedTopic('React')).toBe(false);
+    expect(result.current.isTopicSelected('JavaScript')).toBe(true);
+    expect(result.current.isTopicSelected('React')).toBe(false);
   });
 });

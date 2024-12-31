@@ -17,7 +17,7 @@ export interface TopicSelectorProps {
 
 export default function TopicSelector({ variant = 'topic', devType, topics }: TopicSelectorProps) {
   const router = useRouter();
-  const { selectedTopics, isAllSelected, handleClickTopic, handleSelectAll, isSelectedTopic } = useTopicSelector({
+  const { selectedTopics, isAllSelected, handleClickTopic, handleSelectAll, isTopicSelected } = useTopicSelector({
     topics,
   });
 
@@ -55,7 +55,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
             key={topic}
             variant="simple"
             option={{ title: topic }}
-            isSelected={isSelectedTopic(topic)}
+            isSelected={isTopicSelected(topic)}
             onClick={() => handleClickTopic(topic)}
           />
         ))}

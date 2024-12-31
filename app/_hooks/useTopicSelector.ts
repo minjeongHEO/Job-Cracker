@@ -4,7 +4,11 @@ import { TopicSelectorProps } from '../_components/TopicSelector';
 
 export default function useTopicSelector({ topics }: Omit<TopicSelectorProps, 'devType'>) {
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);
-  const isAllSelected = selectedTopics.length === topics.length;
+
+  const selector = {
+    isAllSelected: selectedTopics.length === topics.length,
+    isTopicSelected: (topic: string) => selectedTopics.includes(topic),
+  };
 
   const toggleTopic = (prevTopics: string[], clickedTopic: string) => {
     if (prevTopics.includes(clickedTopic)) {
@@ -25,13 +29,11 @@ export default function useTopicSelector({ topics }: Omit<TopicSelectorProps, 'd
     });
   };
 
-  const isSelectedTopic = (topic: string) => selectedTopics.includes(topic);
-
   return {
     selectedTopics,
-    isAllSelected,
+    isAllSelected: selector.isAllSelected,
+    isTopicSelected: selector.isTopicSelected,
     handleClickTopic,
     handleSelectAll,
-    isSelectedTopic,
   };
 }
