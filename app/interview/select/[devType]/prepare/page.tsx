@@ -1,5 +1,5 @@
 import TopicSelector from '@/app/_components/TopicSelector';
-import { DeveloperType } from '@/app/_types/interview';
+import { getSelectedTopics, isValidTopicParam } from '@/app/_helpers/interviewHelpers';
 import { isDeveloperType } from '@/app/_utils/typeGuards';
 import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 import SelectLayout from '@/app/interview/select/_components/SelectLayout';
@@ -37,24 +37,4 @@ export default async function PreparePage({ params, searchParams }: PreparePageT
       <TopicSelector variant={'subTopic'} devType={devType} topics={subTopics}></TopicSelector>
     </SelectLayout>
   );
-}
-
-function isValidTopicParam(devType: DeveloperType, param: string) {
-  const validTopics = Object.keys(DEVELOPER_OPTIONS[devType].topics);
-
-  if (param === 'all') {
-    return true;
-  }
-
-  return param.split(',').every((topic) => validTopics.includes(topic));
-}
-
-function getSelectedTopics(devType: DeveloperType, param: string) {
-  const validTopics = Object.keys(DEVELOPER_OPTIONS[devType].topics);
-
-  if (param === 'all') {
-    return validTopics;
-  }
-
-  return param.split(',');
 }
