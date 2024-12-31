@@ -56,16 +56,16 @@ describe('TopicSelector', () => {
   });
 
   describe('-다음 버튼 관련', () => {
-    it('선택된 주제가 없을 때는 다음 버튼이 --visible 클래스를 가지지 않는다.', () => {
+    it('선택된 주제가 없을 때는 다음 버튼이 --disabled 클래스를 가진다.', () => {
       render(<TopicSelector {...defaultProps} />);
 
       // 다음 버튼 확인
       const nextButton = screen.getByRole('button', { name: nextButtonText });
 
-      expect(nextButton).not.toHaveClass(styles['next-button--visible']);
+      expect(nextButton).toHaveClass(styles['next-button--disabled']);
     });
 
-    it('주제가 선택되면 다음 버튼이 visible 클래스를 가진다', () => {
+    it('주제가 선택되면 다음 버튼이 disabled 클래스를 가지지 않는다.', () => {
       render(<TopicSelector {...defaultProps} />);
 
       // 주제 선택
@@ -75,7 +75,7 @@ describe('TopicSelector', () => {
       // 다음 버튼 확인
       const nextButton = screen.getByRole('button', { name: nextButtonText });
 
-      expect(nextButton).toHaveClass(styles['next-button--visible']);
+      expect(nextButton).not.toHaveClass(styles['next-button--disabled']);
     });
   });
 
