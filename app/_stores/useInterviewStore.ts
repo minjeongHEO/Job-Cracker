@@ -1,4 +1,5 @@
 import { create } from 'zustand';
+import { devtools } from 'zustand/middleware';
 
 import { DeveloperType } from '@/app/_types/interview';
 
@@ -12,21 +13,25 @@ interface InterviewStore {
   updateSelect: (newSelect: Partial<{ topics: string[]; subTopics: string[] }>) => void;
 }
 
-export const useInterviewStore = create<InterviewStore>((set) => ({
-  // init state
-  devType: null,
-  select: {
-    topics: [],
-    subTopics: [],
-  },
-
-  // actions
-  updateDevType: (newDevType) => set({ devType: newDevType }),
-  updateSelect: (newSelect) =>
-    set((state) => ({
+export const useInterviewStore = create<InterviewStore>()(
+  devtools(
+    (set) => ({
+      devType: null,
       select: {
-        ...state.select,
-        ...newSelect,
+        topics: [],
+        subTopics: [],
       },
-    })),
-}));
+      updateDevType: (newDevType) => set({ devType: newDevType }),
+      updateSelect: (newSelect) =>
+        set((state) => ({
+          select: {
+            ...state.select,
+            ...newSelect,
+          },
+        })),
+    }),
+    {
+      name: 'Interview Store',
+    }
+  )
+);
