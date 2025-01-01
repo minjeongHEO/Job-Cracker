@@ -1,8 +1,7 @@
 'use client';
 
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
-import { getVaildTopics } from '@/app/_helpers/interviewHelpers';
 import useTopicSelector from '@/app/_hooks/useTopicSelector';
 import { useInterviewStore } from '@/app/_stores/useInterviewStore';
 import { DeveloperType } from '@/app/_types/interview';
@@ -18,25 +17,20 @@ export interface TopicSelectorProps {
 
 export default function TopicSelector({ variant = 'topic', devType, topics }: TopicSelectorProps) {
   const router = useRouter();
-  const searchParams = useSearchParams();
   const { selectedTopics, isAllSelected, notSelected, isTopicSelected, handleClickTopic, handleSelectAll } =
     useTopicSelector({
       topics,
     });
-  const { updateSelect, updateDevType } = useInterviewStore();
+  const { updateSelect } = useInterviewStore();
 
   const handleTopicNavigation = () => {
     const topicParam = isAllSelected ? 'all' : selectedTopics.join(',');
     router.push(`/interview/select/${devType}/prepare?topics=${topicParam}`);
+    updateSelect({ topics: selectedTopics });
   };
 
   const handleSubTopicNavigation = () => {
-    const topicsFromUrl = searchParams.get('topics') || '';
-    const wholeTopic = getVaildTopics(devType);
-    const previousTopics = topicsFromUrl === 'all' ? wholeTopic : topicsFromUrl.split(',');
-
-    updateDevType(devType);
-    updateSelect({ topics: previousTopics, subTopics: selectedTopics });
+    updateSelect({ subTopics: selectedTopics });
     router.push('/interview/chat');
   };
 
