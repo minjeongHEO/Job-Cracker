@@ -9,7 +9,7 @@ interface InterviewStore {
     subTopics: string[];
   };
   updateDevType: (newDevType: DeveloperType) => void;
-  updateSelect: (newSelect: { topics: string[]; subTopics: string[] }) => void;
+  updateSelect: (newSelect: Partial<{ topics: string[]; subTopics: string[] }>) => void;
 }
 
 export const useInterviewStore = create<InterviewStore>((set) => ({
@@ -22,5 +22,11 @@ export const useInterviewStore = create<InterviewStore>((set) => ({
 
   // actions
   updateDevType: (newDevType) => set({ devType: newDevType }),
-  updateSelect: ({ topics, subTopics }) => set({ select: { topics, subTopics } }),
+  updateSelect: (newSelect) =>
+    set((state) => ({
+      select: {
+        ...state.select,
+        ...newSelect,
+      },
+    })),
 }));
