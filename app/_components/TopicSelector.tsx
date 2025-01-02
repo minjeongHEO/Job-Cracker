@@ -1,7 +1,8 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 
+import { getTopicParam, getVaildTopics } from '@/app/_helpers/interviewHelpers';
 import useTopicSelector from '@/app/_hooks/useTopicSelector';
 import { DeveloperType } from '@/app/_types/interview';
 
@@ -16,30 +17,44 @@ export interface TopicSelectorProps {
 
 export default function TopicSelector({ variant = 'topic', devType, topics }: TopicSelectorProps) {
   const router = useRouter();
+  const searchParams = useSearchParams();
   const { selectedTopics, isAllSelected, notSelected, isTopicSelected, handleClickTopic, handleSelectAll } =
     useTopicSelector({
       topics,
     });
 
-  const handleTopicNavigation = () => {
-    const topicParam = isAllSelected ? 'all' : selectedTopics.join(',');
-    router.push(`/interview/select/${devType}/prepare?topics=${topicParam}`);
+  const getParamsForChat = () => {
+    const subTopicParam = getTopicParam(isAllSelected, selectedTopics);
+    const topicsParam =
+      searchParams.get('topics') === 'all' ? getVaildTopics(devType).join(',') : searchParams.get('topics');
+    const params = new URLSearchParams({
+      devType,
+      topics: topicsParam || '',
+      subTopics: subTopicParam,
+    });
+
+    return params;
   };
 
-  const handleSubTopicNavigation = () => {
-    router.push('/interview/chat');
+  const getParamsForSubTopic = () => {
+    const topicsParam = getTopicParam(isAllSelected, selectedTopics);
+    const params = new URLSearchParams({
+      topics: topicsParam,
+    });
+
+    return params;
   };
 
-  const navigateToNext = () => {
+  const handleNavigation = () => {
     if (!selectedTopics.length) return;
 
     switch (variant) {
       case 'topic':
-        handleTopicNavigation();
+        router.push(`/interview/select/${devType}/prepare?${getParamsForSubTopic()}`);
         break;
 
       case 'subTopic':
-        handleSubTopicNavigation();
+        router.push(`/interview/chat?${getParamsForChat()}`);
         break;
     }
   };
@@ -72,7 +87,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
         ))}
       </div>
 
-      <button className={styles['next-button']} onClick={navigateToNext} disabled={notSelected}>
+      <button className={styles['next-button']} onClick={handleNavigation} disabled={notSelected}>
         다음
       </button>
     </>

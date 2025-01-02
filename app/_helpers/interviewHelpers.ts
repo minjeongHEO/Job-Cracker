@@ -1,6 +1,9 @@
 import { DeveloperType } from '@/app/_types/interview';
 import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 
+export const getTopicParam = (isAllSelected: boolean, selectedTopics: string[]): string =>
+  isAllSelected ? 'all' : selectedTopics.join(',');
+
 export const getVaildTopics = (devType: DeveloperType) => Object.keys(DEVELOPER_OPTIONS[devType].topics);
 
 export const isValidTopicParam = (devType: DeveloperType, param: string) => {
