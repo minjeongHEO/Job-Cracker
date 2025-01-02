@@ -1,3 +1,4 @@
+import InterviewChat from '@/app/_components/InterviewChat';
 import { isDeveloperType, isValidSubTopicParam, isValidTopicParam } from '@/app/_helpers/typeGuards';
 import SelectLayout from '@/app/interview/select/_components/SelectLayout';
 
@@ -32,7 +33,7 @@ export default async function ChatPage({ searchParams }: ChatPageType) {
 
   return (
     <div>
-      채팅 시작{devType}, {topics}, {subTopics}
+      <InterviewChat devType={devType} topics={topics.split(',')} subTopics={subTopics.split(',')} />
     </div>
   );
 }
