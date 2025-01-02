@@ -6,13 +6,8 @@ export const getTopicParam = (isAllSelected: boolean, selectedTopics: string[]):
 
 export const getVaildTopics = (devType: DeveloperType) => Object.keys(DEVELOPER_OPTIONS[devType].topics);
 
-export const isValidTopicParam = (devType: DeveloperType, param: string) => {
-  const validTopics = getVaildTopics(devType);
-
-  if (param === 'all') return true;
-
-  return param.split(',').every((topic) => validTopics.includes(topic));
-};
+export const getVaildSubTopics = (devType: DeveloperType, topic: string) =>
+  DEVELOPER_OPTIONS[devType].topics[topic] || [];
 
 export const getSelectedTopics = (devType: DeveloperType, param: string) => {
   const validTopics = getVaildTopics(devType);
