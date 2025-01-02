@@ -1,7 +1,6 @@
 import TopicSelector from '@/app/_components/TopicSelector';
-import { getSelectedTopics, isValidTopicParam } from '@/app/_helpers/interviewHelpers';
-import { isDeveloperType } from '@/app/_utils/typeGuards';
-import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
+import { getSelectedTopics, getVaildSubTopics } from '@/app/_helpers/interviewHelpers';
+import { isDeveloperType, isValidTopicParam } from '@/app/_helpers/typeGuards';
 import SelectLayout from '@/app/interview/select/_components/SelectLayout';
 
 interface PreparePageType {
@@ -29,8 +28,7 @@ export default async function PreparePage({ params, searchParams }: PreparePageT
   }
 
   const selectedTopics = getSelectedTopics(devType, topics);
-
-  const subTopics = selectedTopics.flatMap((topic) => DEVELOPER_OPTIONS[devType].topics[topic] || []);
+  const subTopics = selectedTopics.flatMap((topic) => getVaildSubTopics(devType, topic) || []);
 
   return (
     <SelectLayout title={'세부 내용을 선택하시면 관련 면접 질문을 준비해드릴게요!'}>

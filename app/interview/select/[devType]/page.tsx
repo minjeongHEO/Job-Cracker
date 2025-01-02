@@ -1,7 +1,7 @@
 import TopicSelector from '@/app/_components/TopicSelector';
 import { getVaildTopics } from '@/app/_helpers/interviewHelpers';
+import { isDeveloperType } from '@/app/_helpers/typeGuards';
 import { DeveloperType } from '@/app/_types/interview';
-import { isDeveloperType } from '@/app/_utils/typeGuards';
 import SelectLayout from '@/app/interview/select/_components/SelectLayout';
 
 export default async function DevTypePage({ params }: { params: Promise<{ devType: DeveloperType }> }) {
