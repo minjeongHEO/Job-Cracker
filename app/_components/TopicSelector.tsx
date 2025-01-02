@@ -3,7 +3,6 @@
 import { useRouter } from 'next/navigation';
 
 import useTopicSelector from '@/app/_hooks/useTopicSelector';
-import { useInterviewStore } from '@/app/_stores/useInterviewStore';
 import { DeveloperType } from '@/app/_types/interview';
 
 import SelectButton from './SelectButton';
@@ -21,16 +20,13 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
     useTopicSelector({
       topics,
     });
-  const { updateSelect } = useInterviewStore();
 
   const handleTopicNavigation = () => {
     const topicParam = isAllSelected ? 'all' : selectedTopics.join(',');
     router.push(`/interview/select/${devType}/prepare?topics=${topicParam}`);
-    updateSelect({ topics: selectedTopics });
   };
 
   const handleSubTopicNavigation = () => {
-    updateSelect({ subTopics: selectedTopics });
     router.push('/interview/chat');
   };
 
