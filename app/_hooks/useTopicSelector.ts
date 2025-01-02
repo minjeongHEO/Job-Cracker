@@ -8,6 +8,7 @@ export default function useTopicSelector({ topics }: Omit<TopicSelectorProps, 'd
   const selector = {
     isAllSelected: selectedTopics.length === topics.length,
     isTopicSelected: (topic: string) => selectedTopics.includes(topic),
+    notSelected: selectedTopics.length === 0,
   };
 
   const toggleTopic = (prevTopics: string[], clickedTopic: string) => {
@@ -33,6 +34,7 @@ export default function useTopicSelector({ topics }: Omit<TopicSelectorProps, 'd
     selectedTopics,
     isAllSelected: selector.isAllSelected,
     isTopicSelected: selector.isTopicSelected,
+    notSelected: selector.notSelected,
     handleClickTopic,
     handleSelectAll,
   };
