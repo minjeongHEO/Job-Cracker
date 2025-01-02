@@ -1,22 +1,46 @@
-// color
-$default-bg-color: #fefbf3;
-$sub-bg-color: #eff6ff;
+@use 'sass:map';
 
-$main-color: #f0c387;
-$sub-color: #2b4c7e;
-$highlight-color: #ff6b35;
+$colors: (
+  'background': (
+    'default': #fefbf3,
+    'sub': #eff6ff,
+  ),
+  'brand': (
+    'main': #f0c387,
+    'sub': #2b4c7e,
+  ),
+  'highlight': (
+    '01': #ff6b35,
+    '02': #ffb535,
+    '03': #ffdf53,
+    '04': #7dd45b,
+  ),
+  'text': (
+    'default': #1f364d,
+    'sub': #5b6c7e,
+  ),
+  'neutral': (
+    'grey': #d9d9d9,
+    'black': #14212b,
+    'white': #fffcfb,
+  ),
+  'accent': (
+    'yellow': #fecf75,
+    'select': #74a6f2,
+  ),
+  'shadow': (
+    'default': rgba(95, 84, 62, 0.2),
+    'button': rgba(62, 73, 95, 0.2),
+  ),
+);
 
-$default-text-color: #1f364d;
-$sub-text-color: #5b6c7e;
+@function color($category, $shade) {
+  @return map.get(map.get($colors, $category), $shade);
+}
 
-$default-black-color: #14212b;
-$default-white-color: #fffcfb;
-$default-yellow-color: #fecf75;
-$default-select-color: #74a6f2;
-
-$default-shadow-color: rgba(95, 84, 62, 0.2);
-$button-shadow-color: rgba(62, 73, 95, 0.2);
-
-//test color
-$test-color1: aliceblue;
-$test-color2: red;
+// NOTE
+// 사용 예시
+// .element {
+//   background-color: color('background', 'default');
+//   color: color('text', 'primary');
+// }

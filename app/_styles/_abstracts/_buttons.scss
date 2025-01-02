@@ -9,13 +9,13 @@
   align-items: center;
   width: 7rem;
   height: 2.5rem;
-  color: $default-white-color;
+  color: color('neutral', 'white');
   font-size: large;
   font-weight: bold;
   cursor: pointer;
-  background-color: $default-select-color;
+  background-color: color('accent', 'select');
   border-radius: 2rem;
-  box-shadow: 0 1rem 1.3rem $button-shadow-color;
+  box-shadow: 0 1rem 1.3rem color('shadow', 'button');
   transition: transform 0.2s ease;
 
   &:hover {

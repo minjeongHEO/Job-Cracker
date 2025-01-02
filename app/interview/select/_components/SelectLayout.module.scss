@@ -16,12 +16,12 @@
   &__title {
     font-size: 2rem;
     font-weight: bold;
-    color: $default-text-color;
+    color: color('text', 'default');
   }
 
   &__sub-title {
     font-size: 1.2rem;
-    color: $default-text-color;
+    color: color('text', 'default');
   }
 
   &__selectBox {

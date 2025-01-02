@@ -15,8 +15,8 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  color: $default-text-color;
-  background: $default-bg-color;
+  color: color('text', 'default');
+  background: color('background', 'default');
 }
 
 * {
@@ -46,5 +46,5 @@ li {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: $default-bg-color;
+  background-color: color('background', 'default');
 }
