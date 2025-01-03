@@ -1,6 +1,6 @@
-import InterviewChat from '@/app/_components/InterviewChat';
+import InterviewChat from '@/app/_components/pages/InterviewChat';
+import SelectLayout from '@/app/_components/templates/SelectLayout';
 import { isDeveloperType, isValidSubTopicParam, isValidTopicParam } from '@/app/_helpers/typeGuards';
-import SelectLayout from '@/app/interview/select/_components/SelectLayout';
 
 import styles from './page.module.scss';
 interface ChatPageType {

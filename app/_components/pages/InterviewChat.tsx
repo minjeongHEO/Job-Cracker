@@ -1,7 +1,8 @@
 'use client';
-import QuestionCard from '@/app/_components/QuestionCard';
 
+import AnswerSection from './AnswerSection';
 import styles from './InterviewChat.module.scss';
+import QuestionSection from './QuestionSection';
 
 interface InterviewChatProps {
   devType: string;
@@ -15,9 +16,8 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
       <div>{topics.join(',')}</div>
       <div>{subTopics.join(',')}</div>
       질문답변 페이지
-      <QuestionCard isSelected={false} level={'01'} />
-      <QuestionCard isSelected={false} level={'02'} />
-      <QuestionCard isSelected={false} level={'03'} />
+      <QuestionSection />
+      <AnswerSection />
     </div>
   );
 }

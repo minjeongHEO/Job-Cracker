@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { TopicSelectorProps } from '../_components/TopicSelector';
+import { TopicSelectorProps } from '@/app/_components/molecules/TopicSelector';
 
 export default function useTopicSelector({ topics }: Omit<TopicSelectorProps, 'devType'>) {
   const [selectedTopics, setSelectedTopics] = useState<string[]>([]);

@@ -2,11 +2,11 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
+import SelectButton from '@/app/_components/atoms/SelectButton';
 import { handleNavigation } from '@/app/_helpers/interviewHelpers';
 import useTopicSelector from '@/app/_hooks/useTopicSelector';
 import { DeveloperType, SelectorVariant } from '@/app/_types/interview';
 
-import SelectButton from './SelectButton';
 import styles from './TopicSelector.module.scss';
 
 export interface TopicSelectorProps {
@@ -56,7 +56,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
         ))}
       </div>
 
-      <button className={styles['next-button']} onClick={() => handleNextClick} disabled={notSelected}>
+      <button className={styles['next-button']} onClick={handleNextClick} disabled={notSelected}>
         다음
       </button>
     </>

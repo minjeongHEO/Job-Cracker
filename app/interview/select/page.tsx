@@ -3,12 +3,12 @@
 import Link from 'next/link';
 import { useState } from 'react';
 
-import SelectButton from '@/app/_components/SelectButton';
+import SelectButton from '@/app/_components/atoms/SelectButton';
 import { DeveloperType } from '@/app/_types/interview';
 import { typedEntries } from '@/app/_utils/typeUtils';
 import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 
-import SelectLayout from './_components/SelectLayout';
+import SelectLayout from '../../_components/templates/SelectLayout';
 
 export default function SelectPage() {
   const [selectedDev, setSelectedDev] = useState<DeveloperType | null>();

@@ -2,7 +2,7 @@
 
 import clsx from 'clsx';
 
-import Badge from './Badge';
+import Badge from '../atoms/Badge';
 import CardStyles from './QuestionCard.module.scss';
 
 type ShadeType = '01' | '02' | '03' | '04' | '05';

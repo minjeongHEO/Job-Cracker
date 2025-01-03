@@ -1,7 +1,7 @@
-import TopicSelector from '@/app/_components/TopicSelector';
+import TopicSelector from '@/app/_components/molecules/TopicSelector';
+import SelectLayout from '@/app/_components/templates/SelectLayout';
 import { getSelectedTopics, getVaildSubTopics } from '@/app/_helpers/interviewHelpers';
 import { isDeveloperType, isValidTopicParam } from '@/app/_helpers/typeGuards';
-import SelectLayout from '@/app/interview/select/_components/SelectLayout';
 
 interface PreparePageType {
   params: Promise<{ devType: string }>;
