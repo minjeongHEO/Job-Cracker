@@ -13,3 +13,5 @@ export type OptionDetails = {
 export type DeveloperOptionType = {
   [K in DeveloperType]: OptionDetails;
 };
+
+export type SelectorVariant = 'topic' | 'subTopic';

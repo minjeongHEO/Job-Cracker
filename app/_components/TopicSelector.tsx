@@ -2,15 +2,15 @@
 
 import { useRouter, useSearchParams } from 'next/navigation';
 
-import { getTopicParam, getVaildTopics } from '@/app/_helpers/interviewHelpers';
+import { handleNavigation } from '@/app/_helpers/interviewHelpers';
 import useTopicSelector from '@/app/_hooks/useTopicSelector';
-import { DeveloperType } from '@/app/_types/interview';
+import { DeveloperType, SelectorVariant } from '@/app/_types/interview';
 
 import SelectButton from './SelectButton';
 import styles from './TopicSelector.module.scss';
 
 export interface TopicSelectorProps {
-  variant?: 'topic' | 'subTopic';
+  variant?: SelectorVariant;
   devType: DeveloperType;
   topics: string[];
 }
@@ -23,40 +23,9 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
       topics,
     });
 
-  const getParamsForChat = () => {
-    const subTopicParam = getTopicParam(isAllSelected, selectedTopics);
-    const topicsParam =
-      searchParams.get('topics') === 'all' ? getVaildTopics(devType).join(',') : searchParams.get('topics');
-    const params = new URLSearchParams({
-      devType,
-      topics: topicsParam || '',
-      subTopics: subTopicParam,
-    });
-
-    return params;
-  };
-
-  const getParamsForSubTopic = () => {
-    const topicsParam = getTopicParam(isAllSelected, selectedTopics);
-    const params = new URLSearchParams({
-      topics: topicsParam,
-    });
-
-    return params;
-  };
-
-  const handleNavigation = () => {
-    if (!selectedTopics.length) return;
-
-    switch (variant) {
-      case 'topic':
-        router.push(`/interview/select/${devType}/prepare?${getParamsForSubTopic()}`);
-        break;
-
-      case 'subTopic':
-        router.push(`/interview/chat?${getParamsForChat()}`);
-        break;
-    }
+  const handleNextClick = () => {
+    const nextRoute = handleNavigation(variant, devType, selectedTopics, isAllSelected, searchParams);
+    if (nextRoute) router.push(nextRoute);
   };
 
   return (
@@ -87,7 +56,7 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
         ))}
       </div>
 
-      <button className={styles['next-button']} onClick={handleNavigation} disabled={notSelected}>
+      <button className={styles['next-button']} onClick={() => handleNextClick} disabled={notSelected}>
         다음
       </button>
     </>
