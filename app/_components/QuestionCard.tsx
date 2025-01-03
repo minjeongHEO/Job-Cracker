@@ -14,7 +14,7 @@ interface QuestionCardProps {
   level?: ShadeType;
 }
 
-const IMPORTANCE_LEVEL: Record<ShadeType, { title: string; shade: ShadeType }> = {
+export const IMPORTANCE_LEVEL: Record<ShadeType, { title: string; shade: ShadeType }> = {
   '01': { title: '최우선 🚨', shade: '01' },
   '02': { title: '필수 ⭐️⭐️⭐️', shade: '02' },
   '03': { title: '중요 ⭐️⭐️', shade: '03' },
