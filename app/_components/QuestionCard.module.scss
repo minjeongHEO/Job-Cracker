@@ -1,0 +1,57 @@
+.question-card {
+  min-width: 31rem;
+
+  @include primary-box;
+
+  // 상단 제목 영역
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+
+  // 질문 영역
+  &__question {
+    width: 100%;
+    border-radius: 8px;
+    background-color: color('brand', 'main');
+
+    &-content {
+      border-radius: 10px 7px 7px 10px;
+      padding: 12px;
+      color: color('text', 'default');
+
+      margin-left: 8px;
+      width: calc(100% - 8px);
+
+      text-align: left;
+      background-color: color('neutral', 'pureWhite');
+    }
+  }
+
+  // 하단 답변 영역
+  &__answer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  &__score {
+    font-weight: 500;
+    color: color('text', 'sub');
+  }
+
+  &__button--view {
+    @extend %square-button;
+  }
+  &__button--new {
+    @extend %square-button;
+    background-color: color('highlight', '01');
+  }
+}

@@ -1,0 +1,25 @@
+@use 'variables' as *;
+
+@mixin primary-box {
+  border: none;
+  width: 100%;
+  background-color: color('neutral', 'white');
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 1.5rem 3rem;
+  border-radius: 1rem;
+  box-shadow: 0 3px 8px color('shadow', 'default');
+  cursor: pointer;
+  margin-bottom: 1rem;
+  transition: transform 0.2s ease;
+
+  &:hover:not(&--selected) {
+    transform: translateY(-0.25rem);
+  }
+
+  &--selected {
+    box-shadow: 0 3px 8px color('accent', 'select');
+    border: 2px solid color('accent', 'select');
+  }
+}

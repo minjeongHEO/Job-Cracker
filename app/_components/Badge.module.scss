@@ -1,0 +1,25 @@
+.wrapper {
+  padding: 4px 7px;
+  border-radius: 1rem;
+  background-color: color('accent', 'yellow');
+  color: color('neutral', 'white');
+  font-size: 12px;
+  font-weight: 600;
+  align-content: center;
+
+  &-01 {
+    background-color: color('highlight', '01');
+  }
+  &-02 {
+    background-color: color('highlight', '02');
+  }
+  &-03 {
+    background-color: color('highlight', '03');
+  }
+  &-04 {
+    background-color: color('highlight', '04');
+  }
+  &-05 {
+    background-color: color('neutral', 'grey');
+  }
+}

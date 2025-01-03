@@ -1,7 +1,12 @@
+$gradient-start: color('background', 'default');
+$gradient-end: color('background', 'sub');
+
 .main {
   width: 100%;
   height: 100%;
-  background: linear-gradient(-180deg, $default-bg-color, $sub-bg-color);
+  $bg-default: color('background', 'default');
+  $bg-sub: color('background', 'sub');
+  background: linear-gradient(-180deg, $gradient-start, $gradient-end);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -20,20 +25,20 @@
   &__title {
     font-size: 3rem;
     font-weight: bold;
-    color: $default-text-color;
+    color: color('text', 'defualt');
     text-align: center;
     margin-bottom: 1rem;
   }
 
   &__sub-title {
     font-size: 1.2rem;
-    color: $default-text-color;
+    color: color('text', 'default');
     text-align: center;
     margin-bottom: 2rem;
   }
 
   &__description {
-    color: $sub-text-color;
+    color: color('text', 'sub');
     font-size: 1.2rem;
     margin-bottom: 2rem;
   }
@@ -52,7 +57,7 @@
     left: 50%;
     transform: translate(-50%, -50%);
     border-radius: 50%;
-    box-shadow: 0 2rem 1rem $default-shadow-color;
+    box-shadow: 0 2rem 1rem color('shadow', 'default');
     z-index: 1;
   }
 
