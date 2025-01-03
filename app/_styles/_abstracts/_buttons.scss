@@ -22,3 +22,17 @@
     transform: translateY(-0.25rem);
   }
 }
+
+%square-button {
+  padding: 5px 10px;
+  border-radius: 0.5rem;
+  font-weight: 500;
+  border: none;
+  cursor: pointer;
+  background-color: color('brand', 'sub');
+  color: color('neutral', 'white');
+
+  &:hover {
+    filter: brightness(1.2);
+  }
+}
