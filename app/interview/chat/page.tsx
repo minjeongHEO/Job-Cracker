@@ -2,6 +2,7 @@ import InterviewChat from '@/app/_components/InterviewChat';
 import { isDeveloperType, isValidSubTopicParam, isValidTopicParam } from '@/app/_helpers/typeGuards';
 import SelectLayout from '@/app/interview/select/_components/SelectLayout';
 
+import styles from './page.module.scss';
 interface ChatPageType {
   searchParams: Promise<{ devType: string; topics: string; subTopics: string }>;
 }
@@ -32,7 +33,7 @@ export default async function ChatPage({ searchParams }: ChatPageType) {
   }
 
   return (
-    <div>
+    <div className={styles.main}>
       <InterviewChat devType={devType} topics={topics.split(',')} subTopics={subTopics.split(',')} />
     </div>
   );
