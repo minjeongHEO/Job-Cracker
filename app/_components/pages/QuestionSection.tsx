@@ -25,7 +25,7 @@ export default function QuestionSection({
       className={clsx(styles['question_section'], { [styles['question_section--with-answer']]: selectedQuestionId })}
     >
       <header className={styles['question_section__header']}>
-        <p className="title">면접관의 질문에 도전해보세요</p>
+        <p className="title">면접 질문에 답변해보세요</p>
         <p className={styles['sub-title']}>꼬리 질문으로 실력 레벨업! 팔로♾️로미 😉</p>
       </header>
       <section className={styles['question_section__cards']}>
