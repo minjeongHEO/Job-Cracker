@@ -10,13 +10,20 @@
 
   &__header {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     gap: 0.5rem;
     margin-bottom: 1rem;
-    font-size: 2rem;
+    font-size: 1.5rem;
     font-weight: bold;
     color: color('brand', 'sub');
+
+    & .sub-title {
+      font-size: 1rem;
+      font-weight: normal;
+      color: color('brand', 'main');
+    }
   }
 
   &__cards {
