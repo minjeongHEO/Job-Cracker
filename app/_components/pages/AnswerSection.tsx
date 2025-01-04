@@ -1,12 +1,14 @@
 'use client';
 import clsx from 'clsx';
 
+import ArrowRightIcon from '@/app/_components/atoms/ArrowRightIcon';
 import Badge from '@/app/_components/atoms/Badge';
 import { BadgeShadeType } from '@/app/_types/interview';
 
 import styles from './AnswerSection.module.scss';
 
 interface AnswerSectionProps {
+  onClick: (question: string | null) => void;
   clickedQuestion: string | null;
   level: { title: string; shade: BadgeShadeType };
   keywords: string[];
@@ -17,6 +19,7 @@ interface AnswerSectionProps {
 }
 
 export default function AnswerSection({
+  onClick,
   clickedQuestion,
   level: { title: levelTitle, shade: levelShade },
   keywords,
@@ -27,6 +30,9 @@ export default function AnswerSection({
 }: AnswerSectionProps) {
   return (
     <div className={clsx(styles['answer-section'], { [styles['answer-section--visible']]: clickedQuestion })}>
+      <button className={styles['close-button']} aria-label={'답변 닫기'} onClick={() => onClick(null)}>
+        <ArrowRightIcon className={styles['close-button__icon']} />
+      </button>
       <header className={styles['answer-section__header']}>
         <span className={styles['question']}>Q. {clickedQuestion}</span>
         <Badge option={{ title: levelTitle, shade: levelShade }}></Badge>

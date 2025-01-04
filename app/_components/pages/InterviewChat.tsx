@@ -17,18 +17,22 @@ interface InterviewChatProps {
 export default function InterviewChat({ devType, topics, subTopics }: InterviewChatProps) {
   const [clickedQuestion, setClickedQuestion] = useState<string | null>(null);
 
-  const handleQuestionClick = (question: string) => {
+  const handleQuestionClick = (question: string | null) => {
     setClickedQuestion(question);
   };
 
   return (
-    <div className={clsx(styles['interview-chat'], { [styles['interview-chat--with-answer']]: clickedQuestion })}>
-      {/* <div>{devType}</div>
-      <div>{topics.join(',')}</div>
-      <div>{subTopics.join(',')}</div>
-      질문답변 페이지 */}
-      <QuestionSection onClick={handleQuestionClick} clickedQuestion={clickedQuestion} />
+    <div className={styles['interview-chat']}>
+      <div
+        className={clsx(styles['interview-chat__container'], {
+          [styles['interview-chat__container--with-answer']]: clickedQuestion,
+        })}
+      >
+        <QuestionSection onClick={handleQuestionClick} clickedQuestion={clickedQuestion} />
+      </div>
+
       <AnswerSection
+        onClick={handleQuestionClick}
         clickedQuestion={clickedQuestion}
         level={{ title: '최우선 🚨', shade: '01' }}
         keywords={[
