@@ -1,8 +1,10 @@
 'use client';
 
 import clsx from 'clsx';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { generateQuestionAPI } from '@/app/_lib/api/interview';
+import { GenerateQuestionResponse } from '@/app/_types/api/interview';
 import { DeveloperType } from '@/app/_types/interview';
 
 import AnswerSection from './AnswerSection';
@@ -15,7 +17,24 @@ interface InterviewChatProps {
   subTopics: string[];
 }
 export default function InterviewChat({ devType, topics, subTopics }: InterviewChatProps) {
+  const [questions, setQuestions] = useState<GenerateQuestionResponse[]>([]);
   const [clickedQuestion, setClickedQuestion] = useState<string | null>(null);
+
+  // 초기 질문 생성
+  useEffect(() => {
+    const generateInitialQuestion = async () => {
+      if (!questions.length) {
+        try {
+          const question = await generateQuestionAPI({ devType, topics, subTopics });
+          setQuestions([question]);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    };
+
+    generateInitialQuestion();
+  }, [devType, topics, subTopics, questions.length]);
 
   const handleQuestionClick = (question: string | null) => {
     setClickedQuestion(question);
