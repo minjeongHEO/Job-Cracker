@@ -4,7 +4,7 @@ import { GenerateQuestionRequest } from '@/app/_types/api/interview';
 import openai from './openai';
 
 /** 초기 질문 생성 */
-export async function generateQuestion({ devType, subTopic, topic }: GenerateQuestionRequest) {
+export async function generateQuestion({ devType, subTopics, topics }: GenerateQuestionRequest) {
   const systemPrompt = `당신은 기술 면접을 통해서 ${devType} 개발자를 뽑는 개발자와 면접관 경력이 10년 이상의 Tech Lead입니다.
 다음 형식의 JSON으로 응답해주세요:
 {
@@ -20,7 +20,7 @@ export async function generateQuestion({ devType, subTopic, topic }: GenerateQue
 - 04(⭐⭐): 기본적이고 가벼운 지식
 - 05(⭐): 알면 좋은 가산점 지식
 
-주어진 topic(${topic.join(', ')})과 subTopic(${subTopic.join(', ')})에 대해 
+주어진 topic(${topics.join(', ')})과 subTopic(${subTopics.join(', ')})에 대해 
 실제 면접에서 자주 나오는 중요한 질문을 생성해주세요.
 
 응답시 주의사항:
@@ -36,7 +36,7 @@ export async function generateQuestion({ devType, subTopic, topic }: GenerateQue
         { role: 'system', content: systemPrompt },
         {
           role: 'user',
-          content: `${topic.join(',')}의 ${subTopic.join(
+          content: `${topics.join(',')}의 ${subTopics.join(
             ','
           )}에 대한 면접 질문을 중요도가 높은걸 우선 순위로 골고루 생성해주세요.`,
         },

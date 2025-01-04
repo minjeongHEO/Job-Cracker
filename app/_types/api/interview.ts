@@ -2,8 +2,8 @@ import { BadgeShadeType, DeveloperType } from '../interview';
 
 export interface GenerateQuestionRequest {
   devType: DeveloperType;
-  topic: string[];
-  subTopic: string[];
+  topics: string[];
+  subTopics: string[];
 }
 
 export interface GenerateQuestionResponse {
