@@ -2,11 +2,29 @@
   width: 65%;
   height: 100vh;
   padding: 3rem;
-  // background-color: aliceblue;
-
   transition: width 0.3s ease-out;
 
   &--with-answer {
     width: 50%;
+  }
+
+  &__header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: color('brand', 'sub');
+  }
+
+  &__cards {
+    margin-top: 1rem;
+    height: calc(100% - 10rem);
+    overflow-y: auto;
+    padding: 0.5rem;
+
+    mask-image: linear-gradient(to bottom, transparent, black 5%, black 96%, transparent);
   }
 }
