@@ -15,3 +15,5 @@ export type DeveloperOptionType = {
 };
 
 export type SelectorVariant = 'topic' | 'subTopic';
+
+export type BadgeShadeType = '01' | '02' | '03' | '04' | '05';

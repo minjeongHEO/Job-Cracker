@@ -4,7 +4,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { DeveloperType } from '@/app/_types/interview';
 import '@testing-library/jest-dom';
 
-import buttonStyles from './SelectButton.module.scss';
+import buttonStyles from '@/app/_components/atoms/SelectButton.module.scss';
+
 import TopicSelector from './TopicSelector';
 
 export const ROUTES = {

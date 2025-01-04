@@ -1,0 +1,20 @@
+.interview-chat {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  position: relative;
+  justify-content: center;
+}
+
+.interview-chat__container {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 0.2s ease-out;
+
+  &--with-answer {
+    transform: translateX(-25%);
+  }
+}

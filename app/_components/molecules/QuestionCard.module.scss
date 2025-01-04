@@ -1,7 +1,10 @@
 .question-card {
-  min-width: 31rem;
-
   @include primary-box;
+
+  & {
+    min-width: 31rem;
+    cursor: auto;
+  }
 
   // 상단 제목 영역
   &__header {
