@@ -1,11 +1,10 @@
 'use client';
-
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import { generateQuestionAPI } from '@/app/_lib/api/interview';
-import { GenerateQuestionResponse } from '@/app/_types/api/interview';
-import { DeveloperType } from '@/app/_types/interview';
+import { DeveloperType, QuestionState } from '@/app/_types/interview';
 
 import AnswerSection from './AnswerSection';
 import styles from './InterviewChat.module.scss';
@@ -16,9 +15,10 @@ interface InterviewChatProps {
   topics: string[];
   subTopics: string[];
 }
+
 export default function InterviewChat({ devType, topics, subTopics }: InterviewChatProps) {
-  const [questions, setQuestions] = useState<GenerateQuestionResponse[]>([]);
-  const [clickedQuestion, setClickedQuestion] = useState<string | null>(null);
+  const [questions, setQuestions] = useState<QuestionState[]>([]);
+  const [selectedQuestionId, setSelectedQuestionId] = useState<string | null>(null);
 
   // 초기 질문 생성
   useEffect(() => {
@@ -26,7 +26,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
       if (!questions.length) {
         try {
           const question = await generateQuestionAPI({ devType, topics, subTopics });
-          setQuestions([question]);
+          setQuestions([{ ...question, id: uuidv4() }]);
         } catch (error) {
           console.error(error);
         }
@@ -36,23 +36,25 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
     generateInitialQuestion();
   }, [devType, topics, subTopics, questions.length]);
 
-  const handleQuestionClick = (question: string | null) => setClickedQuestion(question);
+  const handleQuestionClick = (id: string) => setSelectedQuestionId(id);
 
-  const handleCloseAnswer = () => setClickedQuestion(null);
+  const handleCloseAnswer = () => setSelectedQuestionId(null);
+
+  const selectedQuestion = questions.find(({ id }) => id === selectedQuestionId) || null;
 
   return (
     <div className={styles['interview-chat']}>
       <div
         className={clsx(styles['interview-chat__container'], {
-          [styles['interview-chat__container--with-answer']]: clickedQuestion,
+          [styles['interview-chat__container--with-answer']]: selectedQuestionId,
         })}
       >
-        <QuestionSection onClick={handleQuestionClick} clickedQuestion={clickedQuestion} questions={questions} />
+        <QuestionSection onClick={handleQuestionClick} selectedQuestionId={selectedQuestionId} questions={questions} />
       </div>
 
       <AnswerSection
         handleCloseAnswer={handleCloseAnswer}
-        clickedQuestion={clickedQuestion}
+        selectedQuestion={selectedQuestion}
         level={{ title: '최우선 🚨', shade: '01' }}
         keywords={[
           '키워드 1',
