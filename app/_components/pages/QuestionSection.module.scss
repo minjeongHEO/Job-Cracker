@@ -1,0 +1,12 @@
+.question_section {
+  width: 65%;
+  height: 100vh;
+  padding: 3rem;
+  // background-color: aliceblue;
+
+  transition: width 0.3s ease-out;
+
+  &--with-answer {
+    width: 50%;
+  }
+}
