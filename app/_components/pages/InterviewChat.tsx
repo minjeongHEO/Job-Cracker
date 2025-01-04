@@ -36,9 +36,9 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
     generateInitialQuestion();
   }, [devType, topics, subTopics, questions.length]);
 
-  const handleQuestionClick = (question: string | null) => {
-    setClickedQuestion(question);
-  };
+  const handleQuestionClick = (question: string | null) => setClickedQuestion(question);
+
+  const handleCloseAnswer = () => setClickedQuestion(null);
 
   return (
     <div className={styles['interview-chat']}>
@@ -51,7 +51,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
       </div>
 
       <AnswerSection
-        onClick={handleQuestionClick}
+        handleCloseAnswer={handleCloseAnswer}
         clickedQuestion={clickedQuestion}
         level={{ title: '최우선 🚨', shade: '01' }}
         keywords={[

@@ -8,7 +8,7 @@ import { BadgeShadeType } from '@/app/_types/interview';
 import styles from './AnswerSection.module.scss';
 
 interface AnswerSectionProps {
-  onClick: (question: string | null) => void;
+  handleCloseAnswer: () => void;
   clickedQuestion: string | null;
   level: { title: string; shade: BadgeShadeType };
   keywords: string[];
@@ -19,7 +19,7 @@ interface AnswerSectionProps {
 }
 
 export default function AnswerSection({
-  onClick,
+  handleCloseAnswer,
   clickedQuestion,
   level: { title: levelTitle, shade: levelShade },
   keywords,
@@ -30,7 +30,7 @@ export default function AnswerSection({
 }: AnswerSectionProps) {
   return (
     <div className={clsx(styles['answer-section'], { [styles['answer-section--visible']]: clickedQuestion })}>
-      <button className={styles['close-button']} aria-label={'답변 닫기'} onClick={() => onClick(null)}>
+      <button className={styles['close-button']} aria-label={'답변 닫기'} onClick={handleCloseAnswer}>
         <ArrowRightIcon className={styles['close-button__icon']} />
       </button>
       <header className={styles['answer-section__header']}>
