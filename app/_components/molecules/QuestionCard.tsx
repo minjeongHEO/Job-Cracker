@@ -13,6 +13,7 @@ interface QuestionCardProps {
   onClick: (question: string) => void;
   level?: BadgeShadeType;
   question: string;
+  titleTopic: string;
 }
 
 export const IMPORTANCE_LEVEL: Record<BadgeShadeType, { title: string; shade: BadgeShadeType }> = {
@@ -28,12 +29,13 @@ export default function QuestionCard({
   onClick = () => {},
   level = '05',
   question,
+  titleTopic,
 }: QuestionCardProps) {
   const { title, shade } = IMPORTANCE_LEVEL[level];
   return (
     <div className={wrapperClass(isSelected)} aria-label={'질문'}>
       <header className={CardStyles['question-card__header']}>
-        <span className={CardStyles['question-card__topic']}>주제</span>
+        <span className={CardStyles['question-card__topic']}>{titleTopic}</span>
         <Badge option={{ title, shade }}></Badge>
       </header>
 

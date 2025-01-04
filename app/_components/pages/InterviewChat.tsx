@@ -47,7 +47,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
           [styles['interview-chat__container--with-answer']]: clickedQuestion,
         })}
       >
-        <QuestionSection onClick={handleQuestionClick} clickedQuestion={clickedQuestion} />
+        <QuestionSection onClick={handleQuestionClick} clickedQuestion={clickedQuestion} questions={questions} />
       </div>
 
       <AnswerSection
