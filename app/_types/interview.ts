@@ -5,6 +5,17 @@ export interface UnknownObject {
   importance?: unknown;
   keywords?: unknown;
 }
+export interface QuestionState {
+  id: string;
+  question: string;
+  importance: BadgeShadeType;
+  keywords: string[];
+  titleTopic: string;
+  userAnswer?: string;
+  score?: number;
+  feedback?: string;
+  improvedAnswer?: string;
+}
 
 export const DEVELOPER_TYPES = ['FrontEnd', 'BackEnd', 'iOS'] as const;
 export type DeveloperType = (typeof DEVELOPER_TYPES)[number];
