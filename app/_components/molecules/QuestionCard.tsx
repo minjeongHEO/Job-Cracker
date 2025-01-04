@@ -3,16 +3,15 @@
 import clsx from 'clsx';
 
 import Badge from '@/app/_components/atoms/Badge';
-import { BadgeShadeType } from '@/app/_types/interview';
+import { BadgeShadeType, QuestionState } from '@/app/_types/interview';
 
 import CardStyles from './QuestionCard.module.scss';
 
 interface QuestionCardProps {
-  // question: string;
   isSelected?: boolean;
   onClick: (question: string) => void;
   level?: BadgeShadeType;
-  question: string;
+  question: QuestionState;
   titleTopic: string;
 }
 
@@ -28,7 +27,7 @@ export default function QuestionCard({
   isSelected = false,
   onClick = () => {},
   level = '05',
-  question,
+  question: { score, userAnswer, id, question },
   titleTopic,
 }: QuestionCardProps) {
   const { title, shade } = IMPORTANCE_LEVEL[level];
@@ -44,11 +43,14 @@ export default function QuestionCard({
       </section>
 
       <footer className={CardStyles['question-card__answer']}>
-        <span className={CardStyles['question-card__score']}>점수</span>
-        <button className={CardStyles['question-card__button--view']} onClick={() => onClick(question)}>
-          답변 보기
-        </button>
-        <button className={CardStyles['question-card__button--new']}>다른 주제</button>
+        {score && <span className={CardStyles['question-card__score']}>{score}점</span>}
+        {userAnswer ? (
+          <button className={CardStyles['question-card__button--view']} onClick={() => onClick(id)}>
+            답변 보기
+          </button>
+        ) : (
+          <button className={CardStyles['question-card__button--new']}>다른 주제</button>
+        )}
       </footer>
     </div>
   );

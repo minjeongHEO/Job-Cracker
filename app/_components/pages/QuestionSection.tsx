@@ -2,9 +2,9 @@
 
 import clsx from 'clsx';
 
+import QuestionCard from '@/app/_components/molecules/QuestionCard';
 import { QuestionState } from '@/app/_types/interview';
 
-import QuestionCard from '../molecules/QuestionCard';
 import styles from './QuestionSection.module.scss';
 
 interface QuestionSectionProps {
@@ -23,11 +23,11 @@ export default function QuestionSection({ onClick, selectedQuestionId, questions
         <p className={styles['sub-title']}>꼬리 질문으로 실력 레벨업! 팔로♾️로미 😉</p>
       </header>
       <section className={styles['question_section__cards']}>
-        {questions.map((question, index) => (
+        {questions.map((question) => (
           <QuestionCard
-            key={`${question.question}-${index}`}
+            key={question.id}
             titleTopic={question.titleTopic}
-            question={question.question}
+            question={question}
             isSelected={question.id === selectedQuestionId}
             onClick={onClick}
             level={question.importance}
