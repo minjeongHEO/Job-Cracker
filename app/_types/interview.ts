@@ -1,5 +1,11 @@
 import { FC, SVGProps } from 'react';
 
+export interface UnknownObject {
+  question?: unknown;
+  importance?: unknown;
+  keywords?: unknown;
+}
+
 export const DEVELOPER_TYPES = ['FrontEnd', 'BackEnd', 'iOS'] as const;
 export type DeveloperType = (typeof DEVELOPER_TYPES)[number];
 
