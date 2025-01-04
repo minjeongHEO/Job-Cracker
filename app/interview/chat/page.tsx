@@ -33,7 +33,7 @@ export default async function ChatPage({ searchParams }: ChatPageType) {
   }
 
   return (
-    <div className={styles.main}>
+    <div className={styles.chat_page}>
       <InterviewChat devType={devType} topics={topics.split(',')} subTopics={subTopics.split(',')} />
     </div>
   );
