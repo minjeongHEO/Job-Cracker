@@ -10,4 +10,5 @@ export interface GenerateQuestionResponse {
   question: string;
   importance: BadgeShadeType;
   keywords: string[];
+  titleTopic: string;
 }

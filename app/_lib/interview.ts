@@ -10,7 +10,8 @@ export async function generateQuestion({ devType, subTopics, topics }: GenerateQ
 {
   "question": "면접 질문",
   "importance": "중요도('01'~'05')",
-  "keywords": ["키워드1", "키워드2"]
+  "keywords": ["키워드1", "키워드2"],
+  "titleTopic": "해당 질문이 속한 주제"
 }
 
 중요도 기준:
@@ -26,8 +27,9 @@ export async function generateQuestion({ devType, subTopics, topics }: GenerateQ
 응답시 주의사항:
 1. 질문은 구체적이고 명확해야 합니다.
 2. 키워드는 3-5개 정도가 적당합니다.
-3. 키워드는 질문에 대한 답을 연상할 수 있도록 도와줄 수 있는 핵심 키워드거나, 추가 학습을 위한 관련 검색 키워드를 제안해주세요
+3. 키워드는 질문에 대한 답을 연상할 수 있도록 도와줄 수 있는 핵심 키워드거나, 추가 학습을 위한 관련 검색 키워드를 제안해주세요.
 4. 난이도는 주어진 기준에 맞게 정확히 판단해주세요.
+5. titleTopic은 생성한 질문이 주어진 topics 중 어느 주제에 해당하는지 명시해주세요.
 `;
   try {
     const completion = await openai.chat.completions.create({
