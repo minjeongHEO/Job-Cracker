@@ -16,4 +16,5 @@ export type DeveloperOptionType = {
 
 export type SelectorVariant = 'topic' | 'subTopic';
 
-export type BadgeShadeType = '01' | '02' | '03' | '04' | '05';
+export const BADGE_SHADE_TYPES = ['01', '02', '03', '04', '05'] as const;
+export type BadgeShadeType = (typeof BADGE_SHADE_TYPES)[number];
