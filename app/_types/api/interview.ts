@@ -1,9 +1,12 @@
-import { BadgeShadeType, DeveloperType } from '../interview';
+import { BadgeShadeType, DeveloperType, QuestionState } from '../interview';
 
 export interface GenerateQuestionRequest {
   devType: DeveloperType;
   topics: string[];
   subTopics: string[];
+}
+export interface GenerateAnotherQuestionRequest extends GenerateQuestionRequest {
+  questionState: QuestionState;
 }
 
 export interface GenerateQuestionResponse {

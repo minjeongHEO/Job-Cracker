@@ -8,12 +8,18 @@ import { QuestionState } from '@/app/_types/interview';
 import styles from './QuestionSection.module.scss';
 
 interface QuestionSectionProps {
-  onClick: (question: string) => void;
+  handleQuestionClick: (question: string) => void;
   selectedQuestionId: string | null;
   questions: QuestionState[];
+  handleGenerateAnotherQuestion: () => void;
 }
 
-export default function QuestionSection({ onClick, selectedQuestionId, questions }: QuestionSectionProps) {
+export default function QuestionSection({
+  handleQuestionClick,
+  selectedQuestionId,
+  questions,
+  handleGenerateAnotherQuestion,
+}: QuestionSectionProps) {
   return (
     <div
       className={clsx(styles['question_section'], { [styles['question_section--with-answer']]: selectedQuestionId })}
@@ -29,8 +35,10 @@ export default function QuestionSection({ onClick, selectedQuestionId, questions
             titleTopic={question.titleTopic}
             question={question}
             isSelected={question.id === selectedQuestionId}
-            onClick={onClick}
+            handleQuestionClick={handleQuestionClick}
             level={question.importance}
+            isLastQuestion={questions[questions.length - 1].id === question.id}
+            handleGenerateAnotherQuestion={handleGenerateAnotherQuestion}
           />
         ))}
       </section>

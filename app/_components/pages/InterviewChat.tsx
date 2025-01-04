@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { generateQuestionAPI } from '@/app/_lib/api/interview';
+import { generateAnotherQuestionAPI, generateQuestionAPI } from '@/app/_lib/api/interview';
 import { DeveloperType, QuestionState } from '@/app/_types/interview';
 
 import AnswerSection from './AnswerSection';
@@ -36,6 +36,27 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
     generateInitialQuestion();
   }, [devType, topics, subTopics, questions.length]);
 
+  const handleGenerateAnotherQuestion = async () => {
+    if (!questions.length) return;
+    try {
+      const question = await generateAnotherQuestionAPI({
+        devType,
+        topics,
+        subTopics,
+        questionState: questions[questions.length - 1],
+      });
+
+      const anotherQuestion = { ...question, id: uuidv4() };
+
+      setQuestions((prevQuestions) => {
+        const newQuestions = [...prevQuestions.slice(0, -1), anotherQuestion];
+        return newQuestions;
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleQuestionClick = (id: string) => setSelectedQuestionId(id);
 
   const handleCloseAnswer = () => setSelectedQuestionId(null);
@@ -49,7 +70,12 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
           [styles['interview-chat__container--with-answer']]: selectedQuestionId,
         })}
       >
-        <QuestionSection onClick={handleQuestionClick} selectedQuestionId={selectedQuestionId} questions={questions} />
+        <QuestionSection
+          handleQuestionClick={handleQuestionClick}
+          selectedQuestionId={selectedQuestionId}
+          questions={questions}
+          handleGenerateAnotherQuestion={handleGenerateAnotherQuestion}
+        />
       </div>
 
       <AnswerSection
