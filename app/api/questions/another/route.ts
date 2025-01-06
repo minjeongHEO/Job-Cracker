@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 
-import { generateAnotherQuestion } from '@/app/_lib/interview';
 import { GenerateAnotherQuestionRequest } from '@/app/_types/api/interview';
+import { generateAnotherQuestion } from '@/app/services/interview';
 
 // API 엔드포인트 로직
 export async function POST(request: Request) {

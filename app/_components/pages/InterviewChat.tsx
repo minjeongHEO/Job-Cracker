@@ -3,8 +3,8 @@ import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
-import { generateAnotherQuestionAPI, generateQuestionAPI } from '@/app/_lib/api/interview';
 import { DeveloperType, QuestionState } from '@/app/_types/interview';
+import { generateAnotherQuestionAPI, generateQuestionAPI } from '@/app/services/api/interview';
 
 import AnswerSection from './AnswerSection';
 import styles from './InterviewChat.module.scss';
