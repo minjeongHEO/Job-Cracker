@@ -3,13 +3,13 @@ import clsx from 'clsx';
 
 import ArrowRightIcon from '@/app/_components/atoms/ArrowRightIcon';
 import Badge from '@/app/_components/atoms/Badge';
-import { BadgeShadeType } from '@/app/_types/interview';
+import { BadgeShadeType, QuestionState } from '@/app/_types/interview';
 
 import styles from './AnswerSection.module.scss';
 
 interface AnswerSectionProps {
-  onClick: (question: string | null) => void;
-  clickedQuestion: string | null;
+  handleCloseAnswer: () => void;
+  selectedQuestion: QuestionState | null;
   level: { title: string; shade: BadgeShadeType };
   keywords: string[];
   score: number;
@@ -19,8 +19,8 @@ interface AnswerSectionProps {
 }
 
 export default function AnswerSection({
-  onClick,
-  clickedQuestion,
+  handleCloseAnswer,
+  selectedQuestion,
   level: { title: levelTitle, shade: levelShade },
   keywords,
   score,
@@ -29,12 +29,12 @@ export default function AnswerSection({
   improvedAnswer,
 }: AnswerSectionProps) {
   return (
-    <div className={clsx(styles['answer-section'], { [styles['answer-section--visible']]: clickedQuestion })}>
-      <button className={styles['close-button']} aria-label={'답변 닫기'} onClick={() => onClick(null)}>
+    <div className={clsx(styles['answer-section'], { [styles['answer-section--visible']]: selectedQuestion })}>
+      <button className={styles['close-button']} aria-label={'답변 닫기'} onClick={handleCloseAnswer}>
         <ArrowRightIcon className={styles['close-button__icon']} />
       </button>
       <header className={styles['answer-section__header']}>
-        <span className={styles['question']}>Q. {clickedQuestion}</span>
+        <span className={styles['question']}>Q. {selectedQuestion?.question}</span>
         <Badge option={{ title: levelTitle, shade: levelShade }}></Badge>
       </header>
 

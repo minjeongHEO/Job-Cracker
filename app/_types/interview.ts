@@ -1,5 +1,22 @@
 import { FC, SVGProps } from 'react';
 
+export interface UnknownObject {
+  question?: unknown;
+  importance?: unknown;
+  keywords?: unknown;
+}
+export interface QuestionState {
+  id: string;
+  question: string;
+  importance: BadgeShadeType;
+  keywords: string[];
+  titleTopic: string;
+  userAnswer?: string;
+  score?: number;
+  feedback?: string;
+  improvedAnswer?: string;
+}
+
 export const DEVELOPER_TYPES = ['FrontEnd', 'BackEnd', 'iOS'] as const;
 export type DeveloperType = (typeof DEVELOPER_TYPES)[number];
 
@@ -16,4 +33,5 @@ export type DeveloperOptionType = {
 
 export type SelectorVariant = 'topic' | 'subTopic';
 
-export type BadgeShadeType = '01' | '02' | '03' | '04' | '05';
+export const BADGE_SHADE_TYPES = ['01', '02', '03', '04', '05'] as const;
+export type BadgeShadeType = (typeof BADGE_SHADE_TYPES)[number];
