@@ -15,6 +15,8 @@
   }
 
   &__text-box {
+    cursor: auto;
+    font-family: 'Pretendard', sans-serif;
     width: 100%;
     border-radius: 2rem 0 0 2rem;
     padding: 1.5rem;
@@ -26,6 +28,29 @@
 
     &:focus {
       outline: none;
+    }
+
+    /* 스크롤바 스타일 */
+    /* Webkit 기반 브라우저 */
+    &::-webkit-scrollbar {
+      width: 10px;
+      cursor: auto;
+    }
+    &::-webkit-scrollbar-track {
+      background: rgba(var(--color-neutral-grey), 0.3);
+    }
+    /* 스크롤 핸들 */
+    &::-webkit-scrollbar-thumb {
+      background: rgba(var(--color-neutral-grey), 0.6);
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: var(--color-neutral-grey);
+    }
+
+    /* firefox 브라우저 */
+    @supports (scrollbar-width: thin) {
+      scrollbar-width: thin;
+      scrollbar-color: var(--color-neutral-grey) rgba(var(--color-neutral-grey), 0.3);
     }
   }
 

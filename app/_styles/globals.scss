@@ -17,6 +17,8 @@
   -moz-osx-font-smoothing: grayscale;
   color: color('text', 'default');
   background: color('background', 'default');
+
+  --color-neutral-grey: #{color('neutral', 'grey')};
 }
 
 * {
