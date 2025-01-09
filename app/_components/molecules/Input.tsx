@@ -27,7 +27,7 @@ export default function Input() {
         rows={1}
       ></textarea>
 
-      <button className={styles['input__submit-button']}>
+      <button type="submit" className={styles['input__submit-button']} aria-label="답변 전송">
         <ArrowUpIcon />
       </button>
     </form>
