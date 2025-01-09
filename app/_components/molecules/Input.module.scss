@@ -1,0 +1,71 @@
+.input {
+  width: 100%;
+  background-color: color('neutral', 'white');
+  box-shadow: 0 3px 8px color('shadow', 'default');
+  border: 2px solid rgba(color('brand', 'main'), 0.5);
+  min-width: 31rem;
+  display: flex;
+  flex-direction: row;
+  padding: 0;
+  border-radius: 2rem;
+  cursor: auto;
+
+  &:hover {
+    transform: none;
+  }
+
+  &__text-box {
+    cursor: auto;
+    font-family: 'Pretendard', sans-serif;
+    width: 100%;
+    border-radius: 2rem 0 0 2rem;
+    padding: 1.5rem;
+    background-color: transparent;
+    border: none;
+    border-right: 2px solid rgba(color('brand', 'main'), 0.5);
+    resize: none;
+    overflow-y: auto;
+
+    &:focus {
+      outline: none;
+    }
+
+    /* 스크롤바 스타일 */
+    /* Webkit 기반 브라우저 */
+    &::-webkit-scrollbar {
+      width: 10px;
+      cursor: auto;
+    }
+    &::-webkit-scrollbar-track {
+      background: rgba(color('neutral', 'grey'), 0.3);
+    }
+    /* 스크롤 핸들 */
+    &::-webkit-scrollbar-thumb {
+      background: rgba(color('neutral', 'grey'), 0.6);
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background: color('neutral', 'grey');
+    }
+
+    /* firefox 브라우저 */
+    // @supports (scrollbar-width: thin) {
+    //   @supports (scrollbar-color: auto) {
+    //   scrollbar-width: thin;
+    //   scrollbar-color: var(--color-neutral-grey) rgba(var(--color-neutral-grey), 0.3);
+    // }
+  }
+
+  &__submit-button {
+    border: none;
+    border-radius: 0 2rem 2rem 0;
+    flex-shrink: 0;
+    width: 4rem;
+    cursor: pointer;
+    background-color: transparent;
+    background-color: color('background', 'default');
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

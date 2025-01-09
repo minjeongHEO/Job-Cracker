@@ -1,6 +1,8 @@
 .question_section {
+  display: flex;
+  flex-direction: column;
   width: 65%;
-  height: 100vh;
+  height: 100%;
   padding: 3rem;
   transition: width 0.3s ease-out;
 
@@ -27,11 +29,17 @@
   }
 
   &__cards {
+    flex: 1;
     margin-top: 1rem;
     height: calc(100% - 10rem);
     overflow-y: auto;
     padding: 0.5rem;
 
     mask-image: linear-gradient(to bottom, transparent, black 5%, black 96%, transparent);
+  }
+
+  &__input-container {
+    flex-shrink: 0;
+    padding: 1rem;
   }
 }

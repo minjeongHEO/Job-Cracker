@@ -1,7 +1,6 @@
-'use client';
-
 import clsx from 'clsx';
 
+import Input from '@/app/_components/molecules/Input';
 import QuestionCard from '@/app/_components/molecules/QuestionCard';
 import { QuestionState } from '@/app/_types/interview';
 
@@ -42,6 +41,10 @@ export default function QuestionSection({
           />
         ))}
       </section>
+
+      <div className={styles['question_section__input-container']}>
+        <Input />
+      </div>
     </div>
   );
 }
