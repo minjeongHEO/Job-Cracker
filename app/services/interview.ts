@@ -50,29 +50,8 @@ export async function generateQuestion({ devType, subTopics, topics }: GenerateQ
   )}에 관련한 면접 질문을 중요도가 높은걸 우선 순위로 하여 랜덤으로 생성해주세요.`;
 
   try {
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        {
-          role: 'user',
-          content: userPrompt,
-        },
-      ],
-      response_format: { type: 'json_object' },
-    });
-
-    const content = completion.choices[0]?.message?.content;
-    if (!content) {
-      throw new Error('Failed to generate question');
-    }
-
-    const result = JSON.parse(content);
-    if (!isGenerateQuestionResponse(result)) {
-      throw new Error('Invalid response format');
-    }
-
-    return result;
+    const parsedResult = await getChatMessage(systemPrompt, userPrompt);
+    return parsedResult;
   } catch (error) {
     throw error;
   }
@@ -86,7 +65,6 @@ export async function generateAnotherQuestion({
   questionState,
 }: GenerateAnotherQuestionRequest) {
   const systemPrompt = getSystemPrompt({ devType, topics, subTopics });
-
   const userPrompt = `이전 질문: "${questionState.question}"
   이전 질문의 주제: "${questionState.titleTopic}"
 
@@ -94,30 +72,33 @@ export async function generateAnotherQuestion({
   특히 ${questionState.titleTopic}을 제외한 다른 주제에서 중요도가 높은 질문을 우선적으로 생성해주세요.`;
 
   try {
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        {
-          role: 'user',
-          content: userPrompt,
-        },
-      ],
-      response_format: { type: 'json_object' },
-    });
-
-    const content = completion.choices[0]?.message?.content;
-    if (!content) {
-      throw new Error('Failed to generate question');
-    }
-
-    const result = JSON.parse(content);
-    if (!isGenerateQuestionResponse(result)) {
-      throw new Error('Invalid response format');
-    }
-
-    return result;
+    const parsedResult = await getChatMessage(systemPrompt, userPrompt);
+    return parsedResult;
   } catch (error) {
     throw error;
   }
+}
+
+/** 공통 fetch 로직 */
+async function getChatMessage(systemPrompt: string, userPrompt: string) {
+  const completion = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userPrompt },
+    ],
+    response_format: { type: 'json_object' },
+  });
+
+  const content = completion.choices[0]?.message?.content;
+  if (!content) {
+    throw new Error('Failed to generate question');
+  }
+
+  const result = JSON.parse(content);
+  if (!isGenerateQuestionResponse(result)) {
+    throw new Error('Invalid response format');
+  }
+
+  return result;
 }
