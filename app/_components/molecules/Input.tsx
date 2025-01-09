@@ -18,7 +18,14 @@ export default function Input() {
 
   return (
     <form className={styles.input}>
-      <textarea className={styles['input__text-box']} ref={textareaRef} onInput={handleInput}></textarea>
+      <textarea
+        className={styles['input__text-box']}
+        ref={textareaRef}
+        onInput={handleInput}
+        aria-label="답변 입력"
+        placeholder="답변을 입력해주세요"
+        rows={1}
+      ></textarea>
 
       <button className={styles['input__submit-button']}>
         <ArrowUpIcon />
