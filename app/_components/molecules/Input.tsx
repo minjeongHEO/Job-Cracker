@@ -19,12 +19,18 @@ export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
     }
   };
 
+  const resetTextarea = (textarea: HTMLTextAreaElement) => {
+    textarea.value = '';
+    textarea.style.height = 'auto';
+  };
+
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
-
     const answerText = textareaRef.current?.value;
     if (!answerText) return;
+
     handleGenerateFeedbackAnswer(answerText);
+    if (textareaRef.current) resetTextarea(textareaRef.current);
   };
 
   return (
