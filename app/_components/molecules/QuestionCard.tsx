@@ -41,7 +41,7 @@ export default function QuestionCard({
       </section>
 
       <footer className={CardStyles['question-card__answer']}>
-        {score && <span className={CardStyles['question-card__score']}>{score}점</span>}
+        {score && score !== 0 ? <span className={CardStyles['question-card__score']}>{score} 점</span> : null}
         {userAnswer && (
           <button className={CardStyles['question-card__button--view']} onClick={() => handleQuestionClick(id)}>
             답변 보기
