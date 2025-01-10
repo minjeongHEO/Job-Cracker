@@ -29,7 +29,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
       if (!questions.length) {
         try {
           const question = await generateQuestionAPI({ devType, topics, subTopics });
-          setQuestions([{ ...question, id: uuidv4(), userAnswer: '', score: 0, feedBack: '', improvedAnswer: '' }]);
+          setQuestions([{ ...question, id: uuidv4() }]);
         } catch (error) {
           console.error(error);
         }
@@ -64,7 +64,8 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
     if (!questions.length) return;
     try {
       const { question: lastQuestion } = questions[questions.length - 1];
-      const { score, feedBack, improvedAnswer } = await generateFeedbackAnswerAPI({
+      const { score, feedBack, improvedAnswer, followUpQuestion } = await generateFeedbackAnswerAPI({
+        topics,
         question: lastQuestion,
         userAnswer: answerText,
       });
@@ -72,7 +73,12 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
       setQuestions((prevQuestions) => {
         const lastQuestion = prevQuestions[prevQuestions.length - 1];
         const updatedQuestion = { ...lastQuestion, score, feedBack, improvedAnswer, userAnswer: answerText };
-        const newQuestions = [...prevQuestions.slice(0, -1), updatedQuestion];
+        const nextQuestion = {
+          id: uuidv4(),
+          ...followUpQuestion,
+        };
+
+        const newQuestions = [...prevQuestions.slice(0, -1), updatedQuestion, nextQuestion];
 
         return newQuestions;
       });
