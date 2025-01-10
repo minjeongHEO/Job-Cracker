@@ -24,13 +24,25 @@ export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
     textarea.style.height = 'auto';
   };
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault();
+  const submitForm = () => {
     const answerText = textareaRef.current?.value;
     if (!answerText) return;
-
     handleGenerateFeedbackAnswer(answerText);
     if (textareaRef.current) resetTextarea(textareaRef.current);
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    submitForm();
+  };
+
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (!isMobile && e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      submitForm();
+    }
   };
 
   return (
@@ -39,8 +51,9 @@ export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
         className={styles['input__text-box']}
         ref={textareaRef}
         onInput={handleInput}
+        onKeyDown={handleKeyDown}
         aria-label="답변 입력"
-        placeholder="답변을 입력해주세요"
+        placeholder={isMobile ? '답변을 입력해주세요' : '답변을 입력해주세요 (Shift + Enter로 줄바꿈)'}
         rows={1}
       ></textarea>
 
