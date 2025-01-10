@@ -61,6 +61,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
   };
 
   const handleGenerateFeedbackAnswer = async (answerText: string) => {
+    if (!questions.length) return;
     try {
       const { question: lastQuestion } = questions[questions.length - 1];
       const { score, feedBack, improvedAnswer } = await generateFeedbackAnswerAPI({
