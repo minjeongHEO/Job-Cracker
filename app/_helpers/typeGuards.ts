@@ -1,4 +1,4 @@
-import { GenerateQuestionResponse } from '@/app/_types/api/interview';
+import { GenerateFeedbackAnswerResponse, GenerateQuestionResponse } from '@/app/_types/api/interview';
 import {
   BADGE_SHADE_TYPES,
   BadgeShadeType,
@@ -6,7 +6,7 @@ import {
   DeveloperType,
   UnknownObject,
 } from '@/app/_types/interview';
-import { isString, isStringArray } from '@/app/_utils/typeUtils';
+import { isNumber, isString, isStringArray } from '@/app/_utils/typeUtils';
 
 import { getSelectedTopics, getVaildSubTopics, getVaildTopics } from './interviewHelpers';
 
@@ -41,7 +41,15 @@ export function isImportanceLevel(value: unknown): value is BadgeShadeType {
 export function isGenerateQuestionResponse(obj: unknown): obj is GenerateQuestionResponse {
   if (!obj || typeof obj !== 'object') return false;
 
-  const response = obj as UnknownObject;
+  const { question, importance, keywords, titleTopic } = obj as UnknownObject;
 
-  return isString(response.question) && isImportanceLevel(response.importance) && isStringArray(response.keywords);
+  return isString(question) && isImportanceLevel(importance) && isStringArray(keywords) && isString(titleTopic);
+}
+
+export function isFeedbackResponse(obj: unknown): obj is GenerateFeedbackAnswerResponse {
+  if (!obj || typeof obj !== 'object') return false;
+
+  const { score, feedBack, improvedAnswer } = obj as UnknownObject;
+
+  return isNumber(score) && isString(feedBack) && isString(improvedAnswer);
 }
