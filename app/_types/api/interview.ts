@@ -12,6 +12,7 @@ export interface GenerateAnotherQuestionRequest extends GenerateQuestionRequest 
 export type GenerateQuestionResponse = Pick<QuestionState, 'question' | 'importance' | 'keywords' | 'titleTopic'>;
 
 export interface GenerateFeedbackAnswerRequest {
+  topics: string[];
   question: string;
   userAnswer: string;
 }
@@ -19,4 +20,5 @@ export interface GenerateFeedbackAnswerResponse {
   score: number;
   feedBack: string;
   improvedAnswer: string;
+  followUpQuestion: GenerateQuestionResponse;
 }

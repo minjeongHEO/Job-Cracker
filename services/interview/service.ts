@@ -4,6 +4,7 @@ import {
   GenerateFeedbackAnswerRequest,
   GenerateQuestionRequest,
 } from '@/app/_types/api/interview';
+
 import { getChatMessage } from '@/services/openAI/service';
 
 import { getAnswerSystemPrompt, getQuestionSystemPrompt } from './prompts';
@@ -46,9 +47,10 @@ export async function generateAnotherQuestion({
 }
 
 /** 답변에 대한 피드백 생성 */
-export async function generateFeedbackAnswer({ question, userAnswer }: GenerateFeedbackAnswerRequest) {
-  const systemPrompt = getAnswerSystemPrompt({ question, userAnswer });
-  const userPrompt = '답변을 평가와 개선을 해주세요';
+export async function generateFeedbackAnswer({ topics, question, userAnswer }: GenerateFeedbackAnswerRequest) {
+  const systemPrompt = getAnswerSystemPrompt({ topics, question, userAnswer });
+  const userPrompt =
+    '답변에 대한 점수 평가, 피드백, 개선된 답변을 제시하고, 답변에서 언급된 개념이나 기술에 대해 더 깊이 있게 확인할 수 있는 꼬리 질문도 함께 생성해주세요.';
 
   try {
     const parsedResult = await getChatMessage(systemPrompt, userPrompt, isFeedbackResponse);
