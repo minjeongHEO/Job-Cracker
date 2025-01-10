@@ -1,5 +1,8 @@
+// c:\study\my-project\Job-Cracker\app\services\api\interview.ts
 import {
   GenerateAnotherQuestionRequest,
+  GenerateFeedbackAnswerRequest,
+  GenerateFeedbackAnswerResponse,
   GenerateQuestionRequest,
   GenerateQuestionResponse,
 } from '@/app/_types/api/interview';
@@ -16,8 +19,15 @@ export async function generateAnotherQuestionAPI(
   return fetchWithErrorHandling('/api/questions/another', params);
 }
 
+/** 질문에 대한 답변 피드백 */
+export async function generateFeedbackAnswerAPI(
+  params: GenerateFeedbackAnswerRequest
+): Promise<GenerateFeedbackAnswerResponse> {
+  return fetchWithErrorHandling('/api/feedBack', params);
+}
+
 /** 공통 fetch 로직 */
-async function fetchWithErrorHandling(url: string, params: unknown): Promise<GenerateQuestionResponse> {
+async function fetchWithErrorHandling(url: string, params: unknown) {
   try {
     const response = await fetch(url, {
       method: 'POST',
