@@ -14,7 +14,7 @@ interface AnswerSectionProps {
   keywords: string[];
   score: number;
   answer: string;
-  feedback: string;
+  feedBack: string;
   improvedAnswer: string;
 }
 
@@ -25,7 +25,7 @@ export default function AnswerSection({
   keywords,
   score,
   answer,
-  feedback,
+  feedBack,
   improvedAnswer,
 }: AnswerSectionProps) {
   return (
@@ -61,7 +61,7 @@ export default function AnswerSection({
 
         <div className={styles['answer-contents']}>
           <div className={styles['answer-contents__title']}>피드백 내용</div>
-          <p className={styles['answer-contents__answer']}>{feedback}</p>
+          <p className={styles['answer-contents__answer']}>{feedBack}</p>
         </div>
 
         <div className={styles['answer-contents']}>

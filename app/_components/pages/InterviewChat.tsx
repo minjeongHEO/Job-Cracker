@@ -4,7 +4,11 @@ import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DeveloperType, QuestionState } from '@/app/_types/interview';
-import { generateAnotherQuestionAPI, generateQuestionAPI } from '@/app/services/api/interview';
+import {
+  generateAnotherQuestionAPI,
+  generateFeedbackAnswerAPI,
+  generateQuestionAPI,
+} from '@/app/services/api/interview';
 
 import AnswerSection from './AnswerSection';
 import styles from './InterviewChat.module.scss';
@@ -57,6 +61,28 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
     }
   };
 
+  const handleGenerateFeedbackAnswer = async (answerText: string) => {
+    try {
+      const { question: lastQuestion } = questions[questions.length - 1];
+      const { score, feedBack, improvedAnswer } = await generateFeedbackAnswerAPI({
+        question: lastQuestion,
+        userAnswer: answerText,
+      });
+
+      setQuestions((prevQuestions) => {
+        const lastQuestionReceivedFeedback = prevQuestions[prevQuestions.length - 1];
+        lastQuestionReceivedFeedback.score = score;
+        lastQuestionReceivedFeedback.feedBack = feedBack;
+        lastQuestionReceivedFeedback.improvedAnswer = improvedAnswer;
+
+        const newQuestions = [...prevQuestions.slice(0, -1), lastQuestionReceivedFeedback];
+        return newQuestions;
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleQuestionClick = (id: string) => setSelectedQuestionId(id);
 
   const handleCloseAnswer = () => setSelectedQuestionId(null);
@@ -75,6 +101,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
           selectedQuestionId={selectedQuestionId}
           questions={questions}
           handleGenerateAnotherQuestion={handleGenerateAnotherQuestion}
+          handleGenerateFeedbackAnswer={handleGenerateFeedbackAnswer}
         />
       </div>
 
@@ -96,7 +123,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
         ]}
         score={100}
         answer={'내답변은 이거야'}
-        feedback={
+        feedBack={
           '피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. '
         }
         improvedAnswer={'100점짜리 답변은 이거다'}

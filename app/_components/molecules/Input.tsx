@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 
 import ArrowUpIcon from '@/app/_components/icons/ArrowUpIcon';
 
@@ -6,7 +6,10 @@ import styles from './Input.module.scss';
 
 export const TEXT_AREA_MAX_HEIGHT = 200;
 
-export default function Input() {
+interface InputProps {
+  handleGenerateFeedbackAnswer: (answer: string) => void;
+}
+export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleInput = () => {
@@ -16,8 +19,16 @@ export default function Input() {
     }
   };
 
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+
+    const answerText = textareaRef.current?.value;
+    if (!answerText) return;
+    handleGenerateFeedbackAnswer(answerText);
+  };
+
   return (
-    <form className={styles.input}>
+    <form className={styles.input} onSubmit={handleSubmit}>
       <textarea
         className={styles['input__text-box']}
         ref={textareaRef}
