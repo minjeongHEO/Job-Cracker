@@ -1,4 +1,4 @@
-import { BadgeShadeType, DeveloperType, QuestionState } from '../interview';
+import { DeveloperType, QuestionState } from '../interview';
 
 export interface GenerateQuestionRequest {
   devType: DeveloperType;
@@ -9,9 +9,14 @@ export interface GenerateAnotherQuestionRequest extends GenerateQuestionRequest 
   questionState: QuestionState;
 }
 
-export interface GenerateQuestionResponse {
+export type GenerateQuestionResponse = Pick<QuestionState, 'question' | 'importance' | 'keywords' | 'titleTopic'>;
+
+export interface GenerateFeedbackAnswerRequest {
   question: string;
-  importance: BadgeShadeType;
-  keywords: string[];
-  titleTopic: string;
+  userAnswer: string;
+}
+export interface GenerateFeedbackAnswerResponse {
+  score: number;
+  feedBack: string;
+  improvedAnswer: string;
 }

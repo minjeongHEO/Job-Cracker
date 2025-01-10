@@ -1,9 +1,10 @@
-// 'use client';
+'use client';
 
 import clsx from 'clsx';
 
 import Badge from '@/app/_components/atoms/Badge';
 import { BadgeShadeType, QuestionState } from '@/app/_types/interview';
+import { IMPORTANCE_LEVEL } from '@/app/interview/_constants/questions';
 
 import CardStyles from './QuestionCard.module.scss';
 
@@ -17,17 +18,9 @@ interface QuestionCardProps {
   handleGenerateAnotherQuestion: () => void;
 }
 
-export const IMPORTANCE_LEVEL: Record<BadgeShadeType, { title: string; shade: BadgeShadeType }> = {
-  '01': { title: '최우선 🚨', shade: '01' },
-  '02': { title: '필수 ⭐️⭐️⭐️', shade: '02' },
-  '03': { title: '중요 ⭐️⭐️', shade: '03' },
-  '04': { title: '기본 ⭐️', shade: '04' },
-  '05': { title: '심화', shade: '05' },
-};
-
 export default function QuestionCard({
   isSelected = false,
-  handleQuestionClick = () => {},
+  handleQuestionClick,
   level = '05',
   question: { score, userAnswer, id, question },
   titleTopic,
@@ -35,6 +28,7 @@ export default function QuestionCard({
   handleGenerateAnotherQuestion,
 }: QuestionCardProps) {
   const { title, shade } = IMPORTANCE_LEVEL[level];
+
   return (
     <div className={wrapperClass(isSelected)} aria-label={'질문'}>
       <header className={CardStyles['question-card__header']}>
@@ -47,7 +41,7 @@ export default function QuestionCard({
       </section>
 
       <footer className={CardStyles['question-card__answer']}>
-        {score && <span className={CardStyles['question-card__score']}>{score}점</span>}
+        {score && score !== 0 ? <span className={CardStyles['question-card__score']}>{score} 점</span> : null}
         {userAnswer && (
           <button className={CardStyles['question-card__button--view']} onClick={() => handleQuestionClick(id)}>
             답변 보기

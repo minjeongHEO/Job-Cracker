@@ -13,8 +13,8 @@ interface AnswerSectionProps {
   level: { title: string; shade: BadgeShadeType };
   keywords: string[];
   score: number;
-  answer: string;
-  feedback: string;
+  userAnswer: string;
+  feedBack: string;
   improvedAnswer: string;
 }
 
@@ -24,8 +24,8 @@ export default function AnswerSection({
   level: { title: levelTitle, shade: levelShade },
   keywords,
   score,
-  answer,
-  feedback,
+  userAnswer,
+  feedBack,
   improvedAnswer,
 }: AnswerSectionProps) {
   return (
@@ -56,12 +56,12 @@ export default function AnswerSection({
 
         <div className={styles['answer-contents']}>
           <div className={styles['answer-contents__title']}>당신의 답변</div>
-          <p className={styles['answer-contents__answer-me']}>{answer}</p>
+          <p className={styles['answer-contents__answer-me']}>{userAnswer}</p>
         </div>
 
         <div className={styles['answer-contents']}>
           <div className={styles['answer-contents__title']}>피드백 내용</div>
-          <p className={styles['answer-contents__answer']}>{feedback}</p>
+          <p className={styles['answer-contents__answer']}>{feedBack}</p>
         </div>
 
         <div className={styles['answer-contents']}>

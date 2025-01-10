@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 
 import Input from '@/app/_components/molecules/Input';
@@ -11,6 +13,7 @@ interface QuestionSectionProps {
   selectedQuestionId: string | null;
   questions: QuestionState[];
   handleGenerateAnotherQuestion: () => void;
+  handleGenerateFeedbackAnswer: (answer: string) => void;
 }
 
 export default function QuestionSection({
@@ -18,6 +21,7 @@ export default function QuestionSection({
   selectedQuestionId,
   questions,
   handleGenerateAnotherQuestion,
+  handleGenerateFeedbackAnswer,
 }: QuestionSectionProps) {
   return (
     <div
@@ -43,7 +47,7 @@ export default function QuestionSection({
       </section>
 
       <div className={styles['question_section__input-container']}>
-        <Input />
+        <Input handleGenerateFeedbackAnswer={handleGenerateFeedbackAnswer} />
       </div>
     </div>
   );

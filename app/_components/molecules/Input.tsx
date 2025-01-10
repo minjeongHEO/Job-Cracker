@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { FormEvent, useRef } from 'react';
 
 import ArrowUpIcon from '@/app/_components/icons/ArrowUpIcon';
 
@@ -6,7 +6,10 @@ import styles from './Input.module.scss';
 
 export const TEXT_AREA_MAX_HEIGHT = 200;
 
-export default function Input() {
+interface InputProps {
+  handleGenerateFeedbackAnswer: (answer: string) => void;
+}
+export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
 
   const handleInput = () => {
@@ -16,11 +19,45 @@ export default function Input() {
     }
   };
 
-  return (
-    <form className={styles.input}>
-      <textarea className={styles['input__text-box']} ref={textareaRef} onInput={handleInput}></textarea>
+  const resetTextarea = (textarea: HTMLTextAreaElement) => {
+    textarea.value = '';
+    textarea.style.height = 'auto';
+  };
 
-      <button className={styles['input__submit-button']}>
+  const submitForm = () => {
+    const answerText = textareaRef.current?.value;
+    if (!answerText) return;
+    handleGenerateFeedbackAnswer(answerText);
+    if (textareaRef.current) resetTextarea(textareaRef.current);
+  };
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault();
+    submitForm();
+  };
+
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (!isMobile && e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      submitForm();
+    }
+  };
+
+  return (
+    <form className={styles.input} onSubmit={handleSubmit}>
+      <textarea
+        className={styles['input__text-box']}
+        ref={textareaRef}
+        onInput={handleInput}
+        onKeyDown={handleKeyDown}
+        aria-label="답변 입력"
+        placeholder={isMobile ? '답변을 입력해주세요' : '답변을 입력해주세요 (Shift + Enter로 줄바꿈)'}
+        rows={1}
+      ></textarea>
+
+      <button type="submit" className={styles['input__submit-button']} aria-label="답변 전송">
         <ArrowUpIcon />
       </button>
     </form>

@@ -4,6 +4,10 @@ export interface UnknownObject {
   question?: unknown;
   importance?: unknown;
   keywords?: unknown;
+  score?: unknown;
+  feedBack?: unknown;
+  improvedAnswer?: unknown;
+  titleTopic?: unknown;
 }
 export interface QuestionState {
   id: string;
@@ -13,7 +17,7 @@ export interface QuestionState {
   titleTopic: string;
   userAnswer?: string;
   score?: number;
-  feedback?: string;
+  feedBack?: string;
   improvedAnswer?: string;
 }
 

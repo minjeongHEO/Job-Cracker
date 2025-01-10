@@ -1,10 +1,13 @@
 'use client';
+
 import clsx from 'clsx';
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DeveloperType, QuestionState } from '@/app/_types/interview';
-import { generateAnotherQuestionAPI, generateQuestionAPI } from '@/app/services/api/interview';
+import { IMPORTANCE_LEVEL } from '@/app/interview/_constants/questions';
+
+import { generateAnotherQuestionAPI, generateFeedbackAnswerAPI, generateQuestionAPI } from '@/services/api/interview';
 
 import AnswerSection from './AnswerSection';
 import styles from './InterviewChat.module.scss';
@@ -26,7 +29,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
       if (!questions.length) {
         try {
           const question = await generateQuestionAPI({ devType, topics, subTopics });
-          setQuestions([{ ...question, id: uuidv4() }]);
+          setQuestions([{ ...question, id: uuidv4(), userAnswer: '', score: 0, feedBack: '', improvedAnswer: '' }]);
         } catch (error) {
           console.error(error);
         }
@@ -57,6 +60,27 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
     }
   };
 
+  const handleGenerateFeedbackAnswer = async (answerText: string) => {
+    if (!questions.length) return;
+    try {
+      const { question: lastQuestion } = questions[questions.length - 1];
+      const { score, feedBack, improvedAnswer } = await generateFeedbackAnswerAPI({
+        question: lastQuestion,
+        userAnswer: answerText,
+      });
+
+      setQuestions((prevQuestions) => {
+        const lastQuestion = prevQuestions[prevQuestions.length - 1];
+        const updatedQuestion = { ...lastQuestion, score, feedBack, improvedAnswer, userAnswer: answerText };
+        const newQuestions = [...prevQuestions.slice(0, -1), updatedQuestion];
+
+        return newQuestions;
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   const handleQuestionClick = (id: string) => setSelectedQuestionId(id);
 
   const handleCloseAnswer = () => setSelectedQuestionId(null);
@@ -75,31 +99,19 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
           selectedQuestionId={selectedQuestionId}
           questions={questions}
           handleGenerateAnotherQuestion={handleGenerateAnotherQuestion}
+          handleGenerateFeedbackAnswer={handleGenerateFeedbackAnswer}
         />
       </div>
 
       <AnswerSection
         handleCloseAnswer={handleCloseAnswer}
         selectedQuestion={selectedQuestion}
-        level={{ title: '최우선 🚨', shade: '01' }}
-        keywords={[
-          '키워드 1',
-          '키워드 2',
-          '키워드 3',
-          '키워드 4',
-          '키워드 5',
-          '키워드 6',
-          '키워드 7',
-          '키워드 8',
-          '키워드 9',
-          '키워드 10',
-        ]}
-        score={100}
-        answer={'내답변은 이거야'}
-        feedback={
-          '피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. 피드백 내용은 이렇습니다. '
-        }
-        improvedAnswer={'100점짜리 답변은 이거다'}
+        level={IMPORTANCE_LEVEL[selectedQuestion?.importance || '05']}
+        keywords={selectedQuestion?.keywords || []}
+        score={selectedQuestion?.score || 0}
+        userAnswer={selectedQuestion?.userAnswer || ''}
+        feedBack={selectedQuestion?.feedBack || ''}
+        improvedAnswer={selectedQuestion?.improvedAnswer || ''}
       />
     </div>
   );
