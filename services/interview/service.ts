@@ -4,7 +4,7 @@ import {
   GenerateFeedbackAnswerRequest,
   GenerateQuestionRequest,
 } from '@/app/_types/api/interview';
-import { getChatMessage } from '@/app/services/openAI/service';
+import { getChatMessage } from '@/services/openAI/service';
 
 import { getAnswerSystemPrompt, getQuestionSystemPrompt } from './prompts';
 

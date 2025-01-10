@@ -4,11 +4,8 @@ import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DeveloperType, QuestionState } from '@/app/_types/interview';
-import {
-  generateAnotherQuestionAPI,
-  generateFeedbackAnswerAPI,
-  generateQuestionAPI,
-} from '@/app/services/api/interview';
+
+import { generateAnotherQuestionAPI, generateFeedbackAnswerAPI, generateQuestionAPI } from '@/services/api/interview';
 
 import AnswerSection from './AnswerSection';
 import styles from './InterviewChat.module.scss';
