@@ -1,4 +1,7 @@
 .answer-section {
+  & p {
+    white-space: pre-wrap;
+  }
   position: absolute;
   right: 0;
   width: 50%;

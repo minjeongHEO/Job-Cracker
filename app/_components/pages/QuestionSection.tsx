@@ -1,3 +1,5 @@
+'use client';
+
 import clsx from 'clsx';
 
 import Input from '@/app/_components/molecules/Input';
