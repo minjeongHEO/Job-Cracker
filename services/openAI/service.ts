@@ -1,4 +1,4 @@
-import openai from '../openai';
+import { openai } from './config';
 
 /** 공통 fetch 로직 */
 export async function getChatMessage<T>(

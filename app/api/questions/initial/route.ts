@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
 
 import { GenerateQuestionRequest } from '@/app/_types/api/interview';
-import { generateQuestion } from '@/services/interview';
+
+import { generateQuestion } from '@/services/interview/service';
 
 // API 엔드포인트 로직
 export async function POST(request: Request) {
