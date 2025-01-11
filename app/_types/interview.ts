@@ -20,6 +20,11 @@ export interface QuestionState {
   feedBack?: string;
   improvedAnswer?: string;
 }
+export interface InterviewChatProps {
+  devType: DeveloperType;
+  topics: string[];
+  subTopics: string[];
+}
 
 export const DEVELOPER_TYPES = ['FrontEnd', 'BackEnd', 'iOS'] as const;
 export type DeveloperType = (typeof DEVELOPER_TYPES)[number];
