@@ -1,4 +1,6 @@
-import { FormEvent, useRef } from 'react';
+'use client';
+
+import { FormEvent, useEffect, useRef, useState } from 'react';
 
 import ArrowUpIcon from '@/app/_components/icons/ArrowUpIcon';
 
@@ -11,6 +13,11 @@ interface InputProps {
 }
 export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(/iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent));
+  }, []);
 
   const handleInput = () => {
     if (textareaRef.current) {
@@ -35,8 +42,6 @@ export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
     e.preventDefault();
     submitForm();
   };
-
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (!isMobile && e.key === 'Enter' && !e.shiftKey) {
