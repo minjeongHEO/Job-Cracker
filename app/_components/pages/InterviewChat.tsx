@@ -1,8 +1,11 @@
 'use client';
 
 import clsx from 'clsx';
+import { useEffect } from 'react';
 
-import useQuestions from '@/app/_hooks/useQuestions';
+import useQuestionActions from '@/app/_hooks/useQuestionActions';
+import useQuestionSelection from '@/app/_hooks/useQuestionSelection';
+import useQuestionState from '@/app/_hooks/useQuestionState';
 import { InterviewChatProps } from '@/app/_types/interview';
 import { IMPORTANCE_LEVEL } from '@/app/interview/_constants/questions';
 
@@ -11,15 +14,28 @@ import styles from './InterviewChat.module.scss';
 import QuestionSection from './QuestionSection';
 
 export default function InterviewChat({ devType, topics, subTopics }: InterviewChatProps) {
-  const {
-    handleGenerateAnotherQuestion,
-    handleGenerateFeedbackAnswer,
-    selectedQuestion,
-    handleQuestionClick,
-    handleCloseAnswer,
-    selectedQuestionId,
-    questions,
-  } = useQuestions({ devType, topics, subTopics });
+  // 상태 관리 커스텀 훅
+  const { addQuestion, questions, changeLastQuestion, updateFollowUpQuestion } = useQuestionState();
+  // 선택 로직 커스텀 훅
+  const { selectedQuestionId, selectedQuestion, handleQuestionClick, handleCloseAnswer } =
+    useQuestionSelection(questions);
+  // 액션 커스텀 훅
+  const { handleGenerateFirstQuestion, handelGenerateAnotherQuestion, handleGenerateFeedbackAnswer } =
+    useQuestionActions({
+      questions,
+      addQuestion,
+      changeLastQuestion,
+      updateFollowUpQuestion,
+    });
+
+  useEffect(() => {
+    const generateInitialQuestion = async () => {
+      if (questions.length > 0) return;
+      handleGenerateFirstQuestion({ devType, topics, subTopics });
+    };
+
+    generateInitialQuestion();
+  }, [devType, topics, subTopics, questions.length]);
 
   return (
     <div className={styles['interview-chat']}>
@@ -32,8 +48,8 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
           handleQuestionClick={handleQuestionClick}
           selectedQuestionId={selectedQuestionId}
           questions={questions}
-          handleGenerateAnotherQuestion={handleGenerateAnotherQuestion}
-          handleGenerateFeedbackAnswer={handleGenerateFeedbackAnswer}
+          handleGenerateAnotherQuestion={() => handelGenerateAnotherQuestion({ devType, topics, subTopics })}
+          handleGenerateFeedbackAnswer={(answerText) => handleGenerateFeedbackAnswer({ topics, answerText })}
         />
       </div>
 
