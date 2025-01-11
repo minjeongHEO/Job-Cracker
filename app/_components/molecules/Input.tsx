@@ -13,7 +13,6 @@ interface InputProps {
 }
 export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
-  const isComposingRef = useRef(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -41,7 +40,7 @@ export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (isComposingRef.current) return;
+    if (e.nativeEvent.isComposing) return;
 
     if (!isMobile && e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
@@ -61,8 +60,6 @@ export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
         ref={textareaRef}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
-        onCompositionStart={() => (isComposingRef.current = true)}
-        onCompositionEnd={() => (isComposingRef.current = false)}
         aria-label="답변 입력"
         placeholder={isMobile ? '답변을 입력해주세요' : '답변을 입력해주세요 (Shift + Enter로 줄바꿈)'}
         rows={1}
