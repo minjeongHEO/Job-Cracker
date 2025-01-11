@@ -13,6 +13,7 @@ interface InputProps {
 }
 export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const isComposingRef = useRef(false);
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -32,22 +33,25 @@ export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
   };
 
   const submitForm = () => {
-    const answerText = textareaRef.current?.value;
-    if (!answerText) return;
+    if (!textareaRef.current) return;
+    const answerText = textareaRef.current.value;
+
     handleGenerateFeedbackAnswer(answerText);
-    if (textareaRef.current) resetTextarea(textareaRef.current);
+    resetTextarea(textareaRef.current);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (isComposingRef.current) return;
+
+    if (!isMobile && e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      submitForm();
+    }
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     submitForm();
-  };
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (!isMobile && e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      submitForm();
-    }
   };
 
   return (
@@ -57,6 +61,8 @@ export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
         ref={textareaRef}
         onInput={handleInput}
         onKeyDown={handleKeyDown}
+        onCompositionStart={() => (isComposingRef.current = true)}
+        onCompositionEnd={() => (isComposingRef.current = false)}
         aria-label="답변 입력"
         placeholder={isMobile ? '답변을 입력해주세요' : '답변을 입력해주세요 (Shift + Enter로 줄바꿈)'}
         rows={1}
