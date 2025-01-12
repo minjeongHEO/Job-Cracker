@@ -19,7 +19,7 @@ interface QuestionCardProps {
 export default function QuestionCard({
   isSelected = false,
   handleQuestionClick,
-  question: { score, userAnswer, id, question, titleTopic, importance: level },
+  question: { score = 0, userAnswer = '', id, question, titleTopic, importance: level = '05' },
   isLastQuestion,
   handleGenerateAnotherQuestion,
 }: QuestionCardProps) {
@@ -37,12 +37,15 @@ export default function QuestionCard({
       </section>
 
       <footer className={styles['question-card__answer']}>
-        {score !== undefined && score !== null && <span className={styles['question-card__score']}>{score} 점</span>}
         {userAnswer && (
-          <button className={styles['question-card__button--view']} onClick={() => handleQuestionClick(id)}>
-            답변 보기
-          </button>
+          <>
+            <span className={styles['question-card__score']}>{score} 점</span>
+            <button className={styles['question-card__button--view']} onClick={() => handleQuestionClick(id)}>
+              답변 보기
+            </button>
+          </>
         )}
+
         {isLastQuestion && (
           <button className={styles['question-card__button--new']} onClick={handleGenerateAnotherQuestion}>
             다른 주제
