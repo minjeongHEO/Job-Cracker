@@ -3,17 +3,15 @@
 import clsx from 'clsx';
 
 import Badge from '@/app/_components/atoms/Badge';
-import { BadgeShadeType, QuestionState } from '@/app/_types/interview';
+import { QuestionState } from '@/app/_types/interview';
 import { IMPORTANCE_LEVEL } from '@/app/interview/_constants/questions';
 
-import CardStyles from './QuestionCard.module.scss';
+import styles from './QuestionCard.module.scss';
 
 interface QuestionCardProps {
   isSelected?: boolean;
   handleQuestionClick: (question: string) => void;
-  level?: BadgeShadeType;
   question: QuestionState;
-  titleTopic: string;
   isLastQuestion: boolean;
   handleGenerateAnotherQuestion: () => void;
 }
@@ -21,9 +19,7 @@ interface QuestionCardProps {
 export default function QuestionCard({
   isSelected = false,
   handleQuestionClick,
-  level = '05',
-  question: { score, userAnswer, id, question },
-  titleTopic,
+  question: { score, userAnswer, id, question, titleTopic, importance: level },
   isLastQuestion,
   handleGenerateAnotherQuestion,
 }: QuestionCardProps) {
@@ -31,24 +27,24 @@ export default function QuestionCard({
 
   return (
     <div className={wrapperClass(isSelected)} aria-label={'질문'}>
-      <header className={CardStyles['question-card__header']}>
-        <span className={CardStyles['question-card__topic']}>{titleTopic}</span>
+      <header className={styles['question-card__header']}>
+        <span className={styles['question-card__topic']}>{titleTopic}</span>
         <Badge option={{ title, shade }}></Badge>
       </header>
 
-      <section className={CardStyles['question-card__question']}>
-        <p className={CardStyles['question-card__question-content']}>Q. {question}</p>
+      <section className={styles['question-card__question']}>
+        <p className={styles['question-card__question-content']}>Q. {question}</p>
       </section>
 
-      <footer className={CardStyles['question-card__answer']}>
-        {score && score !== 0 ? <span className={CardStyles['question-card__score']}>{score} 점</span> : null}
+      <footer className={styles['question-card__answer']}>
+        {score != null && <span className={styles['question-card__score']}>{score} 점</span>}
         {userAnswer && (
-          <button className={CardStyles['question-card__button--view']} onClick={() => handleQuestionClick(id)}>
+          <button className={styles['question-card__button--view']} onClick={() => handleQuestionClick(id)}>
             답변 보기
           </button>
         )}
         {isLastQuestion && (
-          <button className={CardStyles['question-card__button--new']} onClick={handleGenerateAnotherQuestion}>
+          <button className={styles['question-card__button--new']} onClick={handleGenerateAnotherQuestion}>
             다른 주제
           </button>
         )}
@@ -58,7 +54,7 @@ export default function QuestionCard({
 }
 
 function wrapperClass(selected: boolean) {
-  return clsx(CardStyles['question-card'], {
-    [CardStyles['question-card--selected']]: selected,
+  return clsx(styles['question-card'], {
+    [styles['question-card--selected']]: selected,
   });
 }
