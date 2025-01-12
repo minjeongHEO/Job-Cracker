@@ -1,6 +1,6 @@
 import InterviewChat from '@/app/_components/pages/InterviewChat';
 import SelectLayout from '@/app/_components/templates/SelectLayout';
-import { getVaildSubTopics } from '@/app/_helpers/interviewHelpers';
+import { getValidSubTopics } from '@/app/_helpers/interviewHelpers';
 import { isDeveloperType, isValidSubTopicParam, isValidTopicParam } from '@/app/_helpers/typeGuards';
 
 import styles from './page.module.scss';
@@ -35,7 +35,7 @@ export default async function ChatPage({ searchParams }: ChatPageType) {
 
   const topicArray = topics.split(',');
   const subTopicArray =
-    rawSubTopics === 'all' ? topicArray.flatMap((topic) => getVaildSubTopics(devType, topic)) : rawSubTopics.split(',');
+    rawSubTopics === 'all' ? topicArray.flatMap((topic) => getValidSubTopics(devType, topic)) : rawSubTopics.split(',');
 
   return (
     <div className={styles.chat_page}>

@@ -3,8 +3,8 @@ import { describe, expect, it, vi } from 'vitest';
 import {
   getSelectedTopics,
   getTopicParam,
-  getVaildSubTopics,
-  getVaildTopics,
+  getValidSubTopics,
+  getValidTopics,
   handleNavigation,
 } from './interviewHelpers';
 
@@ -91,19 +91,19 @@ describe('interviewHelpers', () => {
 
   describe('getVaildTopics', () => {
     it('devType에 해당하는 모든 토픽을 반환한다', () => {
-      const result = getVaildTopics('FrontEnd');
+      const result = getValidTopics('FrontEnd');
       expect(result).toEqual(['JavaScript', 'React', 'TypeScript']);
     });
   });
 
   describe('getVaildSubTopics', () => {
     it('특정 토픽의 모든 서브토픽을 반환한다', () => {
-      const result = getVaildSubTopics('FrontEnd', 'JavaScript');
+      const result = getValidSubTopics('FrontEnd', 'JavaScript');
       expect(result).toEqual(['스코프', '클로저']);
     });
 
     it('존재하지 않는 토픽의 경우 빈 배열을 반환한다', () => {
-      const result = getVaildSubTopics('FrontEnd', 'nonexistent');
+      const result = getValidSubTopics('FrontEnd', 'nonexistent');
       expect(result).toEqual([]);
     });
   });
