@@ -4,13 +4,13 @@ import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 export const getTopicParam = (isAllSelected: boolean, selectedTopics: string[]): string =>
   isAllSelected ? 'all' : selectedTopics.join(',');
 
-export const getVaildTopics = (devType: DeveloperType) => Object.keys(DEVELOPER_OPTIONS[devType].topics);
+export const getValidTopics = (devType: DeveloperType) => Object.keys(DEVELOPER_OPTIONS[devType].topics);
 
-export const getVaildSubTopics = (devType: DeveloperType, topic: string) =>
+export const getValidSubTopics = (devType: DeveloperType, topic: string) =>
   DEVELOPER_OPTIONS[devType].topics[topic] || [];
 
 export const getSelectedTopics = (devType: DeveloperType, param: string) => {
-  const validTopics = getVaildTopics(devType);
+  const validTopics = getValidTopics(devType);
 
   if (param === 'all') return validTopics;
 
@@ -25,7 +25,7 @@ export const getParamsForChat = (
 ) => {
   const subTopicParam = getTopicParam(isAllSelected, selectedTopics);
   const topicsParam =
-    searchParams.get('topics') === 'all' ? getVaildTopics(devType).join(',') : searchParams.get('topics');
+    searchParams.get('topics') === 'all' ? getValidTopics(devType).join(',') : searchParams.get('topics');
   const params = new URLSearchParams({
     devType,
     topics: topicsParam || '',

@@ -1,6 +1,6 @@
 import TopicSelector from '@/app/_components/molecules/TopicSelector';
 import SelectLayout from '@/app/_components/templates/SelectLayout';
-import { getSelectedTopics, getVaildSubTopics } from '@/app/_helpers/interviewHelpers';
+import { getSelectedTopics, getValidSubTopics } from '@/app/_helpers/interviewHelpers';
 import { isDeveloperType, isValidTopicParam } from '@/app/_helpers/typeGuards';
 
 interface PreparePageType {
@@ -28,7 +28,7 @@ export default async function PreparePage({ params, searchParams }: PreparePageT
   }
 
   const selectedTopics = getSelectedTopics(devType, topics);
-  const subTopics = selectedTopics.flatMap((topic) => getVaildSubTopics(devType, topic) || []);
+  const subTopics = selectedTopics.flatMap((topic) => getValidSubTopics(devType, topic) || []);
 
   return (
     <SelectLayout title={'세부 내용을 선택하시면 관련 면접 질문을 준비해드릴게요!'}>

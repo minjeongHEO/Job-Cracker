@@ -1,4 +1,6 @@
-import { FormEvent, useRef } from 'react';
+'use client';
+
+import { FormEvent, useEffect, useRef, useState } from 'react';
 
 import ArrowUpIcon from '@/app/_components/icons/ArrowUpIcon';
 
@@ -11,6 +13,11 @@ interface InputProps {
 }
 export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setIsMobile(/iPhone|iPad|iPod|Android/i.test(window.navigator.userAgent));
+  }, []);
 
   const handleInput = () => {
     if (textareaRef.current) {
@@ -25,24 +32,25 @@ export default function Input({ handleGenerateFeedbackAnswer }: InputProps) {
   };
 
   const submitForm = () => {
-    const answerText = textareaRef.current?.value;
-    if (!answerText) return;
+    if (!textareaRef.current) return;
+    const answerText = textareaRef.current.value;
+
     handleGenerateFeedbackAnswer(answerText);
-    if (textareaRef.current) resetTextarea(textareaRef.current);
+    resetTextarea(textareaRef.current);
+  };
+
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (e.nativeEvent.isComposing) return;
+
+    if (!isMobile && e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault();
+      submitForm();
+    }
   };
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     submitForm();
-  };
-
-  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-  const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
-    if (!isMobile && e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault();
-      submitForm();
-    }
   };
 
   return (

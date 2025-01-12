@@ -1,0 +1,25 @@
+.answer-contents {
+  display: flex;
+  align-items: baseline;
+  gap: 1rem;
+
+  &__title {
+    flex-shrink: 0;
+    width: 5rem;
+    font-size: 1rem;
+    font-weight: bold;
+  }
+
+  &__answer {
+    flex-grow: 1;
+  }
+  &__answer-me {
+    color: color('text', 'sub');
+  }
+
+  &__answer-keyword {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+}

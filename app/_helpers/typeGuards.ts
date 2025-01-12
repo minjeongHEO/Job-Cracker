@@ -8,7 +8,7 @@ import {
 } from '@/app/_types/interview';
 import { isNumber, isString, isStringArray } from '@/app/_utils/typeUtils';
 
-import { getSelectedTopics, getVaildSubTopics, getVaildTopics } from './interviewHelpers';
+import { getSelectedTopics, getValidSubTopics, getValidTopics } from './interviewHelpers';
 
 export const isDeveloperType = (value: string): value is DeveloperType => {
   if (!value) return false;
@@ -19,8 +19,8 @@ export const isValidSubTopicParam = (devType: DeveloperType, topic: string, subT
   if (!devType || !topic || !subTopicParam) return false;
   if (subTopicParam === 'all') return true;
 
-  const vaildTopics = getSelectedTopics(devType, topic);
-  const validSubTopics = vaildTopics.flatMap((topic) => getVaildSubTopics(devType, topic));
+  const validTopics = getSelectedTopics(devType, topic);
+  const validSubTopics = validTopics.flatMap((topic) => getValidSubTopics(devType, topic));
 
   return subTopicParam.split(',').every((subTopic) => validSubTopics.includes(subTopic));
 };
@@ -29,7 +29,7 @@ export const isValidTopicParam = (devType: DeveloperType, topicParam: string) =>
   if (!devType || !topicParam) return false;
   if (topicParam === 'all') return true;
 
-  const validTopics = getVaildTopics(devType);
+  const validTopics = getValidTopics(devType);
 
   return topicParam.split(',').every((topic) => validTopics.includes(topic));
 };

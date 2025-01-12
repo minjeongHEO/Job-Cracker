@@ -2,34 +2,35 @@
 import clsx from 'clsx';
 
 import Badge from '@/app/_components/atoms/Badge';
-import ArrowRightIcon from '@/app/_components/icons/ArrowRightIcon';
 import { BadgeShadeType, QuestionState } from '@/app/_types/interview';
 
+import AnswerContent from '@/app/_components/atoms/AnswerContent';
+import ArrowRightIcon from '@/app/_components/icons/ArrowRightIcon';
 import styles from './AnswerSection.module.scss';
 
 interface AnswerSectionProps {
   handleCloseAnswer: () => void;
-  selectedQuestion: QuestionState | null;
+  selectedQuestion?: QuestionState;
   level: { title: string; shade: BadgeShadeType };
-  keywords: string[];
-  score: number;
-  userAnswer: string;
-  feedBack: string;
-  improvedAnswer: string;
 }
 
 export default function AnswerSection({
   handleCloseAnswer,
-  selectedQuestion,
   level: { title: levelTitle, shade: levelShade },
-  keywords,
-  score,
-  userAnswer,
-  feedBack,
-  improvedAnswer,
+  selectedQuestion = {
+    id: '',
+    question: '',
+    importance: '05',
+    keywords: [],
+    titleTopic: '',
+  },
 }: AnswerSectionProps) {
+  const { keywords, score, userAnswer, feedBack, improvedAnswer } = selectedQuestion;
+
   return (
-    <div className={clsx(styles['answer-section'], { [styles['answer-section--visible']]: selectedQuestion })}>
+    <div
+      className={clsx(styles['answer-section'], { [styles['answer-section--visible']]: selectedQuestion.id !== '' })}
+    >
       <button className={styles['close-button']} aria-label={'답변 닫기'} onClick={handleCloseAnswer}>
         <ArrowRightIcon className={styles['close-button__icon']} />
       </button>
@@ -49,25 +50,18 @@ export default function AnswerSection({
           </div>
         </div>
 
-        <div className={styles['answer-contents']}>
-          <div className={styles['answer-contents__title']}>평가 점수</div>
-          <p className={styles['answer-contents__answer']}>{score} 점</p>
-        </div>
-
-        <div className={styles['answer-contents']}>
-          <div className={styles['answer-contents__title']}>당신의 답변</div>
-          <p className={styles['answer-contents__answer-me']}>{userAnswer}</p>
-        </div>
-
-        <div className={styles['answer-contents']}>
-          <div className={styles['answer-contents__title']}>피드백 내용</div>
-          <p className={styles['answer-contents__answer']}>{feedBack}</p>
-        </div>
-
-        <div className={styles['answer-contents']}>
-          <div className={styles['answer-contents__title']}>개선된 답변</div>
-          <p className={styles['answer-contents__answer']}>{improvedAnswer}</p>
-        </div>
+        <AnswerContent type="default" title="평가 점수">
+          {score} 점
+        </AnswerContent>
+        <AnswerContent type="answer" title="당신의 답변">
+          {userAnswer}
+        </AnswerContent>
+        <AnswerContent type="default" title="피드백 내용">
+          {feedBack}
+        </AnswerContent>
+        <AnswerContent type="default" title="개선된 답변">
+          {improvedAnswer}
+        </AnswerContent>
       </section>
     </div>
   );

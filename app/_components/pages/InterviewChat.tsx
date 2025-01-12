@@ -1,91 +1,41 @@
 'use client';
 
 import clsx from 'clsx';
-import { useEffect, useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
+import { useEffect } from 'react';
 
-import { DeveloperType, QuestionState } from '@/app/_types/interview';
+import useQuestionActions from '@/app/_hooks/useQuestionActions';
+import useQuestionSelection from '@/app/_hooks/useQuestionSelection';
+import useQuestionState from '@/app/_hooks/useQuestionState';
+import { InterviewChatProps } from '@/app/_types/interview';
 import { IMPORTANCE_LEVEL } from '@/app/interview/_constants/questions';
-
-import { generateAnotherQuestionAPI, generateFeedbackAnswerAPI, generateQuestionAPI } from '@/services/api/interview';
 
 import AnswerSection from './AnswerSection';
 import styles from './InterviewChat.module.scss';
 import QuestionSection from './QuestionSection';
 
-interface InterviewChatProps {
-  devType: DeveloperType;
-  topics: string[];
-  subTopics: string[];
-}
-
 export default function InterviewChat({ devType, topics, subTopics }: InterviewChatProps) {
-  const [questions, setQuestions] = useState<QuestionState[]>([]);
-  const [selectedQuestionId, setSelectedQuestionId] = useState<string | null>(null);
+  // 상태 관리 커스텀 훅
+  const { addQuestion, questions, changeLastQuestion, updateFollowUpQuestion } = useQuestionState();
+  // 선택 로직 커스텀 훅
+  const { selectedQuestionId, selectedQuestion, handleQuestionClick, handleCloseAnswer } =
+    useQuestionSelection(questions);
+  // 액션 커스텀 훅
+  const { handleGenerateFirstQuestion, handelGenerateAnotherQuestion, handleGenerateFeedbackAnswer } =
+    useQuestionActions({
+      questions,
+      addQuestion,
+      changeLastQuestion,
+      updateFollowUpQuestion,
+    });
 
-  // 초기 질문 생성
   useEffect(() => {
     const generateInitialQuestion = async () => {
-      if (!questions.length) {
-        try {
-          const question = await generateQuestionAPI({ devType, topics, subTopics });
-          setQuestions([{ ...question, id: uuidv4(), userAnswer: '', score: 0, feedBack: '', improvedAnswer: '' }]);
-        } catch (error) {
-          console.error(error);
-        }
-      }
+      if (questions.length > 0) return;
+      handleGenerateFirstQuestion({ devType, topics, subTopics });
     };
 
     generateInitialQuestion();
   }, [devType, topics, subTopics, questions.length]);
-
-  const handleGenerateAnotherQuestion = async () => {
-    if (!questions.length) return;
-    try {
-      const question = await generateAnotherQuestionAPI({
-        devType,
-        topics,
-        subTopics,
-        questionState: questions[questions.length - 1],
-      });
-
-      const anotherQuestion = { ...question, id: uuidv4() };
-
-      setQuestions((prevQuestions) => {
-        const newQuestions = [...prevQuestions.slice(0, -1), anotherQuestion];
-        return newQuestions;
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleGenerateFeedbackAnswer = async (answerText: string) => {
-    if (!questions.length) return;
-    try {
-      const { question: lastQuestion } = questions[questions.length - 1];
-      const { score, feedBack, improvedAnswer } = await generateFeedbackAnswerAPI({
-        question: lastQuestion,
-        userAnswer: answerText,
-      });
-
-      setQuestions((prevQuestions) => {
-        const lastQuestion = prevQuestions[prevQuestions.length - 1];
-        const updatedQuestion = { ...lastQuestion, score, feedBack, improvedAnswer, userAnswer: answerText };
-        const newQuestions = [...prevQuestions.slice(0, -1), updatedQuestion];
-
-        return newQuestions;
-      });
-    } catch (error) {
-      console.error(error);
-    }
-  };
-
-  const handleQuestionClick = (id: string) => setSelectedQuestionId(id);
-
-  const handleCloseAnswer = () => setSelectedQuestionId(null);
-
-  const selectedQuestion = questions.find(({ id }) => id === selectedQuestionId) || null;
 
   return (
     <div className={styles['interview-chat']}>
@@ -98,8 +48,8 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
           handleQuestionClick={handleQuestionClick}
           selectedQuestionId={selectedQuestionId}
           questions={questions}
-          handleGenerateAnotherQuestion={handleGenerateAnotherQuestion}
-          handleGenerateFeedbackAnswer={handleGenerateFeedbackAnswer}
+          handleGenerateAnotherQuestion={() => handelGenerateAnotherQuestion({ devType, topics, subTopics })}
+          handleGenerateFeedbackAnswer={(answerText) => handleGenerateFeedbackAnswer({ topics, answerText })}
         />
       </div>
 
@@ -107,11 +57,6 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
         handleCloseAnswer={handleCloseAnswer}
         selectedQuestion={selectedQuestion}
         level={IMPORTANCE_LEVEL[selectedQuestion?.importance || '05']}
-        keywords={selectedQuestion?.keywords || []}
-        score={selectedQuestion?.score || 0}
-        userAnswer={selectedQuestion?.userAnswer || ''}
-        feedBack={selectedQuestion?.feedBack || ''}
-        improvedAnswer={selectedQuestion?.improvedAnswer || ''}
       />
     </div>
   );
