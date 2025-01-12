@@ -10,7 +10,7 @@ import styles from './QuestionSection.module.scss';
 
 interface QuestionSectionProps {
   handleQuestionClick: (question: string) => void;
-  selectedQuestionId: string | null;
+  selectedQuestionId?: string;
   questions: QuestionState[];
   handleGenerateAnotherQuestion: () => void;
   handleGenerateFeedbackAnswer: (answer: string) => void;
@@ -32,15 +32,13 @@ export default function QuestionSection({
         <p className={styles['sub-title']}>꼬리 질문으로 실력 레벨업! 팔로♾️로미 😉</p>
       </header>
       <section className={styles['question_section__cards']}>
-        {questions.map((question) => (
+        {questions.map((question, index) => (
           <QuestionCard
             key={question.id}
-            titleTopic={question.titleTopic}
             question={question}
             isSelected={question.id === selectedQuestionId}
             handleQuestionClick={handleQuestionClick}
-            level={question.importance}
-            isLastQuestion={questions[questions.length - 1].id === question.id}
+            isLastQuestion={index === questions.length - 1}
             handleGenerateAnotherQuestion={handleGenerateAnotherQuestion}
           />
         ))}
