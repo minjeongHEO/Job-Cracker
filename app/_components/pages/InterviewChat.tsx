@@ -57,11 +57,6 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
         handleCloseAnswer={handleCloseAnswer}
         selectedQuestion={selectedQuestion}
         level={IMPORTANCE_LEVEL[selectedQuestion?.importance || '05']}
-        keywords={selectedQuestion?.keywords || []}
-        score={selectedQuestion?.score || 0}
-        userAnswer={selectedQuestion?.userAnswer || ''}
-        feedBack={selectedQuestion?.feedBack || ''}
-        improvedAnswer={selectedQuestion?.improvedAnswer || ''}
       />
     </div>
   );
