@@ -37,7 +37,7 @@ export default function QuestionCard({
       </section>
 
       <footer className={styles['question-card__answer']}>
-        {score != null && <span className={styles['question-card__score']}>{score} 점</span>}
+        {score !== undefined && score !== null && <span className={styles['question-card__score']}>{score} 점</span>}
         {userAnswer && (
           <button className={styles['question-card__button--view']} onClick={() => handleQuestionClick(id)}>
             답변 보기
