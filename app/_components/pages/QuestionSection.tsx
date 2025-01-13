@@ -42,6 +42,7 @@ export default function QuestionSection({
             handleQuestionClick={handleQuestionClick}
             isLastQuestion={index === questions.length - 1}
             handleGenerateAnotherQuestion={handleGenerateAnotherQuestion}
+            loadingType={loadingType}
           />
         ))}
       </section>

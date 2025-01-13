@@ -56,5 +56,10 @@
   &__button--new {
     @extend %square-button;
     background-color: color('highlight', '01');
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
   }
 }

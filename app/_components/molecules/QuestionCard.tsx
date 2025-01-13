@@ -3,7 +3,7 @@
 import clsx from 'clsx';
 
 import Badge from '@/app/_components/atoms/Badge';
-import { QuestionState } from '@/app/_types/interview';
+import { LoadingType, QuestionState } from '@/app/_types/interview';
 import { IMPORTANCE_LEVEL } from '@/app/interview/_constants/questions';
 
 import styles from './QuestionCard.module.scss';
@@ -14,6 +14,7 @@ interface QuestionCardProps {
   question: QuestionState;
   isLastQuestion: boolean;
   handleGenerateAnotherQuestion: () => void;
+  loadingType: LoadingType;
 }
 
 export default function QuestionCard({
@@ -22,6 +23,7 @@ export default function QuestionCard({
   question: { score = 0, userAnswer = '', id, question, titleTopic, importance: level = '05' },
   isLastQuestion,
   handleGenerateAnotherQuestion,
+  loadingType,
 }: QuestionCardProps) {
   const { title, shade } = IMPORTANCE_LEVEL[level];
 
@@ -47,7 +49,11 @@ export default function QuestionCard({
         )}
 
         {isLastQuestion && (
-          <button className={styles['question-card__button--new']} onClick={handleGenerateAnotherQuestion}>
+          <button
+            className={styles['question-card__button--new']}
+            onClick={handleGenerateAnotherQuestion}
+            disabled={loadingType !== null}
+          >
             다른 주제
           </button>
         )}
