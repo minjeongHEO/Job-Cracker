@@ -43,6 +43,7 @@ export default function useQuestionActions({
 
       addQuestion(anotherQuestion);
     } catch (error) {
+      throw new Error(error instanceof Error ? error.message : '오류가 발생했습니다.');
     } finally {
       setLoadingType(null);
     }
@@ -71,6 +72,7 @@ export default function useQuestionActions({
 
       changeLastQuestion(anotherQuestion);
     } catch (error) {
+      throw new Error(error instanceof Error ? error.message : '오류가 발생했습니다.');
     } finally {
       setLoadingType(null);
     }
@@ -90,7 +92,7 @@ export default function useQuestionActions({
 
       updateFollowUpQuestion({ ...feedBackData, answerText });
     } catch (error) {
-      throw new Error('error');
+      throw new Error(error instanceof Error ? error.message : '오류가 발생했습니다.');
     } finally {
       setLoadingType(null);
     }
