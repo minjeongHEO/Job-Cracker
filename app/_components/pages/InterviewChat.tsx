@@ -30,12 +30,13 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
 
   useEffect(() => {
     const generateInitialQuestion = async () => {
+      if (loadingType !== null) return;
       if (questions.length > 0) return;
       handleGenerateFirstQuestion({ devType, topics, subTopics });
     };
 
     generateInitialQuestion();
-  }, [devType, topics, subTopics, questions.length]);
+  }, [devType, topics, subTopics]);
 
   return (
     <div className={styles['interview-chat']}>
