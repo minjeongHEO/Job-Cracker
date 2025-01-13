@@ -7,3 +7,5 @@ export const IMPORTANCE_LEVEL: Record<BadgeShadeType, { title: string; shade: Ba
   '04': { title: '기본 ⭐️', shade: '04' },
   '05': { title: '심화', shade: '05' },
 };
+
+export const TEXT_AREA_MAX_HEIGHT = 200;
