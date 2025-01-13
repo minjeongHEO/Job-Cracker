@@ -23,3 +23,13 @@
     border: 2px solid color('accent', 'select');
   }
 }
+
+$breakpoint-tablet: 768px;
+$breakpoint-mobile: 480px;
+@mixin responsive($device) {
+  @if $device == 'tablet-and-mobile' {
+    @media screen and (max-width: $breakpoint-tablet) {
+      @content;
+    }
+  }
+}
