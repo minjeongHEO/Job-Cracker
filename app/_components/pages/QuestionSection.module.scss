@@ -6,8 +6,16 @@
   padding: 3rem;
   transition: width 0.3s ease-out;
 
+  @include responsive('tablet-and-mobile') {
+    width: 100%;
+    padding: 2rem 1rem;
+  }
+
   &--with-answer {
     width: 50%;
+    @include responsive('tablet-and-mobile') {
+      width: 100%;
+    }
   }
 
   &__header {
@@ -48,7 +56,8 @@
 .loading-spinner {
   position: absolute;
   top: 45%;
-  left: 47%;
+  left: 50%;
+  transform: translateX(-50%);
   opacity: 0;
   z-index: 999;
   transition: opacity 0.1s ease-in;
@@ -61,9 +70,9 @@
 
 @keyframes spin {
   from {
-    transform: rotate(0deg);
+    transform: translateX(-50%) rotate(0deg);
   }
   to {
-    transform: rotate(360deg);
+    transform: translateX(-50%) rotate(360deg);
   }
 }

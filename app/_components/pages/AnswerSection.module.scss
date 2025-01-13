@@ -1,23 +1,20 @@
 .answer-section {
+  & {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100%;
+    padding: 4rem 4rem 4rem 2.5rem;
+    overflow-y: auto;
+    background: linear-gradient(to right, color('background', 'default') 0%, color('background', 'sub') 70%);
+
+    transform: translateX(100%);
+    transition: transform 0.2s ease-out;
+  }
+
   & p {
     white-space: pre-wrap;
   }
-  position: absolute;
-  right: 0;
-  width: 50%;
-  height: 100%;
-  padding: 4rem 4rem 4rem 2.5rem;
-  overflow-y: auto;
-
-  background: linear-gradient(
-    to right,
-    rgba(color('background', 'sub'), 0) 0%,
-    rgba(color('background', 'sub'), 0.8) 30%,
-    rgba(color('background', 'sub'), 1) 50%
-  );
-
-  transform: translateX(100%);
-  transition: transform 0.2s ease-out;
 
   &--visible {
     transform: translateX(0);
@@ -41,6 +38,15 @@
     gap: 1rem;
     margin-top: 1rem;
   }
+
+  @include responsive('tablet-and-mobile') {
+    width: 100%;
+    padding: 2rem;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    z-index: 10;
+  }
 }
 
 .answer-contents {
@@ -62,7 +68,7 @@
   margin-bottom: 1rem;
 
   &__icon {
-    width: 30px; // 원하는 크기
+    width: 30px;
     height: 30px;
     fill: color('brand', 'main');
   }
