@@ -1,5 +1,6 @@
 import { FC, SVGProps } from 'react';
 
+export type LoadingType = 'question' | 'feedback' | null;
 export interface UnknownObject {
   question?: unknown;
   importance?: unknown;
