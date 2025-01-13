@@ -20,7 +20,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
   const { selectedQuestionId, selectedQuestion, handleQuestionClick, handleCloseAnswer } =
     useQuestionSelection(questions);
   // 액션 커스텀 훅
-  const { handleGenerateFirstQuestion, handelGenerateAnotherQuestion, handleGenerateFeedbackAnswer } =
+  const { loadingType, handleGenerateFirstQuestion, handelGenerateAnotherQuestion, handleGenerateFeedbackAnswer } =
     useQuestionActions({
       questions,
       addQuestion,
@@ -45,6 +45,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
         })}
       >
         <QuestionSection
+          loadingType={loadingType}
           handleQuestionClick={handleQuestionClick}
           selectedQuestionId={selectedQuestionId}
           questions={questions}

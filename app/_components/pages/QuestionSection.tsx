@@ -4,11 +4,12 @@ import clsx from 'clsx';
 
 import Input from '@/app/_components/molecules/Input';
 import QuestionCard from '@/app/_components/molecules/QuestionCard';
-import { QuestionState } from '@/app/_types/interview';
+import { LoadingType, QuestionState } from '@/app/_types/interview';
 
 import styles from './QuestionSection.module.scss';
 
 interface QuestionSectionProps {
+  loadingType: LoadingType;
   handleQuestionClick: (question: string) => void;
   selectedQuestionId?: string;
   questions: QuestionState[];
@@ -17,6 +18,7 @@ interface QuestionSectionProps {
 }
 
 export default function QuestionSection({
+  loadingType,
   handleQuestionClick,
   selectedQuestionId,
   questions,
@@ -45,7 +47,7 @@ export default function QuestionSection({
       </section>
 
       <div className={styles['question_section__input-container']}>
-        <Input handleGenerateFeedbackAnswer={handleGenerateFeedbackAnswer} />
+        <Input handleGenerateFeedbackAnswer={handleGenerateFeedbackAnswer} loadingType={loadingType} />
       </div>
     </div>
   );
