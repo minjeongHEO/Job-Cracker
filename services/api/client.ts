@@ -12,7 +12,7 @@ export async function fetchWithErrorHandling(url: string, params: unknown) {
     const errorData = await response.json();
 
     if (!response.ok) {
-      throw new Error(errorData.error || 'Server Error: Failed to generate question');
+      throw new Error(errorData.message || 'Server Error: Failed to generate question');
     }
     return errorData;
   } catch (error) {
