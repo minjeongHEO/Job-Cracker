@@ -42,6 +42,13 @@ li {
   list-style: none;
 }
 
+input,
+textarea {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  touch-action: manipulation;
+}
+
 .container {
   width: 100vw;
   height: 100dvh;
@@ -49,7 +56,4 @@ li {
   justify-content: center;
   align-items: center;
   background-color: color('background', 'default');
-  // @supports (-webkit-touch-callout: none) {
-  //   height: -webkit-fill-available;
-  // }
 }
