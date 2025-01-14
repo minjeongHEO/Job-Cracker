@@ -9,13 +9,12 @@ export async function fetchWithErrorHandling(url: string, params: unknown) {
       body: JSON.stringify(params),
     });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Server Error:', errorData);
-      throw new Error(errorData.error || 'Failed to generate question');
-    }
+    const errorData = await response.json();
 
-    return response.json();
+    if (!response.ok) {
+      throw new Error(errorData.error || 'Server Error: Failed to generate question');
+    }
+    return errorData;
   } catch (error) {
     throw error;
   }
