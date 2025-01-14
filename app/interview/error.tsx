@@ -1,6 +1,7 @@
 'use client';
 
 import SelectLayout from '@/app/_components/templates/SelectLayout';
+
 import styles from './error.module.scss';
 
 export default function DevTypeError({ error }: { error: Error & { digest?: string } }) {

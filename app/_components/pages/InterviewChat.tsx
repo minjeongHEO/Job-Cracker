@@ -2,13 +2,13 @@
 
 import clsx from 'clsx';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import useQuestionActions from '@/app/_hooks/useQuestionActions';
 import useQuestionSelection from '@/app/_hooks/useQuestionSelection';
 import useQuestionState from '@/app/_hooks/useQuestionState';
 import { InterviewChatProps } from '@/app/_types/interview';
 import { IMPORTANCE_LEVEL } from '@/app/interview/_constants/questions';
-import { ToastContainer } from 'react-toastify';
 
 import AnswerSection from './AnswerSection';
 import styles from './InterviewChat.module.scss';

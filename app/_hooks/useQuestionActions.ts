@@ -1,11 +1,11 @@
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DeveloperType, LoadingType, QuestionState } from '@/app/_types/interview';
 
 import { generateAnotherQuestionAPI, generateFeedbackAnswerAPI, generateQuestionAPI } from '@/services/api/interview';
 
-import { useState } from 'react';
-import { toast } from 'react-toastify';
 import { AddQuestionType, ChangeLastQuestionType, UpdateFollowUpQuestionType } from './useQuestionState';
 
 interface PropUseQuestionActions {
