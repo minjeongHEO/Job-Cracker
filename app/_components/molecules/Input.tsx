@@ -6,7 +6,6 @@ import ArrowUpIcon from '@/app/_components/icons/ArrowUpIcon';
 
 import { getPlaceHolder, handleInput, resetTextarea } from '@/app/_helpers/inputHelpers';
 import { LoadingType } from '@/app/_types/interview';
-import clsx from 'clsx';
 import styles from './Input.module.scss';
 
 interface InputProps {
@@ -45,7 +44,7 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
   };
 
   return (
-    <form className={loadingClass(loadingType)} onSubmit={handleSubmit}>
+    <form className={styles.input} onSubmit={handleSubmit}>
       <textarea
         className={styles['input__text-box']}
         ref={textareaRef}
@@ -67,10 +66,4 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
       </button>
     </form>
   );
-}
-
-function loadingClass(loadingType: LoadingType) {
-  return clsx(styles.input, {
-    [styles['input--loading']]: loadingType !== null,
-  });
 }

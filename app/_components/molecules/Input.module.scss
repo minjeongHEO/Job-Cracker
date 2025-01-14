@@ -14,16 +14,9 @@
   }
 
   // 로딩 상태일 때의 스타일
-  &--loading {
+  textarea:disabled,
+  button:disabled {
     cursor: not-allowed;
-
-    .input__text-box {
-      cursor: not-allowed;
-    }
-
-    .input__submit-button {
-      cursor: not-allowed;
-    }
   }
 
   &__text-box {
