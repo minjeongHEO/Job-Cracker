@@ -51,7 +51,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
           selectedQuestionId={selectedQuestionId}
           questions={questions}
           handleGenerateAnotherQuestion={() => handelGenerateAnotherQuestion({ devType, topics, subTopics })}
-          handleGenerateFeedbackAnswer={(answerText) => handleGenerateFeedbackAnswer({ topics, answerText })}
+          handleGenerateFeedbackAnswer={(userAnswer) => handleGenerateFeedbackAnswer({ topics, userAnswer })}
         />
       </div>
 
