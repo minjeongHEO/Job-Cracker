@@ -2,16 +2,18 @@ $gradient-start: color('background', 'default');
 $gradient-end: color('background', 'sub');
 
 .main {
-  width: 100%;
-  height: 100%;
-  $bg-default: color('background', 'default');
-  $bg-sub: color('background', 'sub');
-  background: linear-gradient(-180deg, $gradient-start, $gradient-end);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  vertical-align: middle;
-  justify-content: center;
+  & {
+    width: 100%;
+    height: 100vh;
+    background: linear-gradient(-180deg, $gradient-start, $gradient-end);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    vertical-align: middle;
+    justify-content: center;
+  }
+
+  @include ios-height-fix;
 
   &__logo {
     position: relative;
