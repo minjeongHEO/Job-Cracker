@@ -10,7 +10,14 @@ export default function Home() {
     <div className={styles['main']}>
       <div className={styles['main__logo']}>
         <div className={styles['logo__shadow']} />
-        <Image className={styles['logo__image']} src={logo} alt="Job Cracker Logo" width={240} height={240} />
+        <Image
+          className={styles['logo__image']}
+          src={logo}
+          alt="Job Cracker Logo"
+          width={240}
+          height={240}
+          priority={true}
+        />
       </div>
 
       <h1 className={styles['main__title']}>Job-Cracker</h1>
