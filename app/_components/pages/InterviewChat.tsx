@@ -8,6 +8,7 @@ import useQuestionSelection from '@/app/_hooks/useQuestionSelection';
 import useQuestionState from '@/app/_hooks/useQuestionState';
 import { InterviewChatProps } from '@/app/_types/interview';
 import { IMPORTANCE_LEVEL } from '@/app/interview/_constants/questions';
+import { ToastContainer } from 'react-toastify';
 
 import AnswerSection from './AnswerSection';
 import styles from './InterviewChat.module.scss';
@@ -45,6 +46,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
           [styles['interview-chat__container--with-answer']]: selectedQuestionId,
         })}
       >
+        <ToastContainer position="top-center" autoClose={1000} />
         <QuestionSection
           loadingType={loadingType}
           handleQuestionClick={handleQuestionClick}

@@ -5,6 +5,7 @@ import { DeveloperType, LoadingType, QuestionState } from '@/app/_types/intervie
 import { generateAnotherQuestionAPI, generateFeedbackAnswerAPI, generateQuestionAPI } from '@/services/api/interview';
 
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { AddQuestionType, ChangeLastQuestionType, UpdateFollowUpQuestionType } from './useQuestionState';
 
 interface PropUseQuestionActions {
@@ -40,7 +41,8 @@ export default function useQuestionActions({
 
       addQuestion(anotherQuestion);
     } catch (error) {
-      throw new Error(error instanceof Error ? error.message : '오류가 발생했습니다.');
+      toast(error instanceof Error ? error.message : '질문 생성 중 오류가 발생했습니다.');
+      console.error(error instanceof Error ? error.message : '질문 생성 중 오류가 발생했습니다.');
     } finally {
       setLoadingType(null);
     }
@@ -59,7 +61,8 @@ export default function useQuestionActions({
 
       changeLastQuestion(anotherQuestion);
     } catch (error) {
-      throw new Error(error instanceof Error ? error.message : '오류가 발생했습니다.');
+      toast(error instanceof Error ? error.message : '주제 변경 중 오류가 발생했습니다.');
+      console.error(error instanceof Error ? error.message : '주제 변경 중 오류가 발생했습니다.');
     } finally {
       setLoadingType(null);
     }
@@ -78,7 +81,8 @@ export default function useQuestionActions({
 
       updateFollowUpQuestion({ ...feedBackData, userAnswer: params.userAnswer });
     } catch (error) {
-      throw new Error(error instanceof Error ? error.message : '오류가 발생했습니다.');
+      toast(error instanceof Error ? error.message : '피드백 생성 중 오류가 발생했습니다.');
+      console.error(error instanceof Error ? error.message : '피드백 생성 중 오류가 발생했습니다.');
     } finally {
       setLoadingType(null);
     }
