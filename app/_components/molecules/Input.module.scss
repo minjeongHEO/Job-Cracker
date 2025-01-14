@@ -79,5 +79,9 @@
     &:focus {
       outline: none;
     }
+
+    &__icon {
+      transform: translateX(-10%);
+    }
   }
 }

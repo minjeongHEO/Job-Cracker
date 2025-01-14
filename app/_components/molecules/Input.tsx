@@ -63,7 +63,7 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
         aria-label="답변 전송"
         disabled={loadingType !== null}
       >
-        <ArrowUpIcon />
+        <ArrowUpIcon className={styles['input__submit-button__icon']} />
       </button>
     </form>
   );
