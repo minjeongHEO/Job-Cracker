@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { ReactNode } from 'react';
-import styles from './AnswerContent.module.css';
+import styles from './AnswerContent.module.scss';
 
 interface Props {
   type: 'default' | 'answer';

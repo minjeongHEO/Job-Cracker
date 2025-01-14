@@ -29,6 +29,7 @@
   }
 
   &__cards {
+    position: relative;
     flex: 1;
     margin-top: 1rem;
     height: calc(100% - 10rem);
@@ -41,5 +42,28 @@
   &__input-container {
     flex-shrink: 0;
     padding: 1rem;
+  }
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 45%;
+  left: 47%;
+  opacity: 0;
+  z-index: 999;
+  transition: opacity 0.1s ease-in;
+
+  &--loading-animation {
+    opacity: 1;
+    animation: spin 1.5s linear infinite;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
