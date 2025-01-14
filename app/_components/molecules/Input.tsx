@@ -22,8 +22,6 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
 
   const submitForm = () => {
     if (!textareaRef.current) return;
-    try {
-    } catch (error) {}
     const answerText = textareaRef.current.value;
 
     resetTextarea(textareaRef.current);
@@ -42,16 +40,6 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault();
     submitForm();
-  };
-
-  const placeHolder = (loadingType: LoadingType, isMobile: boolean) => {
-    if (loadingType === 'feedback') {
-      return '답변을 검토 중 입니다...';
-    }
-    if (loadingType === 'question') {
-      return '질문을 생성 중 입니다...';
-    }
-    return isMobile ? '답변을 입력해주세요' : '답변을 입력해주세요 (Shift + Enter로 줄바꿈)';
   };
 
   return (
