@@ -3,17 +3,15 @@
 import { FormEvent, useEffect, useRef, useState } from 'react';
 
 import ArrowUpIcon from '@/app/_components/icons/ArrowUpIcon';
-
 import { getPlaceHolder, handleInput, resetTextarea } from '@/app/_helpers/inputHelpers';
 import { LoadingType } from '@/app/_types/interview';
+
 import styles from './Input.module.scss';
 
 interface InputProps {
   handleGenerateFeedbackAnswer: (answer: string) => void;
   loadingType: LoadingType;
-  loadingType: LoadingType;
 }
-export default function Input({ handleGenerateFeedbackAnswer, loadingType }: InputProps) {
 export default function Input({ handleGenerateFeedbackAnswer, loadingType }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -29,12 +27,12 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
     const answerText = textareaRef.current.value;
 
     resetTextarea(textareaRef.current);
-    resetTextarea(textareaRef.current);
     handleGenerateFeedbackAnswer(answerText);
   };
 
   const handleKeyDown = (e: React.KeyboardEvent<HTMLTextAreaElement>) => {
     if (e.nativeEvent.isComposing) return;
+
     if (!isMobile && e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
       submitForm();
@@ -57,7 +55,7 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
   };
 
   return (
-    <form className={loadingClass(loadingType)} onSubmit={handleSubmit}>
+    <form className={styles.input} onSubmit={handleSubmit}>
       <textarea
         className={styles['input__text-box']}
         ref={textareaRef}
@@ -66,7 +64,6 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
         aria-label="답변 입력"
         placeholder={getPlaceHolder(loadingType, isMobile)}
         rows={1}
-        disabled={loadingType !== null}
         disabled={loadingType !== null}
       ></textarea>
 
@@ -80,10 +77,4 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
       </button>
     </form>
   );
-}
-
-function loadingClass(loadingType: LoadingType) {
-  return clsx(styles.input, {
-    [styles['input--loading']]: loadingType !== null,
-  });
 }
