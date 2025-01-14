@@ -13,7 +13,11 @@ interface PropUseQuestionActions {
   changeLastQuestion: ChangeLastQuestionType;
   updateFollowUpQuestion: UpdateFollowUpQuestionType;
 }
-
+interface SelectInfo {
+  devType: DeveloperType;
+  topics: string[];
+  subTopics: string[];
+}
 export default function useQuestionActions({
   questions,
   addQuestion,
@@ -23,22 +27,10 @@ export default function useQuestionActions({
   const [loadingType, setLoadingType] = useState<LoadingType>(null);
 
   /** 처음 질문 생성 */
-  const handleGenerateFirstQuestion = async ({
-    devType,
-    topics,
-    subTopics,
-  }: {
-    devType: DeveloperType;
-    topics: string[];
-    subTopics: string[];
-  }) => {
+  const handleGenerateFirstQuestion = async (selectInfo: SelectInfo) => {
     setLoadingType('question');
     try {
-      const question = await generateQuestionAPI({
-        devType,
-        topics,
-        subTopics,
-      });
+      const question = await generateQuestionAPI(selectInfo);
       const anotherQuestion = { ...question, id: uuidv4() };
 
       addQuestion(anotherQuestion);
@@ -49,22 +41,12 @@ export default function useQuestionActions({
   };
 
   /** 다른 주제로 질문 변경 */
-  const handelGenerateAnotherQuestion = async ({
-    devType,
-    topics,
-    subTopics,
-  }: {
-    devType: DeveloperType;
-    topics: string[];
-    subTopics: string[];
-  }) => {
+  const handelGenerateAnotherQuestion = async (selectInfo: SelectInfo) => {
     if (!questions.length) return;
     setLoadingType('question');
     try {
       const question = await generateAnotherQuestionAPI({
-        devType,
-        topics,
-        subTopics,
+        ...selectInfo,
         questionState: questions[questions.length - 1],
       });
       const anotherQuestion = { ...question, id: uuidv4() };
