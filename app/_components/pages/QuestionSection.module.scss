@@ -2,12 +2,11 @@
   & {
     display: flex;
     flex-direction: column;
-    width: 65%;
+    width: 80%;
     height: 100%;
     padding: 3rem;
     transition: width 0.3s ease-out;
   }
-  @include ios-height-fix;
 
   @include responsive('tablet-and-mobile') {
     width: 100%;
