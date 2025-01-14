@@ -1,5 +1,4 @@
 import InterviewChat from '@/app/_components/pages/InterviewChat';
-import SelectLayout from '@/app/_components/templates/SelectLayout';
 import { getValidSubTopics } from '@/app/_helpers/interviewHelpers';
 import { isDeveloperType, isValidSubTopicParam, isValidTopicParam } from '@/app/_helpers/typeGuards';
 
@@ -10,28 +9,9 @@ interface ChatPageType {
 export default async function ChatPage({ searchParams }: ChatPageType) {
   const { devType, topics, subTopics: rawSubTopics } = await searchParams;
 
-  if (!devType || !isDeveloperType(devType)) {
-    return (
-      <SelectLayout title={'개발자 타입 오류'}>
-        <div>잘못된 개발자 타입입니다.</div>
-      </SelectLayout>
-    );
-  }
-
-  if (!topics || !isValidTopicParam(devType, topics)) {
-    return (
-      <SelectLayout title={'주제 오류'}>
-        <div>잘못된 주제 입니다.</div>
-      </SelectLayout>
-    );
-  }
-  if (!rawSubTopics || !isValidSubTopicParam(devType, topics, rawSubTopics)) {
-    return (
-      <SelectLayout title={'세부 주제 오류'}>
-        <div>잘못된 세부 주제 입니다.</div>
-      </SelectLayout>
-    );
-  }
+  if (!devType || !isDeveloperType(devType)) throw new Error('개발자 타입 오류');
+  if (!topics || !isValidTopicParam(devType, topics)) throw new Error('주제 오류');
+  if (!rawSubTopics || !isValidSubTopicParam(devType, topics, rawSubTopics)) throw new Error('세부 주제 오류');
 
   const topicArray = topics.split(',');
   const subTopicArray =

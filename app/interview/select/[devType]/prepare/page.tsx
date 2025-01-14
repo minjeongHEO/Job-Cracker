@@ -11,21 +11,9 @@ interface PreparePageType {
 export default async function PreparePage({ params, searchParams }: PreparePageType) {
   const [{ devType }, { topics }] = await Promise.all([params, searchParams]);
 
-  if (!devType || !isDeveloperType(devType)) {
-    return (
-      <SelectLayout title={'개발자 타입 오류'}>
-        <div>잘못된 개발자 타입입니다.</div>
-      </SelectLayout>
-    );
-  }
+  if (!devType || !isDeveloperType(devType)) throw new Error('개발자 타입 오류');
 
-  if (!topics || !isValidTopicParam(devType, topics)) {
-    return (
-      <SelectLayout title={'주제 오류'}>
-        <div>잘못된 주제 입니다.</div>
-      </SelectLayout>
-    );
-  }
+  if (!topics || !isValidTopicParam(devType, topics)) throw new Error('주제 오류');
 
   const selectedTopics = getSelectedTopics(devType, topics);
   const subTopics = selectedTopics.flatMap((topic) => getValidSubTopics(devType, topic) || []);
