@@ -62,5 +62,15 @@ $gradient-end: color('background', 'sub');
   &__image {
     z-index: 2;
     object-fit: cover;
+    animation: rotate-center 1.5s cubic-bezier(0.785, 0.135, 0.15, 0.86) 1s infinite both;
+  }
+}
+
+@keyframes rotate-center {
+  0% {
+    transform: rotate(0);
+  }
+  100% {
+    transform: rotate(360deg);
   }
 }
