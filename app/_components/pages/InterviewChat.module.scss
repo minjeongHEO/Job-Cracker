@@ -1,26 +1,18 @@
 .interview-chat {
-  @include ios-height-fix;
-
-  & {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    position: relative;
-    justify-content: center;
-  }
+  width: 100%;
+  height: 100%;
+  display: flex;
+  position: relative;
+  justify-content: center;
 }
 
 .interview-chat__container {
-  @include ios-height-fix;
-
-  & {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: 100%;
-    transform: translateX(0);
-    transition: transform 0.2s ease-out;
-  }
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  transform: translateX(0);
+  transition: transform 0.2s ease-out;
 
   &--with-answer {
     transform: translateX(-25%);
