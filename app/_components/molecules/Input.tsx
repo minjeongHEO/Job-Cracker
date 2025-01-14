@@ -11,7 +11,9 @@ import styles from './Input.module.scss';
 interface InputProps {
   handleGenerateFeedbackAnswer: (answer: string) => void;
   loadingType: LoadingType;
+  loadingType: LoadingType;
 }
+export default function Input({ handleGenerateFeedbackAnswer, loadingType }: InputProps) {
 export default function Input({ handleGenerateFeedbackAnswer, loadingType }: InputProps) {
   const textareaRef = useRef<HTMLTextAreaElement>(null);
   const [isMobile, setIsMobile] = useState(false);
@@ -26,6 +28,7 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
     } catch (error) {}
     const answerText = textareaRef.current.value;
 
+    resetTextarea(textareaRef.current);
     resetTextarea(textareaRef.current);
     handleGenerateFeedbackAnswer(answerText);
   };
@@ -43,8 +46,18 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
     submitForm();
   };
 
+  const placeHolder = (loadingType: LoadingType, isMobile: boolean) => {
+    if (loadingType === 'feedback') {
+      return '답변을 검토 중 입니다...';
+    }
+    if (loadingType === 'question') {
+      return '질문을 생성 중 입니다...';
+    }
+    return isMobile ? '답변을 입력해주세요' : '답변을 입력해주세요 (Shift + Enter로 줄바꿈)';
+  };
+
   return (
-    <form className={styles.input} onSubmit={handleSubmit}>
+    <form className={loadingClass(loadingType)} onSubmit={handleSubmit}>
       <textarea
         className={styles['input__text-box']}
         ref={textareaRef}
@@ -53,6 +66,7 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
         aria-label="답변 입력"
         placeholder={getPlaceHolder(loadingType, isMobile)}
         rows={1}
+        disabled={loadingType !== null}
         disabled={loadingType !== null}
       ></textarea>
 
@@ -66,4 +80,10 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
       </button>
     </form>
   );
+}
+
+function loadingClass(loadingType: LoadingType) {
+  return clsx(styles.input, {
+    [styles['input--loading']]: loadingType !== null,
+  });
 }

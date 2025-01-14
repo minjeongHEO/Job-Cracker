@@ -11,14 +11,14 @@ interface PropsUpdateFollowUpQuestion {
   score: number;
   feedBack: string;
   improvedAnswer: string;
-  answerText: string;
+  userAnswer: string;
   followUpQuestion: GenerateQuestionResponse;
 }
 export type UpdateFollowUpQuestionType = ({
   score,
   feedBack,
   improvedAnswer,
-  answerText,
+  userAnswer,
   followUpQuestion,
 }: PropsUpdateFollowUpQuestion) => void;
 
@@ -40,12 +40,12 @@ export default function useQuestionState() {
     score,
     feedBack,
     improvedAnswer,
-    answerText,
+    userAnswer,
     followUpQuestion,
   }) => {
     setQuestions((prevQuestions) => {
       const lastQuestion = prevQuestions[prevQuestions.length - 1];
-      const updatedQuestion = { ...lastQuestion, score, feedBack, improvedAnswer, userAnswer: answerText };
+      const updatedQuestion = { ...lastQuestion, score, feedBack, improvedAnswer, userAnswer };
       const nextQuestion = {
         id: uuidv4(),
         ...followUpQuestion,

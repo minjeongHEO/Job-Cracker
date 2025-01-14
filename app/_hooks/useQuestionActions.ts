@@ -13,6 +13,15 @@ interface PropUseQuestionActions {
   changeLastQuestion: ChangeLastQuestionType;
   updateFollowUpQuestion: UpdateFollowUpQuestionType;
 }
+interface QuestionGenerateParams {
+  devType: DeveloperType;
+  topics: string[];
+  subTopics: string[];
+}
+interface FeedbackGenerateParams {
+  topics: string[];
+  userAnswer: string;
+}
 
 export default function useQuestionActions({
   questions,
@@ -23,22 +32,10 @@ export default function useQuestionActions({
   const [loadingType, setLoadingType] = useState<LoadingType>(null);
 
   /** 처음 질문 생성 */
-  const handleGenerateFirstQuestion = async ({
-    devType,
-    topics,
-    subTopics,
-  }: {
-    devType: DeveloperType;
-    topics: string[];
-    subTopics: string[];
-  }) => {
+  const handleGenerateFirstQuestion = async (params: QuestionGenerateParams) => {
     setLoadingType('question');
     try {
-      const question = await generateQuestionAPI({
-        devType,
-        topics,
-        subTopics,
-      });
+      const question = await generateQuestionAPI(params);
       const anotherQuestion = { ...question, id: uuidv4() };
 
       addQuestion(anotherQuestion);
@@ -50,22 +47,12 @@ export default function useQuestionActions({
   };
 
   /** 다른 주제로 질문 변경 */
-  const handelGenerateAnotherQuestion = async ({
-    devType,
-    topics,
-    subTopics,
-  }: {
-    devType: DeveloperType;
-    topics: string[];
-    subTopics: string[];
-  }) => {
+  const handelGenerateAnotherQuestion = async (params: QuestionGenerateParams) => {
     if (!questions.length) return;
     setLoadingType('question');
     try {
       const question = await generateAnotherQuestionAPI({
-        devType,
-        topics,
-        subTopics,
+        ...params,
         questionState: questions[questions.length - 1],
       });
       const anotherQuestion = { ...question, id: uuidv4() };
@@ -79,18 +66,17 @@ export default function useQuestionActions({
   };
 
   /** 질문 피드백 생성 */
-  const handleGenerateFeedbackAnswer = async ({ topics, answerText }: { topics: string[]; answerText: string }) => {
+  const handleGenerateFeedbackAnswer = async (params: FeedbackGenerateParams) => {
     if (!questions.length) return;
     setLoadingType('feedback');
     try {
       const { question: lastQuestion } = questions[questions.length - 1];
       const feedBackData = await generateFeedbackAnswerAPI({
-        topics,
+        ...params,
         question: lastQuestion,
-        userAnswer: answerText,
       });
 
-      updateFollowUpQuestion({ ...feedBackData, answerText });
+      updateFollowUpQuestion({ ...feedBackData, userAnswer: params.userAnswer });
     } catch (error) {
       throw new Error(error instanceof Error ? error.message : '오류가 발생했습니다.');
     } finally {
