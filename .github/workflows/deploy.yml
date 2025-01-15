@@ -41,4 +41,4 @@ jobs:
             /home/ubuntu/.nvm/versions/node/v20.18.0/bin/pnpm install
             /home/ubuntu/.nvm/versions/node/v20.18.0/bin/pnpm build
             /home/ubuntu/.local/share/pnpm/pm2 delete all || true
-            /home/ubuntu/.local/share/pnpm/pm2 start ecosystem.config.js
+            /home/ubuntu/.local/share/pnpm/pm2 start ecosystem.config.cjs
