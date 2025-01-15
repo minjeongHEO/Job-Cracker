@@ -22,6 +22,8 @@ export default function Input({ handleGenerateFeedbackAnswer, loadingType }: Inp
 
   const submitForm = () => {
     if (!textareaRef.current) return;
+    try {
+    } catch (error) {}
     const answerText = textareaRef.current.value;
 
     resetTextarea(textareaRef.current);
