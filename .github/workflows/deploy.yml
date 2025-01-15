@@ -38,4 +38,5 @@ jobs:
           git pull
           pnpm install
           pnpm build
-          pm2 restart all
+          pm2 delete all || true  # 기존 프로세스 종료 (실패해도 계속 진행)
+          pm2 start ecosystem.config.js  # PM2로 새로운 프로세스 시작
