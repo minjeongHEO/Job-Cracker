@@ -15,7 +15,7 @@ import styles from './InterviewChat.module.scss';
 import QuestionSection from './QuestionSection';
 
 export default function InterviewChat({ devType, topics, subTopics }: InterviewChatProps) {
-  console.log('11');
+  console.log('112');
   // 상태 관리 커스텀 훅
   const { addQuestion, questions, changeLastQuestion, updateFollowUpQuestion } = useQuestionState();
   // 선택 로직 커스텀 훅
