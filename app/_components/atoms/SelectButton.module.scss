@@ -7,6 +7,11 @@
     color: color('brand', 'sub');
     display: flex;
     gap: 1rem;
+
+    &-text {
+      word-break: break-all;
+      text-align: left;
+    }
   }
 
   &__description {
@@ -16,14 +21,21 @@
     margin: 1rem 0 2rem 0;
   }
 
-  &__topics span {
-    background-color: color('accent', 'yellow');
-    color: color('neutral', 'white');
-    margin: 0 0.5rem 2rem 0;
-    padding: 3px 16px;
-    border-radius: 2rem;
-    font-size: 1rem;
-    text-align: center;
-    font-weight: 500;
+  &__topics {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    // margin-bottom: 1rem;
+
+    & span {
+      background-color: color('accent', 'yellow');
+      color: color('neutral', 'white');
+      padding: 3px 16px;
+      border-radius: 2rem;
+      font-size: 1rem;
+      text-align: center;
+      font-weight: 500;
+      // margin: 0 0.5rem 2rem 0;
+    }
   }
 }

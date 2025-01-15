@@ -3,9 +3,7 @@ $gradient-end: color('background', 'sub');
 
 .main {
   width: 100%;
-  height: 100%;
-  $bg-default: color('background', 'default');
-  $bg-sub: color('background', 'sub');
+  height: 100dvh;
   background: linear-gradient(-180deg, $gradient-start, $gradient-end);
   display: flex;
   flex-direction: column;

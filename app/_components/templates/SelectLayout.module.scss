@@ -1,9 +1,10 @@
 .main {
   width: min(85%, 1200px); // 최대 너비 제한
-  height: 80vh;
+  height: 95dvh;
   margin: 0 auto;
   display: flex;
   flex-direction: column;
+  padding: 2rem 0;
 
   &__description {
     display: flex;
@@ -28,6 +29,7 @@
     flex: 1; // 남은 공간 채우기
     display: flex;
     flex-direction: column;
-    // gap: 1rem;
+    gap: 1rem;
+    min-height: 0; // 중요! overflow가 있는 flex child를 위해 필요
   }
 }
