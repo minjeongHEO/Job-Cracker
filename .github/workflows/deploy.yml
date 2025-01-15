@@ -34,11 +34,12 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
+            export PATH="/home/ubuntu/.nvm/versions/node/v20.18.0/bin:$PATH"
             cd ~/Job-Cracker
             git pull
-            /home/ubuntu/.nvm/versions/node/v20.18.0/bin/pnpm install
-            /home/ubuntu/.nvm/versions/node/v20.18.0/bin/pnpm build
-            /home/ubuntu/.local/share/pnpm/pm2 delete all || true
-            /home/ubuntu/.local/share/pnpm/pm2 start ecosystem.config.js
+            /home/ubuntu/.nvm/versions/node/v20.18.0/bin/node /home/ubuntu/.nvm/versions/node/v20.18.0/bin/pnpm install
+            /home/ubuntu/.nvm/versions/node/v20.18.0/bin/node /home/ubuntu/.nvm/versions/node/v20.18.0/bin/pnpm build
+            /home/ubuntu/.nvm/versions/node/v20.18.0/bin/node /home/ubuntu/.local/share/pnpm/pm2 delete all || true
+            /home/ubuntu/.nvm/versions/node/v20.18.0/bin/node /home/ubuntu/.local/share/pnpm/pm2 start ecosystem.config.js
             pm2 delete all || true 
             pm2 start ecosystem.config.js
