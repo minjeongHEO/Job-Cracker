@@ -37,9 +37,7 @@ jobs:
             export NVM_DIR="$HOME/.nvm"
             [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd ~/Job-Cracker
-            git fetch --all
-            git checkout ${GITHUB_REF#refs/heads/}
-            git pull origin ${GITHUB_REF#refs/heads/}
+            git pull
             /home/ubuntu/.nvm/versions/node/v20.18.0/bin/pnpm install
             /home/ubuntu/.nvm/versions/node/v20.18.0/bin/pnpm build
             /home/ubuntu/.local/share/pnpm/pm2 delete all || true
