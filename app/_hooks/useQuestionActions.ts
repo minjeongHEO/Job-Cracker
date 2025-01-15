@@ -41,8 +41,10 @@ export default function useQuestionActions({
 
       addQuestion(anotherQuestion);
     } catch (error) {
-      toast(error instanceof Error ? error.message : '질문 생성 중 오류가 발생했습니다.');
-      console.error(error instanceof Error ? error.message : '질문 생성 중 오류가 발생했습니다.');
+      if (error instanceof Error) {
+        toast(error.message);
+        console.error(error.message);
+      }
     } finally {
       setLoadingType(null);
     }
@@ -61,8 +63,10 @@ export default function useQuestionActions({
 
       changeLastQuestion(anotherQuestion);
     } catch (error) {
-      toast(error instanceof Error ? error.message : '주제 변경 중 오류가 발생했습니다.');
-      console.error(error instanceof Error ? error.message : '주제 변경 중 오류가 발생했습니다.');
+      if (error instanceof Error) {
+        toast(error.message);
+        console.error(error.message);
+      }
     } finally {
       setLoadingType(null);
     }
@@ -81,8 +85,10 @@ export default function useQuestionActions({
 
       updateFollowUpQuestion({ ...feedBackData, userAnswer: params.userAnswer });
     } catch (error) {
-      toast(error instanceof Error ? error.message : '피드백 생성 중 오류가 발생했습니다.');
-      console.error(error instanceof Error ? error.message : '피드백 생성 중 오류가 발생했습니다.');
+      if (error instanceof Error) {
+        toast(error.message);
+        console.error(error.message);
+      }
     } finally {
       setLoadingType(null);
     }
