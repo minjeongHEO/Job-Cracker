@@ -6,15 +6,14 @@ export async function getChatMessage<T>(
   userPrompt: string,
   validateResponse: (obj: unknown) => obj is T
 ): Promise<T> {
-  try {
-    const completion = await openai.chat.completions.create({
-      model: 'gpt-4o-mini',
-      messages: [
-        { role: 'system', content: systemPrompt },
-        { role: 'user', content: userPrompt },
-      ],
-      response_format: { type: 'json_object' },
-    });
+  const completion = await openai.chat.completions.create({
+    model: 'gpt-4o-mini',
+    messages: [
+      { role: 'system', content: systemPrompt },
+      { role: 'user', content: userPrompt },
+    ],
+    response_format: { type: 'json_object' },
+  });
 
   const content = completion.choices[0]?.message?.content;
   if (!content) {
