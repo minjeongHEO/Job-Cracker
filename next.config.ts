@@ -10,6 +10,9 @@ const nextConfig: NextConfig = {
     @use "./_abstracts/_buttons" as *;
     @use "./_abstracts/_mixins" as *;`,
   },
+  server: {
+    port: 3000,
+  },
 };
 
 export default nextConfig;

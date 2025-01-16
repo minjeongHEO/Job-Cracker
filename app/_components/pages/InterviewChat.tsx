@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import useQuestionActions from '@/app/_hooks/useQuestionActions';
 import useQuestionSelection from '@/app/_hooks/useQuestionSelection';
@@ -30,12 +31,13 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
 
   useEffect(() => {
     const generateInitialQuestion = async () => {
+      if (loadingType !== null) return;
       if (questions.length > 0) return;
       handleGenerateFirstQuestion({ devType, topics, subTopics });
     };
 
     generateInitialQuestion();
-  }, [devType, topics, subTopics, questions.length]);
+  }, [devType, topics, subTopics]);
 
   return (
     <div className={styles['interview-chat']}>
@@ -44,13 +46,14 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
           [styles['interview-chat__container--with-answer']]: selectedQuestionId,
         })}
       >
+        <ToastContainer position="top-center" autoClose={1000} />
         <QuestionSection
           loadingType={loadingType}
           handleQuestionClick={handleQuestionClick}
           selectedQuestionId={selectedQuestionId}
           questions={questions}
           handleGenerateAnotherQuestion={() => handelGenerateAnotherQuestion({ devType, topics, subTopics })}
-          handleGenerateFeedbackAnswer={(answerText) => handleGenerateFeedbackAnswer({ topics, answerText })}
+          handleGenerateFeedbackAnswer={(userAnswer) => handleGenerateFeedbackAnswer({ topics, userAnswer })}
         />
       </div>
 

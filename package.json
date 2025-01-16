@@ -4,7 +4,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev --turbopack",
+    "dev": "next dev --turbo",
+    "dev1": "next dev --turbo -H 192.168.35.82",
+    "dev2": "next dev --turbo -H 172.16.1.23",
     "build": "next build",
     "start": "next start",
     "lint": "next lint ",
@@ -17,6 +19,7 @@
     "openai": "^4.77.3",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-toastify": "^11.0.2",
     "uuid": "^11.0.3"
   },
   "devDependencies": {

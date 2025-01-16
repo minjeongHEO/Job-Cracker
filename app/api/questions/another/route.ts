@@ -9,10 +9,23 @@ export async function POST(request: Request) {
   try {
     const body: GenerateAnotherQuestionRequest = await request.json();
     const question = await generateAnotherQuestion(body);
-
     return NextResponse.json(question);
   } catch (error) {
-    console.error('API Error:', error);
-    return NextResponse.json({ error: 'Failed to generate question' }, { status: 500 });
+    // SyntaxError(JSON.parse()가 실패할 때)
+    if (error instanceof SyntaxError) {
+      return NextResponse.json(
+        {
+          message: 'GPT 응답을 처리할 수 없습니다.',
+        },
+        { status: 500 }
+      );
+    }
+
+    return NextResponse.json(
+      {
+        message: '문제 생성 중 오류가 발생했습니다.',
+      },
+      { status: 500 }
+    );
   }
 }

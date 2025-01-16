@@ -1,9 +1,8 @@
 .input {
   width: 100%;
-  background-color: color('neutral', 'white');
+  background-color: color('neutral', 'pureWhite');
   box-shadow: 0 3px 8px color('shadow', 'default');
   border: 2px solid rgba(color('brand', 'main'), 0.5);
-  min-width: 31rem;
   display: flex;
   flex-direction: row;
   padding: 0;
@@ -15,16 +14,9 @@
   }
 
   // 로딩 상태일 때의 스타일
-  &--loading {
+  textarea:disabled,
+  button:disabled {
     cursor: not-allowed;
-
-    .input__text-box {
-      cursor: not-allowed;
-    }
-
-    .input__submit-button {
-      cursor: not-allowed;
-    }
   }
 
   &__text-box {
@@ -79,6 +71,10 @@
 
     &:focus {
       outline: none;
+    }
+
+    &__icon {
+      transform: translateX(-10%);
     }
   }
 }

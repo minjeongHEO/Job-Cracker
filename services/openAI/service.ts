@@ -17,14 +17,12 @@ export async function getChatMessage<T>(
 
   const content = completion.choices[0]?.message?.content;
   if (!content) {
-    throw new Error('Failed to generate question');
+    throw new Error('GPT 의 질문 생성에 실패하였습니다.');
   }
 
   const result = JSON.parse(content);
-
   if (!validateResponse(result)) {
-    throw new Error('Invalid response format');
+    throw new Error('GPT 응답 형식이 올바르지 않습니다.');
   }
-
   return result;
 }

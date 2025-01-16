@@ -1,22 +1,17 @@
 /** 공통 fetch 로직 */
 export async function fetchWithErrorHandling(url: string, params: unknown) {
-  try {
-    const response = await fetch(url, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(params),
-    });
+  const response = await fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(params),
+  });
 
-    if (!response.ok) {
-      const errorData = await response.json();
-      console.error('Server Error:', errorData);
-      throw new Error(errorData.error || 'Failed to generate question');
-    }
+  const errorData = await response.json();
 
-    return response.json();
-  } catch (error) {
-    throw error;
+  if (!response.ok) {
+    throw new Error(errorData.message || 'Server Error: Failed to generate question');
   }
+  return errorData;
 }

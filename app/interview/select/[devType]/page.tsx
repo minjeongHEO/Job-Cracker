@@ -7,23 +7,10 @@ import { DeveloperType } from '@/app/_types/interview';
 export default async function DevTypePage({ params }: { params: Promise<{ devType: DeveloperType }> }) {
   const { devType } = await params;
 
-  if (!devType || !isDeveloperType(devType)) {
-    return (
-      <SelectLayout title={'개발자 타입 오류'}>
-        <div>잘못된 개발자 타입입니다.</div>
-      </SelectLayout>
-    );
-  }
+  if (!devType || !isDeveloperType(devType)) throw new Error('개발자 타입 오류');
 
   const selectedDevOptions = getValidTopics(devType);
-
-  if (!selectedDevOptions?.length) {
-    return (
-      <SelectLayout title={'주제 로드 오류'}>
-        <div>{devType} 개발자 유형에 대한 주제를 찾을 수 없습니다.</div>
-      </SelectLayout>
-    );
-  }
+  if (!selectedDevOptions?.length) throw new Error('주제 로드 오류');
 
   return (
     <SelectLayout title={`어떤 주제로 ${devType} 면접을 준비하시겠어요?`}>

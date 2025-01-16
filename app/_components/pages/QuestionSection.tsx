@@ -2,11 +2,11 @@
 
 import clsx from 'clsx';
 
+import SpinnerIcon from '@/app/_components/icons/SpinnerIcon';
 import Input from '@/app/_components/molecules/Input';
 import QuestionCard from '@/app/_components/molecules/QuestionCard';
 import { LoadingType, QuestionState } from '@/app/_types/interview';
 
-import SpinnerIcon from '@/app/_components/icons/SpinnerIcon';
 import styles from './QuestionSection.module.scss';
 
 interface QuestionSectionProps {

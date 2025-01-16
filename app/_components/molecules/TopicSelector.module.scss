@@ -10,9 +10,10 @@
 
 .select_container {
   padding: 0 0.5rem;
-  height: 60vh;
+  height: 70dvh;
   overflow-y: auto;
   margin-bottom: 1rem;
+  mask-image: linear-gradient(to bottom, transparent, black 5%, black 96%, transparent);
 }
 
 .next-button {
@@ -21,6 +22,7 @@
   pointer-events: auto;
   opacity: 1;
   transition: opacity 0.4s ease;
+  height: 3rem;
 }
 
 .next-button:disabled {
