@@ -1,10 +1,11 @@
+import { useState } from 'react';
+import { toast } from 'react-toastify';
 import { v4 as uuidv4 } from 'uuid';
 
 import { DeveloperType, LoadingType, QuestionState } from '@/app/_types/interview';
 
 import { generateAnotherQuestionAPI, generateFeedbackAnswerAPI, generateQuestionAPI } from '@/services/api/interview';
 
-import { useState } from 'react';
 import { AddQuestionType, ChangeLastQuestionType, UpdateFollowUpQuestionType } from './useQuestionState';
 
 interface PropUseQuestionActions {
@@ -40,7 +41,10 @@ export default function useQuestionActions({
 
       addQuestion(anotherQuestion);
     } catch (error) {
-      throw new Error(error instanceof Error ? error.message : '오류가 발생했습니다.');
+      if (error instanceof Error) {
+        toast(error.message);
+        console.error(error.message);
+      }
     } finally {
       setLoadingType(null);
     }
@@ -59,7 +63,10 @@ export default function useQuestionActions({
 
       changeLastQuestion(anotherQuestion);
     } catch (error) {
-      throw new Error(error instanceof Error ? error.message : '오류가 발생했습니다.');
+      if (error instanceof Error) {
+        toast(error.message);
+        console.error(error.message);
+      }
     } finally {
       setLoadingType(null);
     }
@@ -78,7 +85,10 @@ export default function useQuestionActions({
 
       updateFollowUpQuestion({ ...feedBackData, userAnswer: params.userAnswer });
     } catch (error) {
-      throw new Error(error instanceof Error ? error.message : '오류가 발생했습니다.');
+      if (error instanceof Error) {
+        toast(error.message);
+        console.error(error.message);
+      }
     } finally {
       setLoadingType(null);
     }

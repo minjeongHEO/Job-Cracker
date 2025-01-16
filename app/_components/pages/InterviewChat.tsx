@@ -2,6 +2,7 @@
 
 import clsx from 'clsx';
 import { useEffect } from 'react';
+import { ToastContainer } from 'react-toastify';
 
 import useQuestionActions from '@/app/_hooks/useQuestionActions';
 import useQuestionSelection from '@/app/_hooks/useQuestionSelection';
@@ -45,6 +46,7 @@ export default function InterviewChat({ devType, topics, subTopics }: InterviewC
           [styles['interview-chat__container--with-answer']]: selectedQuestionId,
         })}
       >
+        <ToastContainer position="top-center" autoClose={1000} />
         <QuestionSection
           loadingType={loadingType}
           handleQuestionClick={handleQuestionClick}

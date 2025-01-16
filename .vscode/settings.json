@@ -2,7 +2,7 @@
   "eslint.workingDirectories": [{ "mode": "auto" }],
   "eslint.validate": ["javascript", "javascriptreact", "typescript", "typescriptreact"],
   "eslint.options": {
-    "overrideConfigFile": "./eslint.config.js"
+    "overrideConfigFile": "./eslint.config.mjs"
   },
   "editor.formatOnSave": true,
   "editor.codeActionsOnSave": {

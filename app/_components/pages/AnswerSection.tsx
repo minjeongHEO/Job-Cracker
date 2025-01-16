@@ -1,11 +1,11 @@
 'use client';
 import clsx from 'clsx';
 
+import AnswerContent from '@/app/_components/atoms/AnswerContent';
 import Badge from '@/app/_components/atoms/Badge';
+import ArrowRightIcon from '@/app/_components/icons/ArrowRightIcon';
 import { BadgeShadeType, QuestionState } from '@/app/_types/interview';
 
-import AnswerContent from '@/app/_components/atoms/AnswerContent';
-import ArrowRightIcon from '@/app/_components/icons/ArrowRightIcon';
 import styles from './AnswerSection.module.scss';
 
 interface AnswerSectionProps {
