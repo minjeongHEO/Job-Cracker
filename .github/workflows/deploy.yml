@@ -26,10 +26,6 @@ jobs:
       - name: Install pnpm
         run: npm install -g pnpm@9.12.3
 
-      - name: Create .env file
-        run: |
-          echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" >> .env
-
       - name: Deploy to EC2
         uses: appleboy/ssh-action@master
         with:
@@ -38,6 +34,7 @@ jobs:
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
             cd ~/Job-Cracker
+            echo "OPENAI_API_KEY=${{ secrets.OPENAI_API_KEY }}" > .env
             git pull
             /usr/bin/pnpm install
             /usr/bin/pnpm build
