@@ -4,6 +4,11 @@ on:
   push:
     branches: ['main']
 
+# 동시 실행 방지 추가
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   deploy:
     name: Deploy
@@ -32,11 +37,9 @@ jobs:
           username: ubuntu
           key: ${{ secrets.EC2_SSH_KEY }}
           script: |
-            export NVM_DIR="$HOME/.nvm"
-            [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"
             cd ~/Job-Cracker
             git pull
-            /home/ubuntu/.nvm/versions/node/v20.18.0/bin/pnpm install
-            /home/ubuntu/.nvm/versions/node/v20.18.0/bin/pnpm build
-            /home/ubuntu/.local/share/pnpm/pm2 delete all || true
-            /home/ubuntu/.local/share/pnpm/pm2 start ecosystem.config.cjs
+            /usr/bin/pnpm install
+            /usr/bin/pnpm build
+            /usr/bin/pm2 delete all || true
+            /usr/bin/pm2 start ecosystem.config.cjs

@@ -3,7 +3,6 @@ import { RefObject } from 'react';
 import { LoadingType } from '@/app/_types/interview';
 import { TEXT_AREA_MAX_HEIGHT } from '@/app/interview/_constants/questions';
 
-
 export const getPlaceHolder = (loadingType: LoadingType, isMobile: boolean) => {
   if (loadingType === 'feedback') {
     return '답변을 검토 중 입니다...';
