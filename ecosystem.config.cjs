@@ -4,7 +4,7 @@ module.exports = {
       name: 'job-cracker',
       cwd: './',
       script: 'node_modules/next/dist/bin/next',
-      args: 'start',
+      args: 'start -p 3000',
       exec_mode: 'cluster',
       instances: 0,
       autorestart: true,
