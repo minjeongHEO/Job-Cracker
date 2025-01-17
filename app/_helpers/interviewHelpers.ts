@@ -1,5 +1,5 @@
+import { DEVELOPER_OPTIONS } from '@/app/_constants/developers';
 import { DeveloperType, SelectorVariant } from '@/app/_types/interview';
-import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 
 export const getTopicParam = (isAllSelected: boolean, selectedTopics: string[]): string =>
   isAllSelected ? 'all' : selectedTopics.join(',');

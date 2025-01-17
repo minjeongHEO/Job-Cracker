@@ -1,6 +1,11 @@
 .wrapper {
   @include primary-box;
 
+  & {
+    word-break: keep-all;
+    text-align: left;
+  }
+
   &__title {
     font-size: 27px;
     font-weight: bold;
@@ -8,9 +13,8 @@
     display: flex;
     gap: 1rem;
 
-    &-text {
-      word-break: break-all;
-      text-align: left;
+    @include responsive('tablet-and-mobile') {
+      font-size: 20px;
     }
   }
 
@@ -19,6 +23,10 @@
     font-size: 1rem;
     font-weight: 500;
     margin: 1rem 0 2rem 0;
+
+    @include responsive('tablet-and-mobile') {
+      font-size: 14px;
+    }
   }
 
   &__topics {

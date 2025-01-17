@@ -12,17 +12,24 @@
     gap: 1rem;
     flex: 0 0 auto; // flex-grow: 0, flex-shrink: 0, flex-basis: auto
     margin-bottom: 1rem;
+    word-break: keep-all;
   }
 
   &__title {
     font-size: 2rem;
     font-weight: bold;
     color: color('text', 'default');
+    @include responsive('tablet-and-mobile') {
+      font-size: 1.5rem;
+    }
   }
 
   &__sub-title {
     font-size: 1.2rem;
     color: color('text', 'default');
+    @include responsive('tablet-and-mobile') {
+      font-size: 1rem;
+    }
   }
 
   &__selectBox {

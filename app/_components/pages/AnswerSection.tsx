@@ -42,7 +42,6 @@ export default function AnswerSection({
       <section className={styles['answer-section__answer']}>
         <div className={styles['answer-contents']}>
           <div className={styles['answer-contents__title']}>학습 키워드</div>
-
           <div className={styles['answer-contents__answer-keyword']}>
             {keywords.map((keyword) => (
               <Badge key={keyword} option={{ title: keyword }}></Badge>
