@@ -3,8 +3,8 @@
 import clsx from 'clsx';
 
 import Badge from '@/app/_components/atoms/Badge';
+import { IMPORTANCE_LEVEL } from '@/app/_constants/questions';
 import { LoadingType, QuestionState } from '@/app/_types/interview';
-import { IMPORTANCE_LEVEL } from '@/app/interview/_constants/questions';
 
 import styles from './QuestionCard.module.scss';
 

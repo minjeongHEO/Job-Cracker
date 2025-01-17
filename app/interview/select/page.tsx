@@ -6,9 +6,9 @@ import { useState } from 'react';
 import SelectButton from '@/app/_components/atoms/SelectButton';
 import topicSelectStyles from '@/app/_components/molecules/TopicSelector.module.scss';
 import SelectLayout from '@/app/_components/templates/SelectLayout';
+import { DEVELOPER_OPTIONS } from '@/app/_constants/developers';
 import { DeveloperType } from '@/app/_types/interview';
 import { typedEntries } from '@/app/_utils/typeUtils';
-import { DEVELOPER_OPTIONS } from '@/app/interview/_constants/developers';
 
 export default function SelectPage() {
   const [selectedDev, setSelectedDev] = useState<DeveloperType | null>();
