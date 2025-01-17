@@ -1,7 +1,7 @@
 import { RefObject } from 'react';
 
+import { TEXT_AREA_MAX_HEIGHT } from '@/app/_constants/questions';
 import { LoadingType } from '@/app/_types/interview';
-import { TEXT_AREA_MAX_HEIGHT } from '@/app/interview/_constants/questions';
 
 export const getPlaceHolder = (loadingType: LoadingType, isMobile: boolean) => {
   if (loadingType === 'feedback') {

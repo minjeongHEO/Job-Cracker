@@ -56,9 +56,11 @@ export default function TopicSelector({ variant = 'topic', devType, topics }: To
         ))}
       </div>
 
-      <button className={styles['next-button']} onClick={handleNextClick} disabled={notSelected}>
-        다음
-      </button>
+      <footer className={styles['button-container']}>
+        <button className={styles['next-button']} onClick={handleNextClick} disabled={notSelected}>
+          다음
+        </button>
+      </footer>
     </>
   );
 }
