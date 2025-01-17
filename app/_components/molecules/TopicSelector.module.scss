@@ -16,6 +16,10 @@
   mask-image: linear-gradient(to bottom, transparent, black 5%, black 96%, transparent);
 }
 
+.button-container {
+  display: flex;
+  justify-content: end;
+}
 .next-button {
   @extend %primary-button;
 
