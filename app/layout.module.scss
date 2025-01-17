@@ -1,0 +1,15 @@
+$gradient-start: color('background', 'default');
+$gradient-end: color('background', 'sub');
+
+.google-form {
+  width: 2rem;
+  height: 2rem;
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  fill: var(--color-neutral-grey);
+  padding: 5px;
+
+  border-radius: 50%;
+  box-shadow: 0 10px 10px color('shadow', 'default');
+}
