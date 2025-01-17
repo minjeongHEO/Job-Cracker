@@ -22,11 +22,12 @@
 }
 .next-button {
   @extend %primary-button;
-
-  pointer-events: auto;
-  opacity: 1;
-  transition: opacity 0.4s ease;
-  height: 3rem;
+  & {
+    pointer-events: auto;
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    height: 3rem;
+  }
 }
 
 .next-button:disabled {
